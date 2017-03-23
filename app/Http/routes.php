@@ -1,0 +1,49 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Application Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register all of the routes for an application.
+| It's a breeze. Simply tell Laravel the URIs it should respond to
+| and give it the controller to call when that URI is requested.
+|
+*/
+
+Route::get('/', function () {
+    //Route::match(['get','post'],  'phone_tn', ['uses' => 'PhoneController@phoneTrackNo', 'as' => 'phoneTrackNo']);
+	return view('pages.welcome', ['name' => 'welcome']);
+});
+
+Route::get('/users', 'users@index');
+
+Route::get('/index.html', function () {
+    return view('pages.welcome', ['name' => 'welcome']);
+});
+
+Route::get('/general.html', function () {
+    return view('pages.general', ['name' => 'general']);
+});
+
+Route::get('/basic_form.html', function () {
+    return view('pages.basic_form', ['name' => 'basic form']);
+});
+
+Route::get('/simple.html', function () {
+    return view('pages.simple', ['name' => 'simple']);
+});
+
+
+/**
+ * Add New Task
+ */
+Route::post('/task', function (Request $request) {
+});
+
+/**
+ * Delete Task
+ */
+Route::delete('/task/{task}', function (Task $task) {
+    
+});
