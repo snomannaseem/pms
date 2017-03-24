@@ -22,7 +22,12 @@
         ],
         "psr-4": {
             "App\\": "app/"
+        },
+		"psr-0": {
+            "BusinessObject\\": ["app/Entities/","app/Dataobjects/"],
+            "BusinessLogic\\": ["app/Repositories/"]
         }
+		
     },
     "autoload-dev": {
         "classmap": [

@@ -16,7 +16,7 @@ Route::get('/', function () {
 	return view('pages.welcome', ['name' => 'welcome']);
 });
 
-Route::get('/users', 'users@index');
+Route::get('/users', 'UserCont@index');
 
 Route::get('/index.html', function () {
     return view('pages.welcome', ['name' => 'welcome']);
