@@ -16,16 +16,17 @@ class UserCont extends Controller
      * @return Response
      */
     public function __invoke($id){
-        return view('pages.users', ['name' => 'users']);
+        //return view('pages.users', ['name' => 'users']);
     }
 
     public function index(){
 		
 		
-		$this->user = new UserRepo();
+		//$this->user = new UserRepo();
 		//dd($this->user->getUsersList());
 		
-        return view('pages.users', ['name' => 'users', 'title' => 'User List', 'data' => $this->user->getUsersList()]);
+        //return view('pages.users', ['name' => 'users', 'title' => 'User List', 'data' => $this->user->getUsersList()]);
+        return view('pages.users', ['name' => 'users', 'title' => 'User List']);
 		
 		
     }
