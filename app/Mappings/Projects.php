@@ -52,7 +52,7 @@ class Projects
     /**
      * @var string
      *
-     * @ORM\Column(name="status", type="string", nullable=true)
+     * @ORM\Column(name="status", type="string", length=30, nullable=true)
      */
     private $status;
 

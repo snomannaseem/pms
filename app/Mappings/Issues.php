@@ -24,6 +24,13 @@ class Issues
     /**
      * @var integer
      *
+     * @ORM\Column(name="project_id", type="integer", nullable=false)
+     */
+    private $projectId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="issue_type", type="integer", nullable=true)
      */
     private $issueType;
@@ -52,7 +59,7 @@ class Issues
     /**
      * @var string
      *
-     * @ORM\Column(name="status", type="string", nullable=true)
+     * @ORM\Column(name="status", type="string", length=50, nullable=true)
      */
     private $status;
 

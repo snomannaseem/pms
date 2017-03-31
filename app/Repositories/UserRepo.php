@@ -6,7 +6,7 @@ namespace App\Repositories;
 use Doctrine\ORM\Query;
 use LaravelDoctrine\ORM\Facades\EntityManager;
 use App\Repositories\BaseRepo;
-use App\Dataobjects\User;
+use App\Entities\Users;
 
 
 class UserRepo extends BaseRepo{
@@ -31,7 +31,7 @@ class UserRepo extends BaseRepo{
 	*/
 
 		$dsql = 'SELECT PARTIAL user.{id, name, email, password, desigId, status}
-                                                    FROM App\\Dataobjects\\User user';
+                                                    FROM App\\Entities\\Users user';
 
         $where_field_map = [
           "userid" => [true, " user.userid = :userid "],
@@ -71,7 +71,7 @@ class UserRepo extends BaseRepo{
         return [
             'code' => 200,
             'status' => 'ok',
-            'rows' => $resultSet
+            'resultSet' => $resultSet
         ];
 
     }

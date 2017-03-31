@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'env' => env('APP_ENV', 'production'),
+    'env' => env('APP_ENV', 'development'),
 
     /*
     |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -156,6 +156,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 		LaravelDoctrine\ORM\DoctrineServiceProvider::class,
+		Barryvdh\Debugbar\ServiceProvider::class,
     ],
 
     /*
@@ -205,6 +206,7 @@ return [
 		'EntityManager' => LaravelDoctrine\ORM\Facades\EntityManager::class,
 		'Registry'      => LaravelDoctrine\ORM\Facades\Registry::class,
 		'Doctrine'      => LaravelDoctrine\ORM\Facades\Doctrine::class,
+		'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 

@@ -7,7 +7,7 @@
                                 <header class="panel-heading">
 								{{$title}}
                                 </header>
-                                <div class="panel-body table-responsive">
+								<div class="panel-body table-responsive">
                                     <div class="box-tools m-b-15">
                                         <div class="input-group">
 											<button id="btn_add" type="button" class="btn btn-primary pull-left">Add</button>
@@ -17,35 +17,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <table class="table table-hover">
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Name</th>
-											<th>Email</th>
-											<th>Projects</th>
-											<th>Status</th>
-											<th>Created On</th>
-											<th>&nbsp;</th>
-                                        </tr>
-										
-                                        <tr>
-                                            <td>183</td>
-                                            <td>John Doe</td>
-                                            <td>abc@email.com</td>
-                                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-											<td><span class="label label-success">Approved</span></td>
-											<td>11-7-2014</td>
-											<td>
-                                                  <button id="btn_edit" rid="101" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i></button>
-												  <button id="btn_del" rid="101" class="btn btn-default btn-xs"><i class="fa fa-times"></i></button>
-											</td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="7">&nbsp;</td>
-                                        </tr>
-                                    
-                                    </table>
-									
+									<div class="grid_box" id="this_grid">
+									<!--GRID-->
+										@include('components.users_grid',['header' => [] , 'paging_result_set' => $data_set])
+									<!-- GRID End -->
+									</div>
+
 									<div class="table-foot">
                                         <ul class="pagination pagination-sm no-margin pull-right">
                                         <li><a href="#">&laquo;</a></li>
