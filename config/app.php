@@ -200,12 +200,15 @@ return [
         'Session' => Illuminate\Support\Facades\Session::class,
         'Storage' => Illuminate\Support\Facades\Storage::class,
         'URL' => Illuminate\Support\Facades\URL::class,
+  
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 		
 		'EntityManager' => LaravelDoctrine\ORM\Facades\EntityManager::class,
 		'Registry'      => LaravelDoctrine\ORM\Facades\Registry::class,
 		'Doctrine'      => LaravelDoctrine\ORM\Facades\Doctrine::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 		'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],

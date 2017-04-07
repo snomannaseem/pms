@@ -1,13 +1,13 @@
 <?php
 
-	#dd($data_set);
+	
 
 	$rows = "";
 	if (count($header) == 0){
 		$header = ['User ID', 'Name','Email','Status','',''];
 	}
 
-	foreach($data_set['resultSet']['rows'] as $result_object){
+	foreach($data_set['resultSet']['object_array'] as $result_object){
 	//    if($result_object->getUpdateInterface() == 2){
 	//        $interface = 'UI';
 	//    }

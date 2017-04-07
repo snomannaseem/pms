@@ -18,26 +18,25 @@
                                         </div>
                                     </div>
 									<div class="grid_box" id="this_grid">
+									<?php 
+										#dd($data_set);
+									?>
 									<!--GRID-->
 										@include('components.users_grid',['header' => [] , 'paging_result_set' => $data_set])
 									<!-- GRID End -->
 									</div>
-
-									<div class="table-foot">
-                                        <ul class="pagination pagination-sm no-margin pull-right">
-                                        <li><a href="#">&laquo;</a></li>
-                                        <li><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">&raquo;</a></li>
-                                    </ul>
-                                    </div>
+										@include('components.paging',['paging_result_set' => $data_set['resultSet']])
+									
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->
                         </div>
                     </div>
                 </section>
+<?php 
 
+$order_by =  $data_set['order'];
+$sort_by =  $data_set['sort_by'];
+?>
 @stop
 @section('client_script')
 <script type="text/javascript">
@@ -45,5 +44,41 @@
 	var grid_edit_page_name = 'user';
 </script>
 <script src="js/pages/grid.js" type="text/javascript">
+</script>
+<script src="js/pages/pagingv2.js" type="text/javascript">
+</script>
+
+<script type="text/javascript">
+       $(document).ready(function(){
+              if(!paging_bg){
+                var paging_bg = new AdpadPaging(
+                        {
+                            "debug" : true,
+                            "forms" : [{'type': 'search', 'id': 'camp_search'}, {'type': 'settings', 'id': 'this_page'}],
+                            "url" : "users",
+                            "frm": "main",
+                            "filter_by": "",
+                            "search": "",
+                            "per_page": <?php echo env('DEFAULT_PAGE_SIZE', 10); ?>,
+                            "current_page": 1,
+                            "total_pages" : <?php echo $data_set['resultSet']['pages_count']?>,
+                            "order": '<?php echo $order_by ?>',
+                            "sort_by": '<?php echo $sort_by?>',
+                            "this_grid" : "this_grid",
+                            "before_send_callback": function(){
+                                //console.log('before send callback');
+                                toggleSrcLock();
+                                //  $('.msg_ok ,  .msg_error').hide();
+                            },
+                            "complete_callback" : function(){
+                                toggleSrcLock();
+                            }
+                        }
+                );
+            }
+
+       
+        });
+ 
 </script>
 @stop
