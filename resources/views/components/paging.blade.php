@@ -23,9 +23,9 @@ if($total_rows<=0){$page_num =0;}
 <div id="paging_container_div" class="opt_bar">
 		
 		<div class="table-foot">
-			<ul class="pagination pagination-sm no-margin pull-right">
-				<li><a id="pprev"   href="<?php echo url('/users');?>">Prev</a></li>
-				<li><a id="pnext"  href="{{url('/users')}}">Next</a></li>
+			<ul class="pagination-sm no-margin pull-right paging">
+				<li><a id="pprev"   href=''>Prev</a></li>
+				<li><a id="pnext"  href=''>Next</a></li>
 			</ul>
 		</div>
 		

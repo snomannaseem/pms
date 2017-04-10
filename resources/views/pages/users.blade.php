@@ -1,7 +1,7 @@
 @extends('layouts.default')
 @section('content')
                 <section class="content">
-                    <div class="row">
+                    <div id="main" class="row">
                         <div class="col-xs-12">
                             <div class="panel">
                                 <header class="panel-heading">
@@ -51,11 +51,12 @@ $sort_by =  $data_set['sort_by'];
 <script type="text/javascript">
        $(document).ready(function(){
               if(!paging_bg){
+				  
                 var paging_bg = new AdpadPaging(
                         {
                             "debug" : true,
                             "forms" : [{'type': 'search', 'id': 'camp_search'}, {'type': 'settings', 'id': 'this_page'}],
-                            "url" : "users",
+                            "url" : "/users",
                             "frm": "main",
                             "filter_by": "",
                             "search": "",
@@ -67,11 +68,11 @@ $sort_by =  $data_set['sort_by'];
                             "this_grid" : "this_grid",
                             "before_send_callback": function(){
                                 //console.log('before send callback');
-                                toggleSrcLock();
+                                //toggleSrcLock();
                                 //  $('.msg_ok ,  .msg_error').hide();
                             },
                             "complete_callback" : function(){
-                                toggleSrcLock();
+                                //toggleSrcLock();
                             }
                         }
                 );
