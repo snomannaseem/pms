@@ -35,11 +35,14 @@ class UserRepo extends BaseRepo{
 
         $where_field_map = [
           "userid" => [true, " user.userid = :userid "],
-          //"username" => [true, " user.username like CONCAT('%',:username,'%') "]
+          "name" => [true, " user.name like CONCAT('%',:name,'%') "],
+          
+		  //"username" => [true, " user.username like CONCAT('%',:username,'%') "]
         ];
 		
         $order_by_field_map = [
           "userid" => " user.id __order__ ",
+          
           //"manager" => " concat(manager.username, ' ', manager.lastname) __order__ "
         ];
 
@@ -47,7 +50,7 @@ class UserRepo extends BaseRepo{
         $filter_obj = self::getWhereClause($filters, $where_field_map);
         $order_clause = self::getOrderClause($order_by, $order_by_field_map);
         $dsql .= $filter_obj['where_clause'] . $order_clause;
-        //dd($filter_obj);
+        //dd($dsql);
         return [
           "dql" => $dsql,
           "values" => $filter_obj['values']
@@ -65,21 +68,56 @@ class UserRepo extends BaseRepo{
         //dd($resultSet);
         //$profileRows = $resultSet["object_array"];
         //$resultSet["object_array"] = $profileRows;//ProfileStaff::CreateProfileStaffArray($profileRows);
-
-        //return $resultSet;
-
+		
+        $resultSet['resultSet'] = $resultSet;
+        $resultSet['code'] = 200;
+		return $resultSet;
+		/*
         return [
             'code' => 200,
             'status' => 'ok',
             'resultSet' => $resultSet
         ];
+		*/
 
     }
 
     public function getListAdminPage(){
 
     }
+	/*
+	public function getUserById($id)
+	{
+		$dsql = 'SELECT PARTIAL user.{id, name, email, password, desigId, status}
+                                                    FROM App\\Entities\\Users user';
+		
+		try {
+            return $query->getSingleResult(Query::HYDRATE_OBJECT);
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+	}
+	*/
+	
+	public function getUserById($id)
+    {
 
+        $query = $this->db->getConnection('db_conn')->createQuery("SELECT PARTIAL user.{id, name, email, password, desigId, status}
+                                                    FROM App\\Entities\\Users user
+        WHERE user.id =:id ")->setParameter('id', $id);
+
+        try {
+            return $query->getSingleResult(Query::HYDRATE_OBJECT);
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
+	
+	public function save(\App\Entities\Users $user)
+	{
+		$this->db->getConnection()->persist($user);
+		$this->db->getConnection()->flush();
+	}
 	/*
     public function updateField($fields_values = [])
     {

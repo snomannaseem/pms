@@ -1,9 +1,9 @@
 <?php
 
 	
-
+	
 	$rows = "";
-	if (count($header) == 0){
+	if (!isset($header) || count($header) == 0){
 		$header = ['User ID', 'Name','Email','Status','',''];
 	}
 
@@ -31,4 +31,4 @@
 				  </tr>";
 	}
 ?>
-@include('components.grid',['header' => $header , 'paging_result_set' => $paging_result_set, 'rows' => $rows])
+@include('components.grid',['header' => $header , 'paging_result_set' => $data_set, 'rows' => $rows])
