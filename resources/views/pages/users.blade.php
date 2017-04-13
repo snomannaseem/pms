@@ -1,6 +1,13 @@
 @extends('layouts.default')
 @section('content')
                 <section class="content">
+				
+					<p id="message" style="color:green">
+					@if(Session::has('message'))	
+						{{ Session::get('message') }}
+					@endif
+					</p>
+				
                     <div id="main" class="row">
 					<input type="hidden" value="{{ csrf_token() }}" name="_token" id="_token">
                         <div class="col-xs-12">

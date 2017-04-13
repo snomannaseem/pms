@@ -7,6 +7,7 @@ use Doctrine\ORM\Query;
 use LaravelDoctrine\ORM\Facades\EntityManager;
 use App\Repositories\BaseRepo;
 use App\Entities\Users;
+use Validator;
 
 
 class UserRepo extends BaseRepo{
@@ -34,6 +35,7 @@ class UserRepo extends BaseRepo{
                                                     FROM App\\Entities\\Users user';
 
         $where_field_map = [
+		  //"default" => [true, " user.status = 1 "],
           "userid" => [true, " user.userid = :userid "],
           "name" => [true, " user.name like CONCAT('%',:name,'%') "],
           
@@ -107,7 +109,7 @@ class UserRepo extends BaseRepo{
         WHERE user.id =:id ")->setParameter('id', $id);
 
         try {
-            return $query->getSingleResult(Query::HYDRATE_OBJECT);
+            return $query->getSingleResult(Query::HYDRATE_ARRAY);
         } catch (\Doctrine\ORM\NoResultException $e) {
             return null;
         }
@@ -118,6 +120,61 @@ class UserRepo extends BaseRepo{
 		$this->db->getConnection()->persist($user);
 		$this->db->getConnection()->flush();
 	}
+	
+	public function update($arr)
+	{
+		$sql_obj['dql'] = "UPDATE App\\Entities\\Users u set
+                                u.name = :name,
+								u.email = :email,
+								u.password = :password
+                               where u.id = :id";
+		$sql_obj['values'] = $arr;
+		$response = $this->db->runSQL($sql_obj['dql'], $sql_obj['values']);
+		return $response;
+	}
+	
+	public function getUserFormValidator($data)
+	{
+		Validator::extend('useremaildup', function($attribute, $value, $parameters)
+		{
+			$query = $this->db->getConnection('db_conn')->createQuery("SELECT PARTIAL user.{id, name, email, password, desigId, status}
+                                                    FROM App\\Entities\\Users user
+			WHERE user.email =:email ")->setParameter('email', $value);
+			
+			try {
+				$res =  $query->getSingleResult(Query::HYDRATE_ARRAY);
+				
+				return count($res) == 0;
+			} catch (\Doctrine\ORM\NoResultException $e) {
+				return true;
+			}
+			return $value == 'foo';
+		});
+		//$validator = Validator::make($request->all(),$test->rules);
+		
+		$rules = [ 'name' => 'required' ];
+		if($data['id'] == 0)
+		{
+			$rules['email'] = "useremaildup:{$data['email']}";
+		}
+		
+		//$validator = Validator::make(['name' => "xy"], ['name' => 'required']);
+		$validator = Validator::make($data, $rules, ['useremaildup' => 'custom error message for email duplication']);
+		
+		return $validator;
+	}
+	
+	public function delete($id)
+	{
+		$sql_obj['dql'] = "UPDATE App\\Entities\\Users u set
+                                u.status = 0
+								
+                               where u.id = :id";
+		$sql_obj['values']['id'] = $id;
+		$response = $this->db->runSQL($sql_obj['dql'], $sql_obj['values']);
+		return $response;
+	}
+	
 	/*
     public function updateField($fields_values = [])
     {

@@ -19,6 +19,7 @@ Route::get('/', function () {
 //Route::get('/users', 'UserCont@index');
 Route::match(['get', 'post'], '/users', ['uses' => 'UserCont@index']);
 Route::match(['get', 'post'], '/user/{id}', ['uses' => 'UserCont@addedit']);
+Route::match(['get', 'post'], '/user/delete/{id}', ['uses' => 'UserCont@delete']);
 
 
 Route::get('/index.html', function () {

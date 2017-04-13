@@ -9,13 +9,20 @@
 			 window.location = grid_edit_page_name + '/0';
 		});
 		
-		$('#btn_edit').click(function(){
+		$(document).on("click", ".btn_edit", function(){
 			 window.location = grid_edit_page_name + '/' + $(this).attr('rid');
 		});
 
-		$("#btn_del").click(function(){
+		
+		$(document).on("click", ".btn_del", function(){
 			if(confirm('Are you sure to delete this record?')){
 				console.log('Record Deleted ' + $(this).attr('rid'));
+				rid = $(this).attr('rid');
+				$.get(grid_edit_page_name + '/delete/'+rid, {}, 
+				function(data){
+					$('#message').html("Successfully deleted");
+					location = "/users";
+				});
 			}
 		});
 	});

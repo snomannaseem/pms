@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\UserRepo;
-
+use Redirect;
 
 
 class UserCont extends Controller
@@ -19,6 +19,8 @@ class UserCont extends Controller
     public function __invoke($id){
         //return view('pages.users', ['name' => 'users']);
     }
+	
+	
 
     public function index(Request $request){
 		
@@ -70,43 +72,70 @@ class UserCont extends Controller
 	public function addedit($id, Request $request)
 	{
 		//Request $request
-		
 		$this->user = new UserRepo();
+		$errors = "";
 		$id = (int) $id;
-		$data_set = ['id' => 0, 'username' => '', 'email' => '' ];		
+		$data_set = $request_data = ['id' => $id, 'name' => $request->get('name',''), 
+		'email' => $request->get('email',''), 'password' => $request->get('password','') ]; // default empty data set just to make		
+		
 		if($id != 0) // edit request, fetch the data to fill the form
 		{
 			$data_set 	= $this->user->getUserById($id);
 		}
 		if($request->isMethod('post'))
 		{
-		
-			$name = $request->get('name');
-			$email = $request->get('email');
-			$password = $request->get('password');
-			if($id == 0)
+			$validator = $this->user->getUserFormValidator($request_data);
+			//dd($request_data);
+			
+			if($validator->fails() == false)
 			{
-				$user = new \App\Entities\Users();
-				$user->setName($name);
-				$user->setEmail($email);
-				$user->setPassword($password);
-				$this->user->save($user);
-				
+				$name = $request->get('name');
+				$email = $request->get('email');
+				$password = $request->get('password');
+				if($id == 0)
+				{
+					
+					$user = new \App\Entities\Users();
+					$user->setName($name);
+					$user->setEmail($email);
+					$user->setPassword($password);
+					$user->setStatus(1);
+					$this->user->save($user);
+					
+					return Redirect::to('/users')->with('message', 'Successfully added.');
+					
+				}
+				else
+				{
+					$res = $this->user->update(['id' => $id, 'name' => $name, 'email' => $email, 'password' => $password ]);
+					return Redirect::to('/users')->with('message', 'Successfully edited.');
+				}
 			}
 			else
 			{
-				$this->user->update(['id' => $id, 'name' => $name, 'email' => $email ]);
-				$sql_obj['dql'] = "UPDATE BusinessObject\\AdcenterProfiles ap set
-//                                ap.account_balance = :account_balance
-//                               where ap.userid = :userid";
-//                    $sql_obj['values']['account_balance'] = $account_balance;
-//                    $sql_obj['values']['userid'] = $inv_userid;
-//                    $response = $this->db->runSQL($sql_obj['dql'], $sql_obj['values']);
+				$errors = implode("<br>", $validator->errors()->all());
+				
 			}
 		}
 		
 		
-		return view('components.user_addedit', ['name' => 'users', 'title' => 'Add User', 'data_set' => $data_set]);
+		return view('components.user_addedit', ['errors' => $errors, 'name' => 'users', 'title' => 'Add User', 'id' => $id, 'data_set' => $data_set]);
+	}
+	
+	public function delete($id)
+	{
+		$this->user = new UserRepo();
+		$errors = "";
+		$id = (int) $id;
+		$res = $this->user->delete($id);
+		/*
+		if($res['code'] == 200)
+		{
+			return Redirect::to('/users')->with('message', 'Successfully deleted.');
+		}
+		*/
+		return $res;
+		
 	}
 
 }
