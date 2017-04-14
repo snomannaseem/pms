@@ -20,7 +20,7 @@
 				rid = $(this).attr('rid');
 				$.get(grid_edit_page_name + '/delete/'+rid, {}, 
 				function(data){
-					$('#message').html("Successfully deleted");
+					$('#message').show().html("Successfully deleted");
 					location = "/users";
 				});
 			}

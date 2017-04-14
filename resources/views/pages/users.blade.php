@@ -2,9 +2,12 @@
 @section('content')
                 <section class="content">
 				
-					<p id="message" style="color:green">
-					@if(Session::has('message'))	
+					<p id="message" style="display:<?php echo Session::has('message') ? "block":"none";?>" class="alert alert-success" >
+					@if(Session::has('message'))
+						
+						
 						{{ Session::get('message') }}
+						
 					@endif
 					</p>
 				
