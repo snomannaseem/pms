@@ -1,13 +1,13 @@
 <?php
 
-
+namespace App\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Projects
  *
- * @ORM\Table(name="projects")
+ * @ORM\Table(name="projects", indexes={@ORM\Index(name="fk_projects_team_id", columns={"team_id"})})
  * @ORM\Entity
  */
 class Projects
@@ -83,6 +83,16 @@ private $updatedBy;
  * @ORM\Column(name="updated_on", type="datetime", precision=0, scale=0, nullable=true, unique=false)
  */
 private $updatedOn;
+
+/**
+ * @var \Teams
+ *
+ * @ORM\ManyToOne(targetEntity="Teams")
+ * @ORM\JoinColumns({
+ *   @ORM\JoinColumn(name="team_id", referencedColumnName="id", nullable=true)
+ * })
+ */
+private $team;
 
 
 /**
@@ -309,6 +319,30 @@ return $this;
 public function getUpdatedOn()
 {
 return $this->updatedOn;
+}
+
+/**
+ * Set team
+ *
+ * @param \Teams $team
+ *
+ * @return Projects
+ */
+public function setTeam(Teams $team = null)
+{
+$this->team = $team;
+
+return $this;
+}
+
+/**
+ * Get team
+ *
+ * @return \Teams
+ */
+public function getTeam()
+{
+return $this->team;
 }
 }
 

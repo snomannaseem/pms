@@ -123,6 +123,7 @@ class UserRepo extends BaseRepo{
 	
 	public function update($arr)
 	{
+		$arr['password'] = bcrypt($arr['password']);
 		$sql_obj['dql'] = "UPDATE App\\Entities\\Users u set
                                 u.name = :name,
 								u.email = :email,
@@ -173,6 +174,23 @@ class UserRepo extends BaseRepo{
 		$sql_obj['values']['id'] = $id;
 		$response = $this->db->runSQL($sql_obj['dql'], $sql_obj['values']);
 		return $response;
+	}
+	
+	public function search($data)
+	{
+		$term = $data['term'];
+		$status = isset($data['status']) ? $data['status'] : 1;
+		$limit = isset($data['limit']) ? $data['limit'] : 10;
+		$query = $this->db->getConnection('db_conn')->createQuery("SELECT PARTIAL user.{id, name, email, status} FROM App\\Entities\\Users user
+			WHERE user.status = :status and user.name like CONCAT('%',:term,'%') OR  user.email like CONCAT('%',:term,'%')  ")->setParameters(['status' => $status, 'term' => $term]);
+			
+		try {
+			$res =  $query->getResult(Query::HYDRATE_ARRAY);
+			return $res;
+		} catch (\Doctrine\ORM\NoResultException $e) {
+			dd('error in teamrepo->search');
+		}
+		
 	}
 	
 	/*

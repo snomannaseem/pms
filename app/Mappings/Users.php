@@ -50,11 +50,18 @@ class Users
     private $desigId;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="remember_token", type="string", length=255, nullable=true)
+     */
+    private $rememberToken;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="status", type="boolean", nullable=true)
      */
-    private $status;
+    private $status = '1';
 
 
 }

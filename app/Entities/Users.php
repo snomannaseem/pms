@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Entities;
 
+namespace App\Entities;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -48,6 +48,13 @@ private $password;
  * @ORM\Column(name="desig_id", type="integer", precision=0, scale=0, nullable=true, unique=false)
  */
 private $desigId;
+
+/**
+ * @var string
+ *
+ * @ORM\Column(name="remember_token", type="string", length=255, precision=0, scale=0, nullable=true, unique=false)
+ */
+private $rememberToken;
 
 /**
  * @var boolean
@@ -161,6 +168,30 @@ return $this;
 public function getDesigId()
 {
 return $this->desigId;
+}
+
+/**
+ * Set rememberToken
+ *
+ * @param string $rememberToken
+ *
+ * @return Users
+ */
+public function setRememberToken($rememberToken)
+{
+$this->rememberToken = $rememberToken;
+
+return $this;
+}
+
+/**
+ * Get rememberToken
+ *
+ * @return string
+ */
+public function getRememberToken()
+{
+return $this->rememberToken;
 }
 
 /**

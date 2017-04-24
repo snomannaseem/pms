@@ -44,7 +44,7 @@ class UserCont extends Controller
 		$data_set['sort_by'] 	= 'userid';
 		$data_set['order'] 		= 'asc';
         if($request->ajax()){
-            $view = view('components.users_grid')->with(
+            $view = view('ui.users.users_grid')->with(
                 [
                     'sort_by'     	=> $order_by['sort_by'],
                     'order_by'     	=> $order_by['order'],
@@ -66,7 +66,7 @@ class UserCont extends Controller
         }
 		
 		//return view('pages.users', ['name' => 'users', 'title' => 'User List']);
-		return view('pages.users', ['name' => 'users', 'title' => 'User List', 'data_set' => $data_set]);
+		return view('ui.users.index', ['name' => 'users', 'title' => 'User List', 'data_set' => $data_set]);
     }
 	
 	public function addedit($id, Request $request)
@@ -119,7 +119,7 @@ class UserCont extends Controller
 		}
 		
 		
-		return view('components.user_addedit', ['errors' => $errors, 'name' => 'users', 'title' => 'Add User', 'id' => $id, 'data_set' => $data_set]);
+		return view('ui.users.user_addedit', ['errors' => $errors, 'name' => 'users', 'title' => 'Add User', 'id' => $id, 'data_set' => $data_set]);
 	}
 	
 	public function delete($id)
@@ -135,6 +135,13 @@ class UserCont extends Controller
 		}
 		*/
 		return $res;
+		
+	}
+	
+	public function search(Request $request)
+	{
+		$user = new UserRepo();
+		return $user->search(['term' => $request['term'], 'status' => 1]);
 		
 	}
 

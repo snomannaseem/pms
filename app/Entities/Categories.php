@@ -1,7 +1,7 @@
 <?php
 
 
-
+namespace App\Entities;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,6 +27,13 @@ private $id;
  * @ORM\Column(name="name", type="string", length=255, precision=0, scale=0, nullable=true, unique=false)
  */
 private $name;
+
+/**
+ * @var boolean
+ *
+ * @ORM\Column(name="status", type="boolean", precision=0, scale=0, nullable=true, unique=false)
+ */
+private $status;
 
 
 /**
@@ -61,6 +68,30 @@ return $this;
 public function getName()
 {
 return $this->name;
+}
+
+/**
+ * Set status
+ *
+ * @param boolean $status
+ *
+ * @return Categories
+ */
+public function setStatus($status)
+{
+$this->status = $status;
+
+return $this;
+}
+
+/**
+ * Get status
+ *
+ * @return boolean
+ */
+public function getStatus()
+{
+return $this->status;
 }
 }
 

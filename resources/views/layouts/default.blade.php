@@ -4,18 +4,18 @@
     @include('includes.head')
 </head>
       <body class="skin-black">
-                @include('includes.header')
+                @include('ui.includes.header')
 				<div class="wrapper row-offcanvas row-offcanvas-left">
                     <!-- Left side column. contains the logo and sidebar -->
                     
-					@include('includes.sidebar')
+					@include('ui.includes.sidebar')
 					<aside class="right-side">
 				
                 <!-- Main content -->
 					@yield('content')
                 <!-- /.content -->
                 
-					@include('includes.footer')
+					@include('ui.includes.footer')
             </aside><!-- /.right-side -->
 
         </div><!-- ./wrapper -->

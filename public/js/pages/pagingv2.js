@@ -530,7 +530,7 @@
                 if(this.ppaging.forms[i].constructor == String) // array contains form id string
                 {
 
-                    jQuery('#'+this.ppaging.forms[i]).submit(jQuery.proxy(function () {
+                    jQuery(this._frmid+' #'+this.ppaging.forms[i]).submit(jQuery.proxy(function () {
                         this.pSettingsAction();
                         return false;
                     }, this));
@@ -542,12 +542,12 @@
                     {
                         this._search_mode = false; // no search available
                         this._search_form_id = this.ppaging.forms[i].id;
-                        if(jQuery('#'+this.ppaging.forms[i].id+' #srch').length) // text input 'srch' found it means it is a simple search form
+                        if(jQuery(this._frmid+' #'+this.ppaging.forms[i].id+' #srch').length) // text input 'srch' found it means it is a simple search form
                         {
 
                             this._search_mode = 'simple';
                             //console.log('simple search');
-                            jQuery('#'+this.ppaging.forms[i].id).submit(jQuery.proxy(function () {
+                            jQuery(this._frmid+' #'+this.ppaging.forms[i].id).submit(jQuery.proxy(function () {
                                 this.pSearchAction();
                                 return false;
                             }, this));
@@ -558,7 +558,7 @@
                             //console.log('#'+this.ppaging.forms[i].id);
 
                             this._search_mode = 'advance';
-                            jQuery('#'+this.ppaging.forms[i].id).submit(jQuery.proxy(function () {
+                            jQuery(this._frmid+' #'+this.ppaging.forms[i].id).submit(jQuery.proxy(function () {
                                 this.pSearchAction(true); // force submit
                                 return false;
                             }, this));
@@ -568,7 +568,7 @@
                     else
                     {
                         //console.log('form type is settings');
-                        jQuery('#'+this.ppaging.forms[i].id).submit(jQuery.proxy(function () {
+                        jQuery(this._frmid+' #'+this.ppaging.forms[i].id).submit(jQuery.proxy(function () {
                             this.pSettingsAction();
                             return false;
                         }, this));

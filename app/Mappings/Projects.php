@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Projects
  *
- * @ORM\Table(name="projects")
+ * @ORM\Table(name="projects", indexes={@ORM\Index(name="fk_projects_team_id", columns={"team_id"})})
  * @ORM\Entity
  */
 class Projects
@@ -83,6 +83,16 @@ class Projects
      * @ORM\Column(name="updated_on", type="datetime", nullable=true)
      */
     private $updatedOn;
+
+    /**
+     * @var \Teams
+     *
+     * @ORM\ManyToOne(targetEntity="Teams")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="team_id", referencedColumnName="id")
+     * })
+     */
+    private $team;
 
 
 }

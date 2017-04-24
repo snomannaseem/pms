@@ -1,13 +1,13 @@
 <?php
 
-
+namespace App\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Issues
  *
- * @ORM\Table(name="issues", indexes={@ORM\Index(name="fk_issue_priority_id", columns={"priority_id"}), @ORM\Index(name="fk_issue_category_id", columns={"category_id"}), @ORM\Index(name="fk_issue_user_id", columns={"assigned_to"})})
+ * @ORM\Table(name="issues", indexes={@ORM\Index(name="fk_issue_priority_id", columns={"priority_id"}), @ORM\Index(name="fk_issue_category_id", columns={"category_id"}), @ORM\Index(name="fk_issue_user_id", columns={"assigned_to"}), @ORM\Index(name="fk_issue_resolution_id", columns={"resolution_id"}), @ORM\Index(name="fk_issue_type_id", columns={"issue_type_id"})})
  * @ORM\Entity
  */
 class Issues
@@ -27,13 +27,6 @@ private $id;
  * @ORM\Column(name="project_id", type="integer", precision=0, scale=0, nullable=false, unique=false)
  */
 private $projectId;
-
-/**
- * @var integer
- *
- * @ORM\Column(name="issue_type", type="integer", precision=0, scale=0, nullable=true, unique=false)
- */
-private $issueType;
 
 /**
  * @var string
@@ -62,13 +55,6 @@ private $estTime;
  * @ORM\Column(name="status", type="string", length=50, precision=0, scale=0, nullable=true, unique=false)
  */
 private $status;
-
-/**
- * @var integer
- *
- * @ORM\Column(name="resolution", type="integer", precision=0, scale=0, nullable=true, unique=false)
- */
-private $resolution;
 
 /**
  * @var integer
@@ -126,6 +112,26 @@ private $category;
 private $priority;
 
 /**
+ * @var \IssueResolutionTypes
+ *
+ * @ORM\ManyToOne(targetEntity="IssueResolutionTypes")
+ * @ORM\JoinColumns({
+ *   @ORM\JoinColumn(name="resolution_id", referencedColumnName="id", nullable=true)
+ * })
+ */
+private $resolution;
+
+/**
+ * @var \IssueTypes
+ *
+ * @ORM\ManyToOne(targetEntity="IssueTypes")
+ * @ORM\JoinColumns({
+ *   @ORM\JoinColumn(name="issue_type_id", referencedColumnName="id", nullable=true)
+ * })
+ */
+private $issueType;
+
+/**
  * @var \Users
  *
  * @ORM\ManyToOne(targetEntity="Users")
@@ -168,30 +174,6 @@ return $this;
 public function getProjectId()
 {
 return $this->projectId;
-}
-
-/**
- * Set issueType
- *
- * @param integer $issueType
- *
- * @return Issues
- */
-public function setIssueType($issueType)
-{
-$this->issueType = $issueType;
-
-return $this;
-}
-
-/**
- * Get issueType
- *
- * @return integer
- */
-public function getIssueType()
-{
-return $this->issueType;
 }
 
 /**
@@ -288,30 +270,6 @@ return $this;
 public function getStatus()
 {
 return $this->status;
-}
-
-/**
- * Set resolution
- *
- * @param integer $resolution
- *
- * @return Issues
- */
-public function setResolution($resolution)
-{
-$this->resolution = $resolution;
-
-return $this;
-}
-
-/**
- * Get resolution
- *
- * @return integer
- */
-public function getResolution()
-{
-return $this->resolution;
 }
 
 /**
@@ -441,7 +399,7 @@ return $this->updatedOn;
  *
  * @return Issues
  */
-public function setCategory(\Categories $category = null)
+public function setCategory(Categories $category = null)
 {
 $this->category = $category;
 
@@ -465,7 +423,7 @@ return $this->category;
  *
  * @return Issues
  */
-public function setPriority(\Priorities $priority = null)
+public function setPriority(Priorities $priority = null)
 {
 $this->priority = $priority;
 
@@ -483,13 +441,61 @@ return $this->priority;
 }
 
 /**
+ * Set resolution
+ *
+ * @param \IssueResolutionTypes $resolution
+ *
+ * @return Issues
+ */
+public function setResolution(IssueResolutionTypes $resolution = null)
+{
+$this->resolution = $resolution;
+
+return $this;
+}
+
+/**
+ * Get resolution
+ *
+ * @return \IssueResolutionTypes
+ */
+public function getResolution()
+{
+return $this->resolution;
+}
+
+/**
+ * Set issueType
+ *
+ * @param \IssueTypes $issueType
+ *
+ * @return Issues
+ */
+public function setIssueType(IssueTypes $issueType = null)
+{
+$this->issueType = $issueType;
+
+return $this;
+}
+
+/**
+ * Get issueType
+ *
+ * @return \IssueTypes
+ */
+public function getIssueType()
+{
+return $this->issueType;
+}
+
+/**
  * Set assignedTo
  *
  * @param \Users $assignedTo
  *
  * @return Issues
  */
-public function setAssignedTo(\Users $assignedTo = null)
+public function setAssignedTo(Users $assignedTo = null)
 {
 $this->assignedTo = $assignedTo;
 

@@ -1,5 +1,5 @@
 <?php
-
+require('Routes/routes_ui.php');
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -10,12 +10,12 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
+/*
 Route::get('/', function () {
-    //Route::match(['get','post'],  'phone_tn', ['uses' => 'PhoneController@phoneTrackNo', 'as' => 'phoneTrackNo']);
+   
 	return view('pages.welcome', ['name' => 'welcome']);
 });
-
+*/
 //Route::get('/users', 'UserCont@index');
 Route::match(['get', 'post'], '/users', ['uses' => 'UserCont@index']);
 Route::match(['get', 'post'], '/user/{id}', ['uses' => 'UserCont@addedit']);

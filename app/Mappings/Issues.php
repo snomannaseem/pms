@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Issues
  *
- * @ORM\Table(name="issues", indexes={@ORM\Index(name="fk_issue_priority_id", columns={"priority_id"}), @ORM\Index(name="fk_issue_category_id", columns={"category_id"}), @ORM\Index(name="fk_issue_user_id", columns={"assigned_to"})})
+ * @ORM\Table(name="issues", indexes={@ORM\Index(name="fk_issue_priority_id", columns={"priority_id"}), @ORM\Index(name="fk_issue_category_id", columns={"category_id"}), @ORM\Index(name="fk_issue_user_id", columns={"assigned_to"}), @ORM\Index(name="fk_issue_resolution_id", columns={"resolution_id"}), @ORM\Index(name="fk_issue_type_id", columns={"issue_type_id"})})
  * @ORM\Entity
  */
 class Issues
@@ -27,13 +27,6 @@ class Issues
      * @ORM\Column(name="project_id", type="integer", nullable=false)
      */
     private $projectId;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="issue_type", type="integer", nullable=true)
-     */
-    private $issueType;
 
     /**
      * @var string
@@ -62,13 +55,6 @@ class Issues
      * @ORM\Column(name="status", type="string", length=50, nullable=true)
      */
     private $status;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="resolution", type="integer", nullable=true)
-     */
-    private $resolution;
 
     /**
      * @var integer
@@ -124,6 +110,26 @@ class Issues
      * })
      */
     private $priority;
+
+    /**
+     * @var \IssueResolutionTypes
+     *
+     * @ORM\ManyToOne(targetEntity="IssueResolutionTypes")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="resolution_id", referencedColumnName="id")
+     * })
+     */
+    private $resolution;
+
+    /**
+     * @var \IssueTypes
+     *
+     * @ORM\ManyToOne(targetEntity="IssueTypes")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="issue_type_id", referencedColumnName="id")
+     * })
+     */
+    private $issueType;
 
     /**
      * @var \Users

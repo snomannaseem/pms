@@ -1,6 +1,6 @@
 <?php
 
-
+namespace App\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -266,7 +266,7 @@ return $this->updatedOn;
  *
  * @return Comments
  */
-public function setIssue(\Issues $issue = null)
+public function setIssue(Issues $issue = null)
 {
 $this->issue = $issue;
 
