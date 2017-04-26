@@ -119,7 +119,7 @@ $sort_by =  $result_set['sort_by'];
 			});
 
 			$(document).on("click", ".btn_edit_res", function(){
-				 window.location = '/projects/editresources/' + $(this).attr('rid');
+				 window.location = '/projects/resources/' + $(this).attr('rid');
 			});
 	
         });

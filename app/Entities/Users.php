@@ -1,7 +1,7 @@
 <?php
 
-
 namespace App\Entities;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -62,6 +62,74 @@ private $rememberToken;
  * @ORM\Column(name="status", type="boolean", precision=0, scale=0, nullable=true, unique=false)
  */
 private $status;
+
+/**
+ * @var string
+ *
+ * @ORM\Column(name="profile_image", type="string", length=50, precision=0, scale=0, nullable=true, unique=false)
+ */
+private $profileImage;
+
+/**
+ * @var integer
+ *
+ * @ORM\Column(name="created_by", type="integer", precision=0, scale=0, nullable=false, unique=false)
+ */
+private $createdBy;
+
+/**
+ * @var \DateTime
+ *
+ * @ORM\Column(name="created_on", type="datetime", precision=0, scale=0, nullable=false, unique=false)
+ */
+private $createdOn;
+
+/**
+ * @var integer
+ *
+ * @ORM\Column(name="updated_by", type="integer", precision=0, scale=0, nullable=true, unique=false)
+ */
+private $updatedBy;
+
+/**
+ * @var \DateTime
+ *
+ * @ORM\Column(name="updated_on", type="datetime", precision=0, scale=0, nullable=true, unique=false)
+ */
+private $updatedOn;
+
+/**
+ * @var integer
+ *
+ * @ORM\Column(name="deleted_by", type="integer", precision=0, scale=0, nullable=true, unique=false)
+ */
+private $deletedBy;
+
+/**
+ * @var \DateTime
+ *
+ * @ORM\Column(name="deleted_on", type="datetime", precision=0, scale=0, nullable=true, unique=false)
+ */
+private $deletedOn;
+
+
+/**
+	 * @ORM\OneToMany(targetEntity="ProjectsResources", mappedBy="users")
+	 * @ORM\JoinColumn(name="id", referencedColumnName="user_id", nullable=false)
+	 */
+protected $projects_resources;
+
+/**
+	 * Get AdcenterCampaigns entity collection (one to many).
+	 *
+	 * @return \Doctrine\Common\Collections\Collection
+	 */
+public function getProjectsResources()
+{
+	return $this->projects_resources;
+}
+
+
 
 
 /**
@@ -216,6 +284,174 @@ return $this;
 public function getStatus()
 {
 return $this->status;
+}
+
+/**
+ * Set profileImage
+ *
+ * @param string $profileImage
+ *
+ * @return Users
+ */
+public function setProfileImage($profileImage)
+{
+$this->profileImage = $profileImage;
+
+return $this;
+}
+
+/**
+ * Get profileImage
+ *
+ * @return string
+ */
+public function getProfileImage()
+{
+return $this->profileImage;
+}
+
+/**
+ * Set createdBy
+ *
+ * @param integer $createdBy
+ *
+ * @return Users
+ */
+public function setCreatedBy($createdBy)
+{
+$this->createdBy = $createdBy;
+
+return $this;
+}
+
+/**
+ * Get createdBy
+ *
+ * @return integer
+ */
+public function getCreatedBy()
+{
+return $this->createdBy;
+}
+
+/**
+ * Set createdOn
+ *
+ * @param \DateTime $createdOn
+ *
+ * @return Users
+ */
+public function setCreatedOn($createdOn)
+{
+$this->createdOn = $createdOn;
+
+return $this;
+}
+
+/**
+ * Get createdOn
+ *
+ * @return \DateTime
+ */
+public function getCreatedOn()
+{
+return $this->createdOn;
+}
+
+/**
+ * Set updatedBy
+ *
+ * @param integer $updatedBy
+ *
+ * @return Users
+ */
+public function setUpdatedBy($updatedBy)
+{
+$this->updatedBy = $updatedBy;
+
+return $this;
+}
+
+/**
+ * Get updatedBy
+ *
+ * @return integer
+ */
+public function getUpdatedBy()
+{
+return $this->updatedBy;
+}
+
+/**
+ * Set updatedOn
+ *
+ * @param \DateTime $updatedOn
+ *
+ * @return Users
+ */
+public function setUpdatedOn($updatedOn)
+{
+$this->updatedOn = $updatedOn;
+
+return $this;
+}
+
+/**
+ * Get updatedOn
+ *
+ * @return \DateTime
+ */
+public function getUpdatedOn()
+{
+return $this->updatedOn;
+}
+
+/**
+ * Set deletedBy
+ *
+ * @param integer $deletedBy
+ *
+ * @return Users
+ */
+public function setDeletedBy($deletedBy)
+{
+$this->deletedBy = $deletedBy;
+
+return $this;
+}
+
+/**
+ * Get deletedBy
+ *
+ * @return integer
+ */
+public function getDeletedBy()
+{
+return $this->deletedBy;
+}
+
+/**
+ * Set deletedOn
+ *
+ * @param \DateTime $deletedOn
+ *
+ * @return Users
+ */
+public function setDeletedOn($deletedOn)
+{
+$this->deletedOn = $deletedOn;
+
+return $this;
+}
+
+/**
+ * Get deletedOn
+ *
+ * @return \DateTime
+ */
+public function getDeletedOn()
+{
+return $this->deletedOn;
 }
 }
 

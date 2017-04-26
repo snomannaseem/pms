@@ -38,9 +38,9 @@ class History
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_on", type="datetime", nullable=true)
+     * @ORM\Column(name="created_on", type="datetime", nullable=false)
      */
-    private $createdOn;
+    private $createdOn = 'CURRENT_TIMESTAMP';
 
     /**
      * @var \Issues

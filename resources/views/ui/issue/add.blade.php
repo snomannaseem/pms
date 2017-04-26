@@ -5,7 +5,14 @@
 
 <div class="row">
 <?php 
-//dd($data);
+$issue_readonly = '';
+if(isset($_GET['type']) && $_GET['type']=="subtask"){
+	$data = $_GET;
+	$data['issue_type_id'] = 2;
+	$issue_readonly ='disabled';
+	$data['task_type'] = "subtask";
+}
+
 ?>
 					
 	<div class="col-md-12">
@@ -68,20 +75,16 @@
 				<div class="form-group"> 
 					  <label class="col-sm-2 col-sm-2 control-label">Issue Type</label>
 					  <div class="col-sm-3">
-					   <select class="form-control" name="issue_type" id="issue_type" > 
-								<?php if($issue_types) { foreach($issue_types as $issue_type) {?>
-									<option value ="<?php echo $issue_type['id'];?>"><?php  echo ucfirst($issue_type['name']);?></option>
+					   <select  <?php echo $issue_readonly;?>   class="form-control" name="issue_type" id="issue_type" > 
+								<?php if($issue_types) { foreach($issue_types as $issue_type) {
+									
+								?>
+							<option  value ="<?php echo $issue_type['id'];?>"><?php  echo ucfirst($issue_type['name']);?></option>
 								<?php } } ?>
 						</select>
 						</div>
 				</div>
 				
-				<div class="form-group" style="display:none;" id="parent_issue_div"> 
-					  <label class="col-sm-2 col-sm-2 control-label">Issue</label>
-					  <div class="col-sm-3">
-						<select class="form-control" name="parent_issue_type" id="parent_issue_type" > </select>
-					  </div>
-				</div>
 				
 				<div class="form-group"> 
 					  <label class="col-sm-2 col-sm-2 control-label">Resolution</label>
@@ -132,6 +135,8 @@
 				  <label class="col-lg-2 col-sm-2 control-label"></label>
 				  <div class="col-lg-10">
 					<input type="hidden" name="id" id="id" value="<?php if(isset($data['issue_id'])) echo $data['issue_id'];?>">
+					<input type="hidden" name="parent_issue_type" id="parent_issue_type" value="<?php if(isset($data['parent_issue_type'])) echo $data['parent_issue_type'];?>">
+					<input type="hidden" name="task_type" id="task_type" value="<?php if(isset($data['task_type'])) echo $data['task_type'];?>">
 					<button type="button" class="btn btn-info" id="create_issue"><?php echo isset($data['issue_id'])?"Update":"Submit";?></button>
 				 </div>
 				</div>
@@ -165,12 +170,12 @@
 	$('#resolution option[value="' + resolution + '"]').prop('selected', true);
 	$('#status option[value="' + status + '"]').prop('selected', true);
 	
-	if(parent_issue_id!=0){
+/*	if(parent_issue_id!=0){
 		onChangeIssueDropDown();
 		$('#parent_issue_div').show();
 		//$('#parent_issue_type option[value="' + parent_issue_id + '"]').attr('selected', true);
 	}
-		/*Onchange of Project Get Assigne Name */
+	*/	/*Onchange of Project Get Assigne Name */
 		onChangeAssigneeDropDown();
 		$("#project").change(function () {
 			$('#parent_issue_div').hide();
@@ -180,13 +185,13 @@
 		});
 		
 		/*On change of issue reneder sub issues*/
-		$("#issue_type").change(function () {
+		/*$("#issue_type").change(function () {
 			$('#parent_issue_div').hide();
 			if($("#issue_type option:selected").text().toLowerCase() =="sub-task"){
 				onChangeIssueDropDown();
 			}
 			
-		});
+		});*/
 		
 		CKEDITOR.replace('description');
 		

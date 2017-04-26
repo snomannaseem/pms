@@ -10,7 +10,7 @@ use App\Entities\Teams;
 use Validator;
 
 
-class TeamRepo extends BaseRepo{
+class ResourcesRepo extends BaseRepo{
 
     // Basic Methods
 	public static function check(){
@@ -20,17 +20,20 @@ class TeamRepo extends BaseRepo{
     public static function buildQuery($filters, $order_by) {
 
 
-		$dsql = 'SELECT PARTIAL team.{id, name, status, deletedBy}
-                                                    FROM App\\Entities\\Teams team';
-
+		$dsql = 'SELECT pr,u,p FROM App\\Entities\\ProjectsResources pr
+		JOIN pr.user u
+		JOIN pr.project p'
+		;
+	
         $where_field_map = [		  
-          "default" => [true, " team.deletedBy IS NULL "],
-          "teamid" => [true, " team.teamid = :teamid "],
-          "name" => [true, " team.name like CONCAT('%',:name,'%') "],
+          "default" => [true, " pr.deletedBy IS NULL "],
+          "teamid" => [true, " pr.teamid = :teamid "],
+          "project_id" => [true, " p.id = :project_id  "],
+          "name" => [true, " pr.name like CONCAT('%',:name,'%') "],
         ];
 		
         $order_by_field_map = [
-          "teamid" => " team.id __order__ ",
+          "teamid" => " pr.id __order__ ",
         ];
 
         //dd($filters);
@@ -44,7 +47,7 @@ class TeamRepo extends BaseRepo{
         ];
     }
 
-    public function getTeamsList(
+    public function getResourcesList(
       $filters = [],
       $orderby = ['order' => "", 'sort_by' => ""],
       $paging = ["page_num" => 1, "page_size" => 0]
@@ -92,11 +95,11 @@ class TeamRepo extends BaseRepo{
         }
     }
 	
-	public function getTeamResourcesByTeamId($id)
+	public function getResourcesByProjectId($id)
     {
 		if($id == "") return [];  // No resource for '' or 0, 
-		$sql = "select * from team_resources where team_id = $id AND deleted_by IS NULL";
-		
+		$sql = "select * from projects_resources where project_id = $id AND deleted_by IS NULL";
+		//dd($sql);
 		$query=$this->db->executeNative($sql, 'db_conn');
 		$result = $query->fetchAll();
 		//dd($result);

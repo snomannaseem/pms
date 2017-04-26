@@ -6,19 +6,19 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\IssueRepo;
 use App\Repositories\HistoryRepo;
-
 use App\Validation\Validate;
-#use Auth;
+use Auth;
+
 class HistoryCont extends Controller
 {
     public function __construct()
     {
-        #$this->logged_user = Auth::user();
+        $this->logged_user = \Auth::user();
         //$this->issue 	= new IssueRepo();
         $this->history	= new HistoryRepo();
     }
 	public function getHistory(Request $request){
-		$userid = 1;
+		$userid = $this->logged_user->__get('id');
 		$post_data = $request->all();
 		$post_data['userid'] = $userid;
 		$history_data =  $this->history->getHistory($post_data);

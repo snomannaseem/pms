@@ -5,12 +5,12 @@
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * TeamResources
+ * UserRoles
  *
- * @ORM\Table(name="team_resources", indexes={@ORM\Index(name="fk_team_resources_team_id", columns={"team_id"}), @ORM\Index(name="fk_team_resources_user_id", columns={"user_id"})})
+ * @ORM\Table(name="user_roles", uniqueConstraints={@ORM\UniqueConstraint(name="fk_user_roles_ids", columns={"role_id", "user_id"})}, indexes={@ORM\Index(name="fk_user_roles_user_id", columns={"user_id"}), @ORM\Index(name="IDX_54FCD59FD60322AC", columns={"role_id"})})
  * @ORM\Entity
  */
-class TeamResources
+class UserRoles
 {
     /**
      * @var integer
@@ -22,13 +22,6 @@ class TeamResources
     private $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="created_by", type="integer", nullable=false)
-     */
-    private $createdBy;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_on", type="datetime", nullable=false)
@@ -36,11 +29,11 @@ class TeamResources
     private $createdOn = 'CURRENT_TIMESTAMP';
 
     /**
-     * @var integer
+     * @var \DateTime
      *
-     * @ORM\Column(name="deleted_by", type="integer", nullable=true)
+     * @ORM\Column(name="updated_on", type="datetime", nullable=true)
      */
-    private $deletedBy;
+    private $updatedOn;
 
     /**
      * @var \DateTime
@@ -50,14 +43,14 @@ class TeamResources
     private $deletedOn;
 
     /**
-     * @var \Teams
+     * @var \Roles
      *
-     * @ORM\ManyToOne(targetEntity="Teams")
+     * @ORM\ManyToOne(targetEntity="Roles")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="team_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="role_id", referencedColumnName="id")
      * })
      */
-    private $team;
+    private $role;
 
     /**
      * @var \Users

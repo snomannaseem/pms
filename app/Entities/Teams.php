@@ -45,9 +45,37 @@ private $createdBy;
 /**
  * @var \DateTime
  *
- * @ORM\Column(name="created_on", type="datetime", precision=0, scale=0, nullable=true, unique=false)
+ * @ORM\Column(name="created_on", type="datetime", precision=0, scale=0, nullable=false, unique=false)
  */
 private $createdOn;
+
+/**
+ * @var integer
+ *
+ * @ORM\Column(name="updated_by", type="integer", precision=0, scale=0, nullable=true, unique=false)
+ */
+private $updatedBy;
+
+/**
+ * @var \DateTime
+ *
+ * @ORM\Column(name="updated_on", type="datetime", precision=0, scale=0, nullable=true, unique=false)
+ */
+private $updatedOn;
+
+/**
+ * @var integer
+ *
+ * @ORM\Column(name="deleted_by", type="integer", precision=0, scale=0, nullable=true, unique=false)
+ */
+private $deletedBy;
+
+/**
+ * @var \DateTime
+ *
+ * @ORM\Column(name="deleted_on", type="datetime", precision=0, scale=0, nullable=true, unique=false)
+ */
+private $deletedOn;
 
 
 /**
@@ -154,6 +182,102 @@ return $this;
 public function getCreatedOn()
 {
 return $this->createdOn;
+}
+
+/**
+ * Set updatedBy
+ *
+ * @param integer $updatedBy
+ *
+ * @return Teams
+ */
+public function setUpdatedBy($updatedBy)
+{
+$this->updatedBy = $updatedBy;
+
+return $this;
+}
+
+/**
+ * Get updatedBy
+ *
+ * @return integer
+ */
+public function getUpdatedBy()
+{
+return $this->updatedBy;
+}
+
+/**
+ * Set updatedOn
+ *
+ * @param \DateTime $updatedOn
+ *
+ * @return Teams
+ */
+public function setUpdatedOn($updatedOn)
+{
+$this->updatedOn = $updatedOn;
+
+return $this;
+}
+
+/**
+ * Get updatedOn
+ *
+ * @return \DateTime
+ */
+public function getUpdatedOn()
+{
+return $this->updatedOn;
+}
+
+/**
+ * Set deletedBy
+ *
+ * @param integer $deletedBy
+ *
+ * @return Teams
+ */
+public function setDeletedBy($deletedBy)
+{
+$this->deletedBy = $deletedBy;
+
+return $this;
+}
+
+/**
+ * Get deletedBy
+ *
+ * @return integer
+ */
+public function getDeletedBy()
+{
+return $this->deletedBy;
+}
+
+/**
+ * Set deletedOn
+ *
+ * @param \DateTime $deletedOn
+ *
+ * @return Teams
+ */
+public function setDeletedOn($deletedOn)
+{
+$this->deletedOn = $deletedOn;
+
+return $this;
+}
+
+/**
+ * Get deletedOn
+ *
+ * @return \DateTime
+ */
+public function getDeletedOn()
+{
+return $this->deletedOn;
 }
 }
 

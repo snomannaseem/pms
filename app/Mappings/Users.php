@@ -63,6 +63,55 @@ class Users
      */
     private $status = '1';
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="profile_image", type="string", length=50, nullable=true)
+     */
+    private $profileImage;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="created_by", type="integer", nullable=false)
+     */
+    private $createdBy;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_on", type="datetime", nullable=false)
+     */
+    private $createdOn = 'CURRENT_TIMESTAMP';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="updated_by", type="integer", nullable=true)
+     */
+    private $updatedBy;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_on", type="datetime", nullable=true)
+     */
+    private $updatedOn;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="deleted_by", type="integer", nullable=true)
+     */
+    private $deletedBy;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="deleted_on", type="datetime", nullable=true)
+     */
+    private $deletedOn;
+
 
 }
 

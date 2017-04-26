@@ -5,12 +5,12 @@
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Teams
+ * Permissions
  *
- * @ORM\Table(name="teams")
+ * @ORM\Table(name="permissions", uniqueConstraints={@ORM\UniqueConstraint(name="const_permissions_name", columns={"permission"})})
  * @ORM\Entity
  */
-class Teams
+class Permissions
 {
     /**
      * @var integer
@@ -24,23 +24,23 @@ class Teams
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=50, nullable=true)
+     * @ORM\Column(name="permission", type="string", length=30, nullable=false)
      */
-    private $name;
+    private $permission;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="status", type="string", length=10, nullable=true)
+     * @ORM\Column(name="description", type="text", length=65535, nullable=true)
      */
-    private $status;
+    private $description;
 
     /**
-     * @var integer
+     * @var boolean
      *
-     * @ORM\Column(name="created_by", type="integer", nullable=false)
+     * @ORM\Column(name="is_active", type="boolean", nullable=true)
      */
-    private $createdBy;
+    private $isActive;
 
     /**
      * @var \DateTime
@@ -50,25 +50,11 @@ class Teams
     private $createdOn = 'CURRENT_TIMESTAMP';
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="updated_by", type="integer", nullable=true)
-     */
-    private $updatedBy;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="updated_on", type="datetime", nullable=true)
      */
     private $updatedOn;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="deleted_by", type="integer", nullable=true)
-     */
-    private $deletedBy;
 
     /**
      * @var \DateTime

@@ -52,7 +52,7 @@ private $createdBy;
 /**
  * @var \DateTime
  *
- * @ORM\Column(name="created_on", type="datetime", precision=0, scale=0, nullable=true, unique=false)
+ * @ORM\Column(name="created_on", type="datetime", precision=0, scale=0, nullable=false, unique=false)
  */
 private $createdOn;
 
@@ -69,6 +69,20 @@ private $updatedBy;
  * @ORM\Column(name="updated_on", type="datetime", precision=0, scale=0, nullable=true, unique=false)
  */
 private $updatedOn;
+
+/**
+ * @var integer
+ *
+ * @ORM\Column(name="deleted_by", type="integer", precision=0, scale=0, nullable=true, unique=false)
+ */
+private $deletedBy;
+
+/**
+ * @var \DateTime
+ *
+ * @ORM\Column(name="deleted_on", type="datetime", precision=0, scale=0, nullable=true, unique=false)
+ */
+private $deletedOn;
 
 /**
  * @var \Issues
@@ -257,6 +271,54 @@ return $this;
 public function getUpdatedOn()
 {
 return $this->updatedOn;
+}
+
+/**
+ * Set deletedBy
+ *
+ * @param integer $deletedBy
+ *
+ * @return Comments
+ */
+public function setDeletedBy($deletedBy)
+{
+$this->deletedBy = $deletedBy;
+
+return $this;
+}
+
+/**
+ * Get deletedBy
+ *
+ * @return integer
+ */
+public function getDeletedBy()
+{
+return $this->deletedBy;
+}
+
+/**
+ * Set deletedOn
+ *
+ * @param \DateTime $deletedOn
+ *
+ * @return Comments
+ */
+public function setDeletedOn($deletedOn)
+{
+$this->deletedOn = $deletedOn;
+
+return $this;
+}
+
+/**
+ * Get deletedOn
+ *
+ * @return \DateTime
+ */
+public function getDeletedOn()
+{
+return $this->deletedOn;
 }
 
 /**

@@ -5,12 +5,12 @@
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Teams
+ * Roles
  *
- * @ORM\Table(name="teams")
+ * @ORM\Table(name="roles", uniqueConstraints={@ORM\UniqueConstraint(name="role", columns={"role"})})
  * @ORM\Entity
  */
-class Teams
+class Roles
 {
     /**
      * @var integer
@@ -24,23 +24,9 @@ class Teams
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=50, nullable=true)
+     * @ORM\Column(name="role", type="string", length=30, nullable=true)
      */
-    private $name;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="status", type="string", length=10, nullable=true)
-     */
-    private $status;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="created_by", type="integer", nullable=false)
-     */
-    private $createdBy;
+    private $role;
 
     /**
      * @var \DateTime
@@ -50,25 +36,11 @@ class Teams
     private $createdOn = 'CURRENT_TIMESTAMP';
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="updated_by", type="integer", nullable=true)
-     */
-    private $updatedBy;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="updated_on", type="datetime", nullable=true)
      */
     private $updatedOn;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="deleted_by", type="integer", nullable=true)
-     */
-    private $deletedBy;
 
     /**
      * @var \DateTime

@@ -22,7 +22,7 @@
 								<form id="camp_search">
                                     <div class="box-tools m-b-15">
                                         <div class="input-group">
-											<button  id="btn_add" type="button" class="btn btn-primary pull-left">Add</button>
+											<button  id="btn_add2" type="button" class="btn btn-primary pull-left">Add</button>
                                             <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
                                             <div class="input-group-btn">
                                                 <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
@@ -35,7 +35,7 @@
 										#dd($data_set);
 									?>
 									<!--GRID-->
-										@include('ui.teams.teams_grid',['header' => [] , 'paging_result_set' => $data_set])
+										@include('ui.resources.resources_grid',['header' => [] , 'paging_result_set' => $data_set])
 									<!-- GRID End -->
 									</div>
 										@include('ui.common.paging',['paging_result_set' => $data_set['resultSet']])
@@ -53,13 +53,18 @@ $sort_by =  $data_set['sort_by'];
 @stop
 @section('client_script')
 <script type="text/javascript">
-	var grid_list_page_name = 'teams';
-	var grid_edit_page_name = 'teams';
-	
+	var grid_list_page_name = '';
+	var grid_edit_page_name = '';
+	$(document).ready(function (){		
+		console.log('ready is ready')
+		$('#btn_add2').click(function(){
+			 window.location = window.location + '/add';
+		});
+	});
 </script>
-<script src="js/pages/grid.js" type="text/javascript">
+<script src="/js/pages/grid.js" type="text/javascript">
 </script>
-<script src="js/pages/pagingv2.js" type="text/javascript">
+<script src="/js/pages/pagingv2.js" type="text/javascript">
 </script>
 
 <script type="text/javascript">

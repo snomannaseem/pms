@@ -8,11 +8,11 @@
 <div class="row">
 	<div class="col-lg-6">
 		<section class="panel">
-			<header class="panel-heading">Add Team</header>
+			<header class="panel-heading">Add/Remove Resources</header>
 			<div class="panel-body">
 				<?php if($errors != "") { ?><p class="alert alert-block alert-danger"><?php echo $errors;  ?></p><?php } ?>
-				<form role="form" action="/teams/<?php echo $id; ?>" method="post">
-				<div class="form-group"> Name: <input class="form-control" name="name" value="<?php echo $data_set['name'];?>" type="text"> </div>
+				<form role="form" action="/projects/resources/<?php echo $id; ?>/add" method="post">
+				
 				<p> Add User By Typing and Enter: <input class="form-control" id="userid" name="userid" value="" type="text" autocomplete="off" class="ui-autocomplete-input" > </p>
 				
 				<div class="panel">
@@ -22,7 +22,7 @@
 
                                 <ul class="list-group teammates">
 									<?php 
-									foreach($team_res as $user)
+									foreach($resources_res as $user)
 									{
 									?>
 									<li class="alert list-group-item"><button type="button" class="close close-sm" data-dismiss="alert"><i class="fa fa-times"></i></button><a href=""><img width="50" height="50" src="img/26115.jpg"></a><a href=""><?php echo $user['name']; ?></a><input type="hidden" name="userids[]" value="<?php echo $user['id']; ?>" /></li>

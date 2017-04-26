@@ -22,6 +22,34 @@ class ProjectsResources
     private $id;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="created_by", type="integer", nullable=true)
+     */
+    private $createdBy;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_on", type="datetime", nullable=true)
+     */
+    private $createdOn;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="deleted_by", type="integer", nullable=true)
+     */
+    private $deletedBy;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="deleted_on", type="datetime", nullable=true)
+     */
+    private $deletedOn = 'CURRENT_TIMESTAMP';
+
+    /**
      * @var \Projects
      *
      * @ORM\ManyToOne(targetEntity="Projects")

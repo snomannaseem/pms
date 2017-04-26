@@ -13,18 +13,19 @@ class IssueCont extends Controller
 {
     public function __construct()
     {
-        $this->logged_user = Auth::user();
+        $this->logged_user = \Auth::user();
         $this->pro 		= new ProjectRepo();
         $this->issue 	= new IssueRepo();
     }
 		
     public function index(Request $request){
-			
+		
+		
 		$temp = $request->input('srch', "");
         parse_str($temp, $srch);
 		$filters['name'] = isset($srch['table_search']) ? $srch['table_search'] : "";
 		
-		$filters['userid'] =  1;
+		$filters['userid'] = $this->logged_user->__get('id');
 
 		$paging['page_num']  = $request->input('page_num', 1);
 		$paging['page_size'] = $request->input('page_size', env('DEFAULT_PAGE_SIZE'));
@@ -76,7 +77,8 @@ class IssueCont extends Controller
 			));
 	 }
 	public function add(Request $request){
-		$projects 			= $this->pro->getProjectByUserId($userid=1);
+		$userid =  $this->logged_user->__get('id');
+		$projects 			= $this->pro->getProjectByUserId($userid);
 		$cats 				= $this->pro->getCategories();
 		$priorities 		= $this->pro->getPriorities();
 		$issue_rso_types 	= $this->pro->getIssueResolutionType();
@@ -85,9 +87,9 @@ class IssueCont extends Controller
 		return view('ui.issue.add',['name'=>'Suresh','projects'=>$projects,'cats'=>$cats,'priorities'=>$priorities,'issue_rso_types'=>$issue_rso_types,'issue_types'=>$issue_types]);
 	}
 	public function edit($id){
-		
+		$userid =  $this->logged_user->__get('id');
 		$issue_data = $this->issue->getIssueById($id);
-		$projects 			= $this->pro->getProjectByUserId($userid=1);
+		$projects 			= $this->pro->getProjectByUserId($userid);
 		$cats 				= $this->pro->getCategories();
 		$priorities 		= $this->pro->getPriorities();
 		$issue_rso_types 	= $this->pro->getIssueResolutionType();
@@ -98,7 +100,7 @@ class IssueCont extends Controller
 	public function create(Request $request){
 		
 		$post_data = $request->all();
-		$post_data['userid'] = 1;
+		$post_data['userid'] =   $this->logged_user->__get('id');
 		$validate_array = array( 'issue_title' => 'required','estimate_time'=>'required|numeric','assigned_to'=>'required');
 		$validation_res = Validate::validateMe($post_data, $validate_array);
 
@@ -117,12 +119,25 @@ class IssueCont extends Controller
 		return $this->issue->getParentIssueLists($post_data['project_id']);
 	}
 	public function view($id){
-		$userid = 1;//$this->logged_user->getId();
+		$userid =  $this->logged_user->__get('id');
 		
 		$issue_data = $this->issue->getIssueById($id);
 		$this->com 	= new CommentRepo();
 		$commens_data = $this->com->getCommentById($id);
-		$user_array = array('userid'=>$userid,'username'=>'Noman','userimage'=>(isset($this->logged_user)?$this->logged_user->getImage():"default.jpg"));
+		$user_array = array('userid'=>$userid,'username'=>$this->logged_user->__get('name'),'userimage'=>($this->logged_user->__get('profile_image')!=null)?$this->logged_user->__get('profile_image'):"default.jpg");
 		return view('ui.issue.view',['data'=>$issue_data[0],'comments_data' =>$commens_data,'userdata'=>$user_array ]);
+	}
+	/*Get subtask list*/
+	public function getSubTask(Request $request){
+		$post_data = $request->all();
+		$substask_data =  $this->issue->getSubTaskListByTaskId($post_data);
+	//	print_r($substask_data);
+		$view = view('ui.issue.subtask')->with(['substask_data'=> $substask_data,'parent_issue_id'=>$post_data['issue_id']]);
+		$response = array(
+                'code' 			=> 200,
+                'status' 		=> 'ok',
+                'rows' 			=> $view->render()
+            );
+		return response(json_encode($response))->header('Content-Type', 'json');
 	}
 }

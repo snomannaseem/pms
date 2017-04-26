@@ -64,18 +64,18 @@ class Issues
     private $parentIssueId;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="created_on", type="datetime", nullable=true)
-     */
-    private $createdOn;
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="created_by", type="integer", nullable=true)
      */
     private $createdBy;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_on", type="datetime", nullable=false)
+     */
+    private $createdOn = 'CURRENT_TIMESTAMP';
 
     /**
      * @var integer
@@ -90,6 +90,20 @@ class Issues
      * @ORM\Column(name="updated_on", type="datetime", nullable=true)
      */
     private $updatedOn;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="deleted_by", type="integer", nullable=true)
+     */
+    private $deletedBy;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="deleted_on", type="datetime", nullable=true)
+     */
+    private $deletedOn;
 
     /**
      * @var \Categories

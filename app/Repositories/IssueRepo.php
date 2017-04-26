@@ -13,15 +13,17 @@ use App\Entities\Users;
 use App\Entities\IssueResolutionTypes;
 use App\Entities\IssueTypes;
 
-
+use App\Repositories\HistoryRepo;
 class IssueRepo extends BaseRepo{
 
     
 	/*CREATE PROJECT AND UPDATE PROJECT*/
 	public function createIssue($data){
-	//	dd($data);
+		
 		$msg = "Successfully added";
-	
+		if(isset($data['task_type']) && $data['task_type']=="subtask"){
+			$data['issue_type'] = 2 ;
+		}
 		$issue = new Issues();
 		if(isset($data['id']) and $data['id']!=''){
 			$msg = "Successfully updated";
@@ -50,8 +52,28 @@ class IssueRepo extends BaseRepo{
 			$issue->setCreatedBy(isset($data['userid'])?$data['userid']:1);
 		}
 		
-		EntityManager::persist($issue);
-		EntityManager::flush();
+			
+			EntityManager::persist($issue);
+			EntityManager::flush();
+			
+			
+			/*History call*/
+			$data['comment'] ="Issue has been created";
+			$data['issue_id'] = $issue->getId();
+			if($data['issue_type']==2){
+					$data['comment'] ="Sub task has been created";
+			}
+			if(isset($data['id']) and $data['id']!=''){
+				$data['comment'] ="Issue has been updated";
+				$data['issue_id'] = $data['id'];
+				if($data['issue_type']==2){
+					$data['comment'] ="Sub task has been updated";
+				}
+			}
+			$this->history 	= new HistoryRepo();
+			$this->history->addHistory($data);
+			
+			/*End of History */	
 		  return array(
 			  'code' => '200',
 			  'status' => 'ok',
@@ -79,8 +101,8 @@ class IssueRepo extends BaseRepo{
 				AND ct.id = iss.category_id
 				AND irt.id=iss.resolution_id
 				AND it.id=iss.issue_type_id
-				AND prt.id=iss.priority_id
-				AND iss.created_by=$userid $where  ";
+				AND prt.id=iss.priority_id AND iss.issue_type_id!=2
+				AND (iss.created_by=$userid OR iss.assigned_to=$userid) $where ";
 				
 		 $result_set = $this->paginateNative($sql, $paging['page_size'], $paging['page_num']);
 		 $result_set['code']  = 200;
@@ -124,6 +146,27 @@ class IssueRepo extends BaseRepo{
 				$res['status'] = 'ok';
 				return $res;
 			}catch(\Exception $e){ return ['code'=>1000,'status'=>'error','msg'=> $e->getMessage(),];}
+	}
+	
+	public function getSubTaskListByTaskId($data){
+		$parent_issue_id = $data['issue_id'];
+		
+		$sql = "SELECT iss.id as issue_id,iss.title as issue_title,p.id as project_id,p.title as project_tilte ,ct.id as cat_id, ct.name as cat_name  ,irt.name as resolution_name ,it.name as issue_type_name, prt.name as pirority_name,u.name as username,u.id as userid
+				FROM issues iss, projects p , categories ct, issue_resolution_types irt,issue_types it ,priorities prt,users u 
+				WHERE p.id=iss.project_id
+				AND ct.id = iss.category_id
+				AND irt.id=iss.resolution_id
+				AND it.id=iss.issue_type_id
+				AND prt.id=iss.priority_id
+				AND iss.assigned_to = u.id
+				AND iss.parent_issue_id=$parent_issue_id";
+		try {
+				$query = $this->db->executeNative($sql);
+				$res ['rows']= $query->fetchAll();
+				$res['code'] = 200;
+				$res['status'] = 'ok';
+				return $res;
+		}catch(\Exception $e){ return ['code'=>1000,'status'=>'error','msg'=> $e->getMessage(),];}	
 	}
 
 }

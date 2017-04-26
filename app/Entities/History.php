@@ -38,7 +38,7 @@ private $createdBy;
 /**
  * @var \DateTime
  *
- * @ORM\Column(name="created_on", type="datetime", precision=0, scale=0, nullable=true, unique=false)
+ * @ORM\Column(name="created_on", type="datetime", precision=0, scale=0, nullable=false, unique=false)
  */
 private $createdOn;
 
@@ -142,7 +142,7 @@ return $this->createdOn;
  *
  * @return History
  */
-public function setIssue(Issues $issue = null)
+public function setIssue(\Issues $issue = null)
 {
 $this->issue = $issue;
 

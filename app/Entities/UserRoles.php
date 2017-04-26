@@ -5,12 +5,12 @@ namespace App\Entities;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * TeamResources
+ * UserRoles
  *
- * @ORM\Table(name="team_resources", indexes={@ORM\Index(name="fk_team_resources_team_id", columns={"team_id"}), @ORM\Index(name="fk_team_resources_user_id", columns={"user_id"})})
+ * @ORM\Table(name="user_roles", uniqueConstraints={@ORM\UniqueConstraint(name="fk_user_roles_ids", columns={"role_id", "user_id"})}, indexes={@ORM\Index(name="fk_user_roles_user_id", columns={"user_id"}), @ORM\Index(name="IDX_54FCD59FD60322AC", columns={"role_id"})})
  * @ORM\Entity
  */
-class TeamResources
+class UserRoles
 {
 /**
  * @var integer
@@ -22,13 +22,6 @@ class TeamResources
 private $id;
 
 /**
- * @var integer
- *
- * @ORM\Column(name="created_by", type="integer", precision=0, scale=0, nullable=false, unique=false)
- */
-private $createdBy;
-
-/**
  * @var \DateTime
  *
  * @ORM\Column(name="created_on", type="datetime", precision=0, scale=0, nullable=false, unique=false)
@@ -36,11 +29,11 @@ private $createdBy;
 private $createdOn;
 
 /**
- * @var integer
+ * @var \DateTime
  *
- * @ORM\Column(name="deleted_by", type="integer", precision=0, scale=0, nullable=true, unique=false)
+ * @ORM\Column(name="updated_on", type="datetime", precision=0, scale=0, nullable=true, unique=false)
  */
-private $deletedBy;
+private $updatedOn;
 
 /**
  * @var \DateTime
@@ -50,14 +43,14 @@ private $deletedBy;
 private $deletedOn;
 
 /**
- * @var \Teams
+ * @var \Roles
  *
- * @ORM\ManyToOne(targetEntity="Teams")
+ * @ORM\ManyToOne(targetEntity="Roles")
  * @ORM\JoinColumns({
- *   @ORM\JoinColumn(name="team_id", referencedColumnName="id", nullable=true)
+ *   @ORM\JoinColumn(name="role_id", referencedColumnName="id", nullable=true)
  * })
  */
-private $team;
+private $role;
 
 /**
  * @var \Users
@@ -81,35 +74,11 @@ return $this->id;
 }
 
 /**
- * Set createdBy
- *
- * @param integer $createdBy
- *
- * @return TeamResources
- */
-public function setCreatedBy($createdBy)
-{
-$this->createdBy = $createdBy;
-
-return $this;
-}
-
-/**
- * Get createdBy
- *
- * @return integer
- */
-public function getCreatedBy()
-{
-return $this->createdBy;
-}
-
-/**
  * Set createdOn
  *
  * @param \DateTime $createdOn
  *
- * @return TeamResources
+ * @return UserRoles
  */
 public function setCreatedOn($createdOn)
 {
@@ -129,27 +98,27 @@ return $this->createdOn;
 }
 
 /**
- * Set deletedBy
+ * Set updatedOn
  *
- * @param integer $deletedBy
+ * @param \DateTime $updatedOn
  *
- * @return TeamResources
+ * @return UserRoles
  */
-public function setDeletedBy($deletedBy)
+public function setUpdatedOn($updatedOn)
 {
-$this->deletedBy = $deletedBy;
+$this->updatedOn = $updatedOn;
 
 return $this;
 }
 
 /**
- * Get deletedBy
+ * Get updatedOn
  *
- * @return integer
+ * @return \DateTime
  */
-public function getDeletedBy()
+public function getUpdatedOn()
 {
-return $this->deletedBy;
+return $this->updatedOn;
 }
 
 /**
@@ -157,7 +126,7 @@ return $this->deletedBy;
  *
  * @param \DateTime $deletedOn
  *
- * @return TeamResources
+ * @return UserRoles
  */
 public function setDeletedOn($deletedOn)
 {
@@ -177,27 +146,27 @@ return $this->deletedOn;
 }
 
 /**
- * Set team
+ * Set role
  *
- * @param \Teams $team
+ * @param \Roles $role
  *
- * @return TeamResources
+ * @return UserRoles
  */
-public function setTeam(\Teams $team = null)
+public function setRole(\Roles $role = null)
 {
-$this->team = $team;
+$this->role = $role;
 
 return $this;
 }
 
 /**
- * Get team
+ * Get role
  *
- * @return \Teams
+ * @return \Roles
  */
-public function getTeam()
+public function getRole()
 {
-return $this->team;
+return $this->role;
 }
 
 /**
@@ -205,7 +174,7 @@ return $this->team;
  *
  * @param \Users $user
  *
- * @return TeamResources
+ * @return UserRoles
  */
 public function setUser(\Users $user = null)
 {

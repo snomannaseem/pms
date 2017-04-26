@@ -64,18 +64,18 @@ private $status;
 private $parentIssueId;
 
 /**
- * @var \DateTime
- *
- * @ORM\Column(name="created_on", type="datetime", precision=0, scale=0, nullable=true, unique=false)
- */
-private $createdOn;
-
-/**
  * @var integer
  *
  * @ORM\Column(name="created_by", type="integer", precision=0, scale=0, nullable=true, unique=false)
  */
 private $createdBy;
+
+/**
+ * @var \DateTime
+ *
+ * @ORM\Column(name="created_on", type="datetime", precision=0, scale=0, nullable=false, unique=false)
+ */
+private $createdOn;
 
 /**
  * @var integer
@@ -90,6 +90,20 @@ private $updatedBy;
  * @ORM\Column(name="updated_on", type="datetime", precision=0, scale=0, nullable=true, unique=false)
  */
 private $updatedOn;
+
+/**
+ * @var integer
+ *
+ * @ORM\Column(name="deleted_by", type="integer", precision=0, scale=0, nullable=true, unique=false)
+ */
+private $deletedBy;
+
+/**
+ * @var \DateTime
+ *
+ * @ORM\Column(name="deleted_on", type="datetime", precision=0, scale=0, nullable=true, unique=false)
+ */
+private $deletedOn;
 
 /**
  * @var \Categories
@@ -297,30 +311,6 @@ return $this->parentIssueId;
 }
 
 /**
- * Set createdOn
- *
- * @param \DateTime $createdOn
- *
- * @return Issues
- */
-public function setCreatedOn($createdOn)
-{
-$this->createdOn = $createdOn;
-
-return $this;
-}
-
-/**
- * Get createdOn
- *
- * @return \DateTime
- */
-public function getCreatedOn()
-{
-return $this->createdOn;
-}
-
-/**
  * Set createdBy
  *
  * @param integer $createdBy
@@ -342,6 +332,30 @@ return $this;
 public function getCreatedBy()
 {
 return $this->createdBy;
+}
+
+/**
+ * Set createdOn
+ *
+ * @param \DateTime $createdOn
+ *
+ * @return Issues
+ */
+public function setCreatedOn($createdOn)
+{
+$this->createdOn = $createdOn;
+
+return $this;
+}
+
+/**
+ * Get createdOn
+ *
+ * @return \DateTime
+ */
+public function getCreatedOn()
+{
+return $this->createdOn;
 }
 
 /**
@@ -390,6 +404,54 @@ return $this;
 public function getUpdatedOn()
 {
 return $this->updatedOn;
+}
+
+/**
+ * Set deletedBy
+ *
+ * @param integer $deletedBy
+ *
+ * @return Issues
+ */
+public function setDeletedBy($deletedBy)
+{
+$this->deletedBy = $deletedBy;
+
+return $this;
+}
+
+/**
+ * Get deletedBy
+ *
+ * @return integer
+ */
+public function getDeletedBy()
+{
+return $this->deletedBy;
+}
+
+/**
+ * Set deletedOn
+ *
+ * @param \DateTime $deletedOn
+ *
+ * @return Issues
+ */
+public function setDeletedOn($deletedOn)
+{
+$this->deletedOn = $deletedOn;
+
+return $this;
+}
+
+/**
+ * Get deletedOn
+ *
+ * @return \DateTime
+ */
+public function getDeletedOn()
+{
+return $this->deletedOn;
 }
 
 /**

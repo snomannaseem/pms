@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\ProjectRepo;
 use App\Validation\Validate;
-#use Auth;
+use Auth;
 class ProjectCont extends Controller
 {
     public function __construct()
     {
-        #$this->logged_user = Auth::user();
+        $this->logged_user = \Auth::user();
         $this->pro = new ProjectRepo();
     }
 		
@@ -21,7 +21,8 @@ class ProjectCont extends Controller
         parse_str($temp, $srch);
 		$filters['name'] = isset($srch['table_search']) ? $srch['table_search'] : "";
 		
-		$filters['userid'] =  1;
+		$filters['userid'] =  $this->logged_user->__get('id');
+		
 
 		$paging['page_num']  = $request->input('page_num', 1);
 		$paging['page_size'] = $request->input('page_size', env('DEFAULT_PAGE_SIZE'));
@@ -71,17 +72,17 @@ class ProjectCont extends Controller
 	 }
 	public function add(Request $request){
 		
-		return view('ui.project.add',['name'=>'Suresh']);
+		return view('ui.project.add');
 	}
 	public function edit($id){
 		$project_data = $this->pro->getProjectById($id);
-		return view('ui.project.add',['name'=>'Suresh','data'=>$project_data]);
+		return view('ui.project.add',['data'=>$project_data]);
 	}
 	
 	public function create(Request $request){
 		
 		$post_data = $request->all();
-		$post_data['userid'] = 1;
+		$post_data['userid'] = $this->logged_user->__get('id');
 		$validate_array = array( 'title' => 'required','estimate_time'=>'required|numeric');
 		
         $validation_res = Validate::validateMe($post_data, $validate_array);
@@ -99,7 +100,7 @@ class ProjectCont extends Controller
 	public function editresources($id) {
 		$project_data = $this->pro->getProjectById($id);
 		$project_resources = $this->pro->getProjectResources($id);
-		return view('ui.project.add',['name'=>'Suresh','data'=>$project_data]);
+		return view('ui.project.add',['data'=>$project_data]);
 	}
 	
 	
