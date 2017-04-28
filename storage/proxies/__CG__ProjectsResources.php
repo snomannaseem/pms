@@ -64,10 +64,10 @@ class ProjectsResources extends \ProjectsResources implements \Doctrine\ORM\Prox
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'ProjectsResources' . "\0" . 'id', '' . "\0" . 'ProjectsResources' . "\0" . 'project', '' . "\0" . 'ProjectsResources' . "\0" . 'user'];
+            return ['__isInitialized__', '' . "\0" . 'ProjectsResources' . "\0" . 'id', '' . "\0" . 'ProjectsResources' . "\0" . 'createdBy', '' . "\0" . 'ProjectsResources' . "\0" . 'createdOn', '' . "\0" . 'ProjectsResources' . "\0" . 'deletedBy', '' . "\0" . 'ProjectsResources' . "\0" . 'deletedOn', '' . "\0" . 'ProjectsResources' . "\0" . 'project', '' . "\0" . 'ProjectsResources' . "\0" . 'user'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'ProjectsResources' . "\0" . 'id', '' . "\0" . 'ProjectsResources' . "\0" . 'project', '' . "\0" . 'ProjectsResources' . "\0" . 'user'];
+        return ['__isInitialized__', '' . "\0" . 'ProjectsResources' . "\0" . 'id', '' . "\0" . 'ProjectsResources' . "\0" . 'createdBy', '' . "\0" . 'ProjectsResources' . "\0" . 'createdOn', '' . "\0" . 'ProjectsResources' . "\0" . 'deletedBy', '' . "\0" . 'ProjectsResources' . "\0" . 'deletedOn', '' . "\0" . 'ProjectsResources' . "\0" . 'project', '' . "\0" . 'ProjectsResources' . "\0" . 'user'];
     }
 
     /**

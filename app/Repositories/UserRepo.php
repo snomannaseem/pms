@@ -181,7 +181,7 @@ class UserRepo extends BaseRepo{
 		$term = $data['term'];
 		$status = isset($data['status']) ? $data['status'] : 1;
 		$limit = isset($data['limit']) ? $data['limit'] : 10;
-		$query = $this->db->getConnection('db_conn')->createQuery("SELECT PARTIAL user.{id, name, email, status} FROM App\\Entities\\Users user
+		$query = $this->db->getConnection('db_conn')->createQuery("SELECT PARTIAL user.{id, name, email, status,profileImage} FROM App\\Entities\\Users user
 			WHERE user.status = :status and user.name like CONCAT('%',:term,'%') OR  user.email like CONCAT('%',:term,'%')  ")->setParameters(['status' => $status, 'term' => $term]);
 			
 		try {

@@ -16,79 +16,87 @@
 		  <div class="panel-body">
 		  
 			<form class="form-horizontal tasi-form" method="get" id="add_issue">
+			
+			<div class="col-lg-5">
 				
-				<div class="form-group">
-					  <label class="col-sm-2 control-label">Title</label> 
-					  <div class="col-lg-10">
+				<div class="form-group border-bottom">
+					  <label class="col-sm-3 control-label">Title</label> 
+					  <div class="col-lg-9">
 						<p class="form-control-static" ><?php if(isset($data['issue_title'])){ echo $data['issue_title'];}?></p>
 					  </div>
 				</div>
 				
-				<div class="form-group">
-					  <label class="col-sm-2 control-label">Reporter</label> 
-					  <div class="col-lg-10">
+				<div class="form-group border-bottom">
+					  <label class="col-sm-3 control-label">Reporter</label> 
+					  <div class="col-lg-9">
 						<p class="form-control-static"><?php echo ucfirst($data['create_by']);?></p>
 					  </div>
-				</div>
-				
-				
-				
+				</div>				
 				  
-				<div class="form-group"> 
-					  <label class="col-sm-2 col-sm-2 control-label">Category</label>
-					  <div class="col-lg-10">
+				<div class="form-group border-bottom"> 
+					  <label class="col-sm-3 control-label">Category</label>
+					  <div class="col-lg-9">
 					    <p class="form-control-static"><?php echo ucfirst($data['cat_name']);?></p>
 					  </div>
 				</div>
 				
-				<div class="form-group"> 
+				<div class="form-group border-bottom"> 
 				  
-					  <label class="col-sm-2 col-sm-2 control-label">Project</label>
-					  <div class="col-lg-10">
+					  <label class="col-sm-3 control-label">Project</label>
+					  <div class="col-lg-9">
 						<p class="form-control-static"><?php echo ucfirst($data['project_tilte']);?></p>
 					  </div>
 				</div>
-				<div class="form-group"> 
+				
+				<div class="form-group border-bottom"> 
 				  
-					  <label class="col-sm-2 col-sm-2 control-label">Priorities</label>
-					  <div class="col-lg-10">
+					  <label class="col-sm-3 control-label">Priorities</label>
+					  <div class="col-lg-9">
 						<p class="form-control-static"><?php echo ucfirst($data['pirority_name']);?></p>
 					  </div>
 				</div>
-				<div class="form-group"> 
-					  <label class="col-sm-2 col-sm-2 control-label">Issue Type</label>
-					  <div class="col-lg-10">
+				
+				</div>
+				
+				<div class="col-lg-1"></div>
+				
+				<div class="col-lg-6">
+				
+				<div class="form-group border-bottom"> 
+					  <label class="col-sm-3 control-label">Issue Type</label>
+					  <div class="col-lg-9">
 						<p class="form-control-static"><?php echo ucfirst($data['issue_type_name']);?></p>
 					  </div>
 				</div>
 				
-				<div class="form-group"> 
-					  <label class="col-sm-2 col-sm-2 control-label">Resolution</label>
-					  <div class="col-lg-10">
+				<div class="form-group border-bottom"> 
+					  <label class="col-sm-3 control-label">Resolution</label>
+					  <div class="col-lg-9">
 					  	  <p class="form-control-static"><?php echo ucfirst($data['resolution_name']);?></p>
 						</div>
 				</div>
 				
 				  
-				  <div class="form-group">
-					  <label class="col-sm-2 col-sm-2 control-label">Description</label>
-					  <div class="col-lg-10">
+				  <div class="form-group border-bottom">
+					  <label class="col-sm-3 control-label">Description</label>
+					  <div class="col-lg-9">
 						<p class="form-control-static"> <?php if(isset($data['description'])){ echo html_entity_decode($data['description']);}?></p>
 					  </div>
 				  </div>
-				  <div class="form-group">
-					  <label class="col-sm-2 col-sm-2 control-label">Estimate Time</label>
-					  <div class="col-lg-10">					  
+				  <div class="form-group border-bottom">
+					  <label class="col-sm-3 control-label">Estimate Time</label>
+					  <div class="col-lg-9">					  
 						<p class="form-control-static"><?php if(isset($data['est_time'])){ echo $data['est_time'];}?></p>
 					  </div>
 				  </div>
 				  
 				  <div class="form-group">
-				  <label class="col-lg-2 col-sm-2 control-label"></label>
-				  <div class="col-lg-10">
-					
-				 </div>
+				  <label class="col-lg-2 control-label"></label>
+				  <div class="col-lg-10"></div>	
 				</div>
+								
+				</div>
+				
 			  </form>
 		  </div>  
 						

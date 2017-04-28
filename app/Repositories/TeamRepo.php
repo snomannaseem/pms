@@ -7,6 +7,7 @@ use Doctrine\ORM\Query;
 use LaravelDoctrine\ORM\Facades\EntityManager;
 use App\Repositories\BaseRepo;
 use App\Entities\Teams;
+use App\Entities\TeamResources;
 use Validator;
 
 
@@ -20,8 +21,7 @@ class TeamRepo extends BaseRepo{
     public static function buildQuery($filters, $order_by) {
 
 
-		$dsql = 'SELECT PARTIAL team.{id, name, status, deletedBy}
-                                                    FROM App\\Entities\\Teams team';
+		$dsql = 'SELECT  team,tr,count(tr.id) as total_memeber FROM App\\Entities\\Teams team  LEFT JOIN team.team_resources tr';
 
         $where_field_map = [		  
           "default" => [true, " team.deletedBy IS NULL "],
@@ -33,10 +33,10 @@ class TeamRepo extends BaseRepo{
           "teamid" => " team.id __order__ ",
         ];
 
-        //dd($filters);
+        
         $filter_obj = self::getWhereClause($filters, $where_field_map);
-        $order_clause = self::getOrderClause($order_by, $order_by_field_map);
-        $dsql .= $filter_obj['where_clause'] . $order_clause;
+      //  $order_clause = self::getOrderClause($order_by, $order_by_field_map);
+        $dsql .= $filter_obj['where_clause'] . " GROUP BY tr.team_id "  ;
         //dd($dsql);
         return [
           "dql" => $dsql,
@@ -49,15 +49,26 @@ class TeamRepo extends BaseRepo{
       $orderby = ['order' => "", 'sort_by' => ""],
       $paging = ["page_num" => 1, "page_size" => 0]
     ) {
-
-        $sql_obj = self::buildQuery($filters, $orderby);
-        $resultSet = $this->getRows($sql_obj, $orderby, $paging);
-
 		
-        $resultSet['resultSet'] = $resultSet;
-        $resultSet['code'] = 200;
-		return $resultSet;
 
+       // $sql_obj = self::buildQuery($filters, $orderby);
+		//$sql_obj['use_output_walkers']=false;
+
+        //$resultSet = $this->getRows($sql_obj, $orderby, $paging);
+		//dd($resultSet);
+	
+		$where ='';
+		if(isset($filters['name']) && $filters['name']!=''){
+			$like_this = $filters['name'];
+			$where = " AND (t.name like '%$like_this%')";
+		}
+		//$userid = $filters['userid'];
+		
+		$sql = "SELECT  t.id, t.name,t.status,count(tr.id) as total_memeber FROM teams t LEFT JOIN team_resources tr  on t.id=tr.team_id   WHERE t.deleted_by IS NULL $where GROUP BY (t.id) ";
+		$result_set = $this->paginateNative($sql, $paging['page_size'], $paging['page_num']);
+		$result_set['code']  = 200;
+		$result_set['status'] ='ok';
+		return $result_set;
 
     }
 
@@ -106,7 +117,7 @@ class TeamRepo extends BaseRepo{
 			$userids[] = $row['user_id'];
 		}
 		
-        $query = $this->db->getConnection('db_conn')->createQuery("SELECT PARTIAL user.{id, name, email,  status}
+        $query = $this->db->getConnection('db_conn')->createQuery("SELECT PARTIAL user.{id, name, email,  status,profileImage}
                                                     FROM App\\Entities\\Users user
         WHERE user.id in (".implode($userids, ','). ")");
 

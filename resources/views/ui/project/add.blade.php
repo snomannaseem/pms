@@ -34,11 +34,11 @@
 				  <div class="form-group">
 					  <label class="col-sm-2 col-sm-2 control-label">Estimate Time</label>
 					  <div class="col-sm-3">
-						  <input id="estimate_time" name="estimate_time" type="text" class="form-control round-input" value="<?php if(isset($data['estTime'])){ echo $data['estTime'];}?>">
+						  <input id="estimate_time" name="estimate_time" type="text" class="form-control round-input" value="<?php if(isset($data['estTime'])){ echo $data['estTime'];}?>"><small>Estimate time is in hours</small>
 					  </div>
 				  </div>
 				  <div class="form-group">
-					  <label class="col-sm-2 col-sm-2 control-label">Estimate Deadline</label>
+					  <label class="col-sm-2 col-sm-2 control-label">Deadline</label>
 					  <div class="col-sm-3">
 						  <input id="estimate_deadline" name="estimate_deadline"class="form-control" id="focusedInput" type="text" value="<?php if(isset($data['estDeadline'])){ echo $data['estDeadline']->format('Y-m-d');}?>">
 					  </div>

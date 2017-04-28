@@ -64,10 +64,10 @@ class Users extends \Users implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'Users' . "\0" . 'id', '' . "\0" . 'Users' . "\0" . 'name', '' . "\0" . 'Users' . "\0" . 'email', '' . "\0" . 'Users' . "\0" . 'password', '' . "\0" . 'Users' . "\0" . 'desigId', '' . "\0" . 'Users' . "\0" . 'rememberToken', '' . "\0" . 'Users' . "\0" . 'status'];
+            return ['__isInitialized__', '' . "\0" . 'Users' . "\0" . 'id', '' . "\0" . 'Users' . "\0" . 'name', '' . "\0" . 'Users' . "\0" . 'email', '' . "\0" . 'Users' . "\0" . 'password', '' . "\0" . 'Users' . "\0" . 'desigId', '' . "\0" . 'Users' . "\0" . 'rememberToken', '' . "\0" . 'Users' . "\0" . 'status', '' . "\0" . 'Users' . "\0" . 'profileImage', '' . "\0" . 'Users' . "\0" . 'createdBy', '' . "\0" . 'Users' . "\0" . 'createdOn', '' . "\0" . 'Users' . "\0" . 'updatedBy', '' . "\0" . 'Users' . "\0" . 'updatedOn', '' . "\0" . 'Users' . "\0" . 'deletedBy', '' . "\0" . 'Users' . "\0" . 'deletedOn'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'Users' . "\0" . 'id', '' . "\0" . 'Users' . "\0" . 'name', '' . "\0" . 'Users' . "\0" . 'email', '' . "\0" . 'Users' . "\0" . 'password', '' . "\0" . 'Users' . "\0" . 'desigId', '' . "\0" . 'Users' . "\0" . 'rememberToken', '' . "\0" . 'Users' . "\0" . 'status'];
+        return ['__isInitialized__', '' . "\0" . 'Users' . "\0" . 'id', '' . "\0" . 'Users' . "\0" . 'name', '' . "\0" . 'Users' . "\0" . 'email', '' . "\0" . 'Users' . "\0" . 'password', '' . "\0" . 'Users' . "\0" . 'desigId', '' . "\0" . 'Users' . "\0" . 'rememberToken', '' . "\0" . 'Users' . "\0" . 'status', '' . "\0" . 'Users' . "\0" . 'profileImage', '' . "\0" . 'Users' . "\0" . 'createdBy', '' . "\0" . 'Users' . "\0" . 'createdOn', '' . "\0" . 'Users' . "\0" . 'updatedBy', '' . "\0" . 'Users' . "\0" . 'updatedOn', '' . "\0" . 'Users' . "\0" . 'deletedBy', '' . "\0" . 'Users' . "\0" . 'deletedOn'];
     }
 
     /**

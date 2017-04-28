@@ -38,7 +38,6 @@ class TeamCont extends Controller
 		$filters['name'] = isset($srch['table_search']) ? $srch['table_search'] : "";
 		
 		$data_set 	= $this->team->getTeamsList($filters,$order_by, $paging);
-		
 			
 		
 		$data_set['sort_by'] 	= 'teamid';

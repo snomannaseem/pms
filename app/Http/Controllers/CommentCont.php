@@ -28,7 +28,7 @@ class CommentCont extends Controller
 		$userid = $this->logged_user->__get('id');
 		$commens_data = $this->comment->getCommentById($post_data['issue_id']);
 		$issue_data = $this->issue->getIssueById($post_data['issue_id']);
-		$user_array = array('userid'=>$userid,'username'=>$this->logged_user->__get('name'),'userimage'=>$this->logged_user->__get('profile_image')!=null)?$this->logged_user->__get('profile_image'):"default.jpg");
+		$user_array = array('userid'=>$userid,'username'=>$this->logged_user->__get('name'),'userimage'=>$this->logged_user->__get('profile_image')!=null?$this->logged_user->__get('profile_image'):"default.jpg");
 		
 		$view = view('ui.issue.comments')->with(['comments_data'=> $commens_data,'userdata'=>$user_array,'data'=>$issue_data[0]]);
 		$response = array(

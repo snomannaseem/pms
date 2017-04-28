@@ -49,16 +49,12 @@ private $deletedBy;
  */
 private $deletedOn;
 
-/**
- * @var \Teams
- *
- * @ORM\ManyToOne(targetEntity="Teams")
- * @ORM\JoinColumns({
- *   @ORM\JoinColumn(name="team_id", referencedColumnName="id", nullable=true)
- * })
- */
-private $team;
 
+/**
+	 * @ORM\ManyToOne(targetEntity="Teams", inversedBy="team_resources")
+	 * @ORM\JoinColumn(name="team_id", referencedColumnName="id", nullable=false)
+	 */
+protected $team;
 /**
  * @var \Users
  *
@@ -68,6 +64,18 @@ private $team;
  * })
  */
 private $user;
+
+
+/**
+ * @var \Teams
+ *
+ * @ORM\ManyToOne(targetEntity="Teams")
+ * @ORM\JoinColumns({
+ *   @ORM\JoinColumn(name="team_id", referencedColumnName="id", nullable=true)
+ * })
+ */
+private $team_id;
+
 
 
 /**
@@ -183,7 +191,7 @@ return $this->deletedOn;
  *
  * @return TeamResources
  */
-public function setTeam(\Teams $team = null)
+public function setTeam(Teams $team = null)
 {
 $this->team = $team;
 
@@ -223,5 +231,30 @@ public function getUser()
 {
 return $this->user;
 }
+
+/**
+ * Set team_id
+ *
+ * @param \Teams $team
+ *
+ * @return TeamResources
+ */
+public function setTeamId(Teams $team = null)
+{
+$this->team = $team;
+
+return $this;
+}
+
+/**
+ * Get team
+ *
+ * @return Team
+ */
+public function getTeamId()
+{
+return $this->team_id;
+}
+
 }
 

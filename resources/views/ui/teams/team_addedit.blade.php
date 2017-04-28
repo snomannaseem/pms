@@ -12,7 +12,7 @@
 			<div class="panel-body">
 				<?php if($errors != "") { ?><p class="alert alert-block alert-danger"><?php echo $errors;  ?></p><?php } ?>
 				<form role="form" action="/teams/<?php echo $id; ?>" method="post">
-				<div class="form-group"> Name: <input class="form-control" name="name" value="<?php echo $data_set['name'];?>" type="text"> </div>
+				<div class="form-group"> Name: <input class="form-control" id="name" name="name" value="<?php echo $data_set['name'];?>" type="text"> </div>
 				<p> Add User By Typing and Enter: <input class="form-control" id="userid" name="userid" value="" type="text" autocomplete="off" class="ui-autocomplete-input" > </p>
 				
 				<div class="panel">
@@ -22,10 +22,13 @@
 
                                 <ul class="list-group teammates">
 									<?php 
+									
 									foreach($team_res as $user)
 									{
+										$profile_image = $user['profileImage']!=null?"/user_images/".$user['profileImage']:"/user_images/default.jpg";
+										
 									?>
-									<li class="alert list-group-item"><button type="button" class="close close-sm" data-dismiss="alert"><i class="fa fa-times"></i></button><a href=""><img width="50" height="50" src="img/26115.jpg"></a><a href=""><?php echo $user['name']; ?></a><input type="hidden" name="userids[]" value="<?php echo $user['id']; ?>" /></li>
+									<li class="alert list-group-item"><button type="button" class="close close-sm" data-dismiss="alert"><i class="fa fa-times"></i></button><a href=""><img width="50" height="50" src="<?php echo $profile_image;?>"></a><a href=""><?php echo $user['name']; ?></a><input type="hidden" name="userids[]" value="<?php echo $user['id']; ?>" /></li>
 									<?php 
 									} 
 									?>
@@ -65,7 +68,8 @@
                             </div>
 				
 				
-				<p> <input class="btn btn-info" type='submit' value='submit' /> </p>
+				<p> <input class="btn btn-info" type='submit' value='Submit' /> 
+				 <input id="cancel_btn" class="btn " type='button' value='Cancel' /> </p>
 				<input type="hidden" value="{{ csrf_token() }}" name="_token" id="_token">
 				</form>
 			</div>
@@ -78,6 +82,11 @@
 		
 		
        $(document).ready(function(){
+	   $(document).on("click", "#cancel_btn", function(){
+			if(confirm('Are you sure to exit without saving current changes?')){
+				window.location = '/teams';
+			}
+		});
               
 			$( function() {
         $( "#userid" ).autocomplete({
@@ -105,7 +114,13 @@
         $( "#project-description" ).html( ui.item.desc );
         $( "#project-icon" ).attr( "src", "images/" + ui.item.icon );
 		*/
-		$('.teammates').append('<li class="alert list-group-item"><button type="button" class="close close-sm" data-dismiss="alert"><i class="fa fa-times"></i></button><a href=""><img width="50" height="50" src="img/26115.jpg"></a><a href="">'+ui.item.name+'</a><input type="hidden" name="userids[]" value="'+ui.item.id+'" /></li>');
+		
+		var profile_image = "/user_images/default.jpg";
+		if(ui.item.profileImage!=null){
+		var profile_image = "/user_images/"+ui.item.profileImage;
+		}
+		$(this).val('');
+		$('.teammates').append('<li class="alert list-group-item"><button type="button" class="close close-sm" data-dismiss="alert"><i class="fa fa-times"></i></button><a href=""><img width="50" height="50" src="'+profile_image+'"></a><a href="">'+ui.item.name+'</a><input type="hidden" name="userids[]" value="'+ui.item.id+'" /></li>');
 		console.log('selected from autocomplete');
         return false;
       }
@@ -116,6 +131,8 @@
         .appendTo( ul );
     };
 });
+
+//cancel_btn
        
         });
  

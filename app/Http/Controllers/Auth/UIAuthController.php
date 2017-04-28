@@ -38,6 +38,7 @@ class UIAuthController extends Controller
      */
     public function __construct()
     {
+		//dd('hi');
         $this->middleware('guest', ['except' => ['getLogout', 'getStaffLogout', 'getMagicLogin', 'postLogin']]);
     }
 

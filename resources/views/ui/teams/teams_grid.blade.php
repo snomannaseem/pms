@@ -4,19 +4,20 @@
 	
 	$rows = "";
 	if (!isset($header) || count($header) == 0){
-		$header = ['Team ID', 'Name','Status','',''];
+		$header = ['Team ID', 'Name','Resources','Status','Action'];
 	}
 
-	foreach($data_set['resultSet']['object_array'] as $result_object){
+	foreach($data_set['rows'] as $result_object){
 	//    if($result_object->getUpdateInterface() == 2){
 	//        $interface = 'UI';
 	//    }
 
 		$user_name = '';
 		$update_name = '';
-		$row_userid = $result_object->getId();
-		$row_name = $result_object->getName();
-		$row_status = $result_object->getStatus();
+		$row_userid = $result_object['id'];
+		$row_name = $result_object['name'];
+		$row_resources = $result_object['total_memeber'];
+		$row_status = $result_object['status'];
 		//$row_email = $result_object->getEmail();
 		$status_label = $status_class = "";
 		if($row_status == 0)
@@ -36,6 +37,7 @@
 		$rows .= "<tr>
 					 <td id ='logid'>${row_userid}</td>
 					 <td>${row_name}</td>
+					  <td>${row_resources}</td>
 					 
 					 <td><span class=\"label $status_class\">$status_label</span></td>
 					 <td>

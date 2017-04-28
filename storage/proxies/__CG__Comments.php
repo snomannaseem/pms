@@ -64,10 +64,10 @@ class Comments extends \Comments implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'Comments' . "\0" . 'id', '' . "\0" . 'Comments' . "\0" . 'typeId', '' . "\0" . 'Comments' . "\0" . 'detail', '' . "\0" . 'Comments' . "\0" . 'isDeleted', '' . "\0" . 'Comments' . "\0" . 'createdBy', '' . "\0" . 'Comments' . "\0" . 'createdOn', '' . "\0" . 'Comments' . "\0" . 'updatedBy', '' . "\0" . 'Comments' . "\0" . 'updatedOn', '' . "\0" . 'Comments' . "\0" . 'issue'];
+            return ['__isInitialized__', '' . "\0" . 'Comments' . "\0" . 'id', '' . "\0" . 'Comments' . "\0" . 'typeId', '' . "\0" . 'Comments' . "\0" . 'detail', '' . "\0" . 'Comments' . "\0" . 'isDeleted', '' . "\0" . 'Comments' . "\0" . 'createdBy', '' . "\0" . 'Comments' . "\0" . 'createdOn', '' . "\0" . 'Comments' . "\0" . 'updatedBy', '' . "\0" . 'Comments' . "\0" . 'updatedOn', '' . "\0" . 'Comments' . "\0" . 'deletedBy', '' . "\0" . 'Comments' . "\0" . 'deletedOn', '' . "\0" . 'Comments' . "\0" . 'issue'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'Comments' . "\0" . 'id', '' . "\0" . 'Comments' . "\0" . 'typeId', '' . "\0" . 'Comments' . "\0" . 'detail', '' . "\0" . 'Comments' . "\0" . 'isDeleted', '' . "\0" . 'Comments' . "\0" . 'createdBy', '' . "\0" . 'Comments' . "\0" . 'createdOn', '' . "\0" . 'Comments' . "\0" . 'updatedBy', '' . "\0" . 'Comments' . "\0" . 'updatedOn', '' . "\0" . 'Comments' . "\0" . 'issue'];
+        return ['__isInitialized__', '' . "\0" . 'Comments' . "\0" . 'id', '' . "\0" . 'Comments' . "\0" . 'typeId', '' . "\0" . 'Comments' . "\0" . 'detail', '' . "\0" . 'Comments' . "\0" . 'isDeleted', '' . "\0" . 'Comments' . "\0" . 'createdBy', '' . "\0" . 'Comments' . "\0" . 'createdOn', '' . "\0" . 'Comments' . "\0" . 'updatedBy', '' . "\0" . 'Comments' . "\0" . 'updatedOn', '' . "\0" . 'Comments' . "\0" . 'deletedBy', '' . "\0" . 'Comments' . "\0" . 'deletedOn', '' . "\0" . 'Comments' . "\0" . 'issue'];
     }
 
     /**

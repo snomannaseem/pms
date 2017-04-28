@@ -38,7 +38,7 @@
 										@include('ui.teams.teams_grid',['header' => [] , 'paging_result_set' => $data_set])
 									<!-- GRID End -->
 									</div>
-										@include('ui.common.paging',['paging_result_set' => $data_set['resultSet']])
+										@include('ui.common.paging',['paging_result_set' => $data_set])
 									
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->
@@ -77,7 +77,7 @@ $sort_by =  $data_set['sort_by'];
 							"_token": "_token",
                             "per_page": <?php echo env('DEFAULT_PAGE_SIZE', 10); ?>,
                             "current_page": 1,
-                            "total_pages" : <?php echo $data_set['resultSet']['pages_count']?>,
+                            "total_pages" : <?php echo $data_set['pages_count']?>,
                             "order": '<?php echo $order_by ?>',
                             "sort_by": '<?php echo $sort_by?>',
                             "this_grid" : "this_grid",

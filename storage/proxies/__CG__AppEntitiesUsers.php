@@ -64,10 +64,10 @@ class Users extends \App\Entities\Users implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'name', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'email', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'password', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'desigId', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'rememberToken', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'status'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'name', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'email', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'password', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'desigId', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'rememberToken', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'status', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'profileImage', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'updatedBy', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'updatedOn', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'deletedBy', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'deletedOn', 'projects_resources'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'name', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'email', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'password', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'desigId', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'rememberToken', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'status'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'name', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'email', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'password', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'desigId', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'rememberToken', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'status', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'profileImage', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'updatedBy', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'updatedOn', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'deletedBy', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'deletedOn', 'projects_resources'];
     }
 
     /**
@@ -173,6 +173,17 @@ class Users extends \App\Entities\Users implements \Doctrine\ORM\Proxy\Proxy
     }
 
     
+    /**
+     * {@inheritDoc}
+     */
+    public function getProjectsResources()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getProjectsResources', []);
+
+        return parent::getProjectsResources();
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -318,6 +329,160 @@ class Users extends \App\Entities\Users implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getStatus', []);
 
         return parent::getStatus();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setProfileImage($profileImage)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setProfileImage', [$profileImage]);
+
+        return parent::setProfileImage($profileImage);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getProfileImage()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getProfileImage', []);
+
+        return parent::getProfileImage();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCreatedBy($createdBy)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCreatedBy', [$createdBy]);
+
+        return parent::setCreatedBy($createdBy);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCreatedBy()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCreatedBy', []);
+
+        return parent::getCreatedBy();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCreatedOn($createdOn)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCreatedOn', [$createdOn]);
+
+        return parent::setCreatedOn($createdOn);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCreatedOn()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCreatedOn', []);
+
+        return parent::getCreatedOn();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setUpdatedBy($updatedBy)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUpdatedBy', [$updatedBy]);
+
+        return parent::setUpdatedBy($updatedBy);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUpdatedBy()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUpdatedBy', []);
+
+        return parent::getUpdatedBy();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setUpdatedOn($updatedOn)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUpdatedOn', [$updatedOn]);
+
+        return parent::setUpdatedOn($updatedOn);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUpdatedOn()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUpdatedOn', []);
+
+        return parent::getUpdatedOn();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setDeletedBy($deletedBy)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDeletedBy', [$deletedBy]);
+
+        return parent::setDeletedBy($deletedBy);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDeletedBy()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDeletedBy', []);
+
+        return parent::getDeletedBy();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setDeletedOn($deletedOn)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDeletedOn', [$deletedOn]);
+
+        return parent::setDeletedOn($deletedOn);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDeletedOn()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDeletedOn', []);
+
+        return parent::getDeletedOn();
     }
 
 }

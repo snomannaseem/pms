@@ -22,7 +22,7 @@
 								<form id="camp_search">
                                     <div class="box-tools m-b-15">
                                         <div class="input-group">
-											<button  id="btn_add2" type="button" class="btn btn-primary pull-left">Add</button>
+											<button  id="btn_add2" type="button" class="btn btn-primary pull-left">Edit</button>
                                             <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
                                             <div class="input-group-btn">
                                                 <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>

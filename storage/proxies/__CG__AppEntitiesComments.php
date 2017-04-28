@@ -64,10 +64,10 @@ class Comments extends \App\Entities\Comments implements \Doctrine\ORM\Proxy\Pro
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'typeId', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'detail', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'isDeleted', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'updatedBy', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'updatedOn', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'issue'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'typeId', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'detail', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'isDeleted', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'updatedBy', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'updatedOn', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'deletedBy', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'deletedOn', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'issue'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'typeId', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'detail', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'isDeleted', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'updatedBy', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'updatedOn', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'issue'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'typeId', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'detail', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'isDeleted', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'updatedBy', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'updatedOn', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'deletedBy', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'deletedOn', '' . "\0" . 'App\\Entities\\Comments' . "\0" . 'issue'];
     }
 
     /**
@@ -340,6 +340,50 @@ class Comments extends \App\Entities\Comments implements \Doctrine\ORM\Proxy\Pro
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUpdatedOn', []);
 
         return parent::getUpdatedOn();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setDeletedBy($deletedBy)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDeletedBy', [$deletedBy]);
+
+        return parent::setDeletedBy($deletedBy);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDeletedBy()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDeletedBy', []);
+
+        return parent::getDeletedBy();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setDeletedOn($deletedOn)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDeletedOn', [$deletedOn]);
+
+        return parent::setDeletedOn($deletedOn);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDeletedOn()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDeletedOn', []);
+
+        return parent::getDeletedOn();
     }
 
     /**

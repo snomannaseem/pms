@@ -64,10 +64,10 @@ class Projects extends \Projects implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'Projects' . "\0" . 'id', '' . "\0" . 'Projects' . "\0" . 'title', '' . "\0" . 'Projects' . "\0" . 'description', '' . "\0" . 'Projects' . "\0" . 'estTime', '' . "\0" . 'Projects' . "\0" . 'estDeadline', '' . "\0" . 'Projects' . "\0" . 'status', '' . "\0" . 'Projects' . "\0" . 'createdBy', '' . "\0" . 'Projects' . "\0" . 'createdOn', '' . "\0" . 'Projects' . "\0" . 'updatedBy', '' . "\0" . 'Projects' . "\0" . 'updatedOn', '' . "\0" . 'Projects' . "\0" . 'team'];
+            return ['__isInitialized__', '' . "\0" . 'Projects' . "\0" . 'id', '' . "\0" . 'Projects' . "\0" . 'title', '' . "\0" . 'Projects' . "\0" . 'description', '' . "\0" . 'Projects' . "\0" . 'estTime', '' . "\0" . 'Projects' . "\0" . 'estDeadline', '' . "\0" . 'Projects' . "\0" . 'status', '' . "\0" . 'Projects' . "\0" . 'createdBy', '' . "\0" . 'Projects' . "\0" . 'createdOn', '' . "\0" . 'Projects' . "\0" . 'updatedBy', '' . "\0" . 'Projects' . "\0" . 'updatedOn', '' . "\0" . 'Projects' . "\0" . 'deletedBy', '' . "\0" . 'Projects' . "\0" . 'deletedOn', '' . "\0" . 'Projects' . "\0" . 'team'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'Projects' . "\0" . 'id', '' . "\0" . 'Projects' . "\0" . 'title', '' . "\0" . 'Projects' . "\0" . 'description', '' . "\0" . 'Projects' . "\0" . 'estTime', '' . "\0" . 'Projects' . "\0" . 'estDeadline', '' . "\0" . 'Projects' . "\0" . 'status', '' . "\0" . 'Projects' . "\0" . 'createdBy', '' . "\0" . 'Projects' . "\0" . 'createdOn', '' . "\0" . 'Projects' . "\0" . 'updatedBy', '' . "\0" . 'Projects' . "\0" . 'updatedOn', '' . "\0" . 'Projects' . "\0" . 'team'];
+        return ['__isInitialized__', '' . "\0" . 'Projects' . "\0" . 'id', '' . "\0" . 'Projects' . "\0" . 'title', '' . "\0" . 'Projects' . "\0" . 'description', '' . "\0" . 'Projects' . "\0" . 'estTime', '' . "\0" . 'Projects' . "\0" . 'estDeadline', '' . "\0" . 'Projects' . "\0" . 'status', '' . "\0" . 'Projects' . "\0" . 'createdBy', '' . "\0" . 'Projects' . "\0" . 'createdOn', '' . "\0" . 'Projects' . "\0" . 'updatedBy', '' . "\0" . 'Projects' . "\0" . 'updatedOn', '' . "\0" . 'Projects' . "\0" . 'deletedBy', '' . "\0" . 'Projects' . "\0" . 'deletedOn', '' . "\0" . 'Projects' . "\0" . 'team'];
     }
 
     /**

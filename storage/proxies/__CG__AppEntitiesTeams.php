@@ -64,10 +64,10 @@ class Teams extends \App\Entities\Teams implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'name', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'status', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'createdOn'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'name', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'status', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'updatedBy', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'updatedOn', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'deletedBy', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'deletedOn', 'team_resources'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'name', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'status', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'createdOn'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'name', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'status', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'updatedBy', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'updatedOn', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'deletedBy', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'deletedOn', 'team_resources'];
     }
 
     /**
@@ -176,6 +176,17 @@ class Teams extends \App\Entities\Teams implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function getTeamResources()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getTeamResources', []);
+
+        return parent::getTeamResources();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getId()
     {
         if ($this->__isInitialized__ === false) {
@@ -274,6 +285,94 @@ class Teams extends \App\Entities\Teams implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCreatedOn', []);
 
         return parent::getCreatedOn();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setUpdatedBy($updatedBy)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUpdatedBy', [$updatedBy]);
+
+        return parent::setUpdatedBy($updatedBy);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUpdatedBy()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUpdatedBy', []);
+
+        return parent::getUpdatedBy();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setUpdatedOn($updatedOn)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUpdatedOn', [$updatedOn]);
+
+        return parent::setUpdatedOn($updatedOn);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUpdatedOn()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUpdatedOn', []);
+
+        return parent::getUpdatedOn();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setDeletedBy($deletedBy)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDeletedBy', [$deletedBy]);
+
+        return parent::setDeletedBy($deletedBy);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDeletedBy()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDeletedBy', []);
+
+        return parent::getDeletedBy();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setDeletedOn($deletedOn)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDeletedOn', [$deletedOn]);
+
+        return parent::setDeletedOn($deletedOn);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDeletedOn()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDeletedOn', []);
+
+        return parent::getDeletedOn();
     }
 
 }

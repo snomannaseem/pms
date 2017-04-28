@@ -56,7 +56,7 @@
 		
 		<ul class="sidebar-menu">
 			<li>
-				<a href="index.html">
+				<a href="/register">
 					<i class="fa fa-dashboard"></i> <span>Register</span>
 				</a>
 			</li>

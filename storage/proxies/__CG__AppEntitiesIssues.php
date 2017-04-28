@@ -64,10 +64,10 @@ class Issues extends \App\Entities\Issues implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'projectId', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'title', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'description', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'estTime', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'status', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'parentIssueId', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'updatedBy', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'updatedOn', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'category', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'priority', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'resolution', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'issueType', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'assignedTo'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'projectId', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'title', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'description', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'estTime', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'status', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'parentIssueId', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'updatedBy', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'updatedOn', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'deletedBy', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'deletedOn', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'category', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'priority', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'resolution', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'issueType', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'assignedTo'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'projectId', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'title', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'description', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'estTime', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'status', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'parentIssueId', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'updatedBy', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'updatedOn', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'category', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'priority', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'resolution', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'issueType', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'assignedTo'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'projectId', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'title', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'description', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'estTime', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'status', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'parentIssueId', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'updatedBy', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'updatedOn', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'deletedBy', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'deletedOn', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'category', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'priority', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'resolution', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'issueType', '' . "\0" . 'App\\Entities\\Issues' . "\0" . 'assignedTo'];
     }
 
     /**
@@ -323,28 +323,6 @@ class Issues extends \App\Entities\Issues implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setCreatedOn($createdOn)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCreatedOn', [$createdOn]);
-
-        return parent::setCreatedOn($createdOn);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getCreatedOn()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCreatedOn', []);
-
-        return parent::getCreatedOn();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function setCreatedBy($createdBy)
     {
 
@@ -362,6 +340,28 @@ class Issues extends \App\Entities\Issues implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCreatedBy', []);
 
         return parent::getCreatedBy();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setCreatedOn($createdOn)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCreatedOn', [$createdOn]);
+
+        return parent::setCreatedOn($createdOn);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCreatedOn()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCreatedOn', []);
+
+        return parent::getCreatedOn();
     }
 
     /**
@@ -406,6 +406,50 @@ class Issues extends \App\Entities\Issues implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUpdatedOn', []);
 
         return parent::getUpdatedOn();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setDeletedBy($deletedBy)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDeletedBy', [$deletedBy]);
+
+        return parent::setDeletedBy($deletedBy);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDeletedBy()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDeletedBy', []);
+
+        return parent::getDeletedBy();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setDeletedOn($deletedOn)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDeletedOn', [$deletedOn]);
+
+        return parent::setDeletedOn($deletedOn);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getDeletedOn()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDeletedOn', []);
+
+        return parent::getDeletedOn();
     }
 
     /**

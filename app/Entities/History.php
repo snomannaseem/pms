@@ -142,7 +142,7 @@ return $this->createdOn;
  *
  * @return History
  */
-public function setIssue(\Issues $issue = null)
+public function setIssue(Issues $issue = null)
 {
 $this->issue = $issue;
 
