@@ -45,14 +45,14 @@ class Users
     /**
      * @var integer
      *
-     * @ORM\Column(name="desig_id", type="integer", nullable=true)
+     * @ORM\Column(name="role_id", type="integer", nullable=true)
      */
-    private $desigId;
+    private $roleId;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="remember_token", type="string", length=255, nullable=true)
+     * @ORM\Column(name="remember_token", type="string", length=255, nullable=false)
      */
     private $rememberToken;
 

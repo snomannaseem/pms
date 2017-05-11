@@ -64,7 +64,7 @@ class TeamRepo extends BaseRepo{
 		}
 		//$userid = $filters['userid'];
 		
-		$sql = "SELECT  t.id, t.name,t.status,count(tr.id) as total_memeber FROM teams t LEFT JOIN team_resources tr  on t.id=tr.team_id   WHERE t.deleted_by IS NULL $where GROUP BY (t.id) ";
+		$sql = "SELECT  t.id, t.name,t.status,count(tr.id) as total_memeber FROM teams t LEFT JOIN team_resources tr  on t.id=tr.team_id   WHERE t.deleted_by IS NULL AND tr.deleted_by IS NULL $where GROUP BY (t.id)";
 		$result_set = $this->paginateNative($sql, $paging['page_size'], $paging['page_num']);
 		$result_set['code']  = 200;
 		$result_set['status'] ='ok';
@@ -106,27 +106,21 @@ class TeamRepo extends BaseRepo{
 	public function getTeamResourcesByTeamId($id)
     {
 		if($id == "") return [];  // No resource for '' or 0, 
-		$sql = "select * from team_resources where team_id = $id AND deleted_by IS NULL";
-		
+		//$sql = "select * from team_resources where team_id = $id AND deleted_by IS NULL";
+		$sql = "select *,tr.role_id as roleId, tr.deleted_by deletedBy from team_resources tr, users u
+where tr.user_id = u.id and tr.team_id = $id";
+		try {
 		$query=$this->db->executeNative($sql, 'db_conn');
 		$result = $query->fetchAll();
-		//dd($result);
-		$userids = [0];  // must be at least one userid exist
-		foreach($result as $row)
+		
+		}
+		catch(\Doctrine\ORM\NoResultException $e)
 		{
-			$userids[] = $row['user_id'];
+			dd('Exception occured');
 		}
 		
-        $query = $this->db->getConnection('db_conn')->createQuery("SELECT PARTIAL user.{id, name, email,  status,profileImage}
-                                                    FROM App\\Entities\\Users user
-        WHERE user.id in (".implode($userids, ','). ")");
-
-        try {
-            $result =  $query->getResult(Query::HYDRATE_ARRAY);
-			return $result;
-        } catch (\Doctrine\ORM\NoResultException $e) {
-            return null;
-        }
+		return $result;
+		
     }
 	
 	public function save(\App\Entities\Teams $team)
@@ -181,11 +175,12 @@ class TeamRepo extends BaseRepo{
 		return $validator;
 	}
 	
-	public function updateTeamResources($teamid, $userids, $deleted_by)
+	public function updateTeamResources($teamid, $userids, $roleids, $deleted_by)
 	{
 		if(!is_array($userids)) $userids = [0]; // a blank array with 0 id
-		foreach($userids as $userid)
+		foreach($userids as $key => $userid)
 		{
+			$roleid = $roleids[$key];
 			$sql = "select * from team_resources where team_id = $teamid AND user_id = $userid";
 			//dd($sql);
 			$query=$this->db->executeNative($sql , 'db_conn');
@@ -193,13 +188,13 @@ class TeamRepo extends BaseRepo{
 			if(count($response) == 0)  // Not found than Insert
 			{
 				$sql2 = "INSERT INTO team_resources SET team_id = $teamid, 
-				user_id = $userid, created_by = $deleted_by, created_on = now()";  // the deleter is also creator
+				user_id = $userid, role_id = $roleid, created_by = $deleted_by, created_on = now()";  // the deleter is also creator
 				echo "<br>$sql2<br>";
 				$query2 = $this->db->executeNative($sql2 , 'db_conn');
 			}
 			else // If found UNDELETE (soft delete removed) it
 			{
-				$sql2 = "UPDATE team_resources SET deleted_by = null, deleted_on = null WHERE team_id = $teamid AND user_id = $userid";  // the deleter is also creator
+				$sql2 = "UPDATE team_resources SET  role_id = $roleid, deleted_by = null, deleted_on = null WHERE team_id = $teamid AND user_id = $userid";  // the deleter is also creator
 				echo "<br>$sql2<br>";
 				$query2 = $this->db->executeNative($sql2 , 'db_conn');
 			}
@@ -247,18 +242,27 @@ class TeamRepo extends BaseRepo{
 	}
 	*/
 	
-	public function saveTeamResources($teamid, $userids, $created_by = 1) // array of userids
+	public function saveTeamResources($teamid, $userids, $roleids,  $created_by = 1) // array of userids
 	{
-		//dd($teamid, $userids);
+		//dd($userids, $roleids);
 		if(is_array($userids))
 		{
-			foreach($userids as $userid)
+			foreach($userids as $index => $userid)
 			{
+				$roleid = $roleids[$index];
 				$team_res = new \App\Entities\TeamResources();
 				//$aa->setAdcenterProfiles($this->db->getConnection()->getReference('BusinessObject\\AdcenterProfiles', $data['userid']));
-				$team_res->setTeam($this->db->getConnection()->getReference('App\\Entities\\Teams', $teamid));
-				$team_res->setUser($this->db->getConnection()->getReference('App\\Entities\\Users', $userid));
-				$team_res->setUser($this->db->getConnection()->getReference('App\\Entities\\Users', $userid));
+				//print "<br>:$teamid:$userid:$roleid:<br>";
+				/*
+				dd(
+				$this->db->getConnection()->getReference('App\\Entities\\Users', $userid),
+				$this->db->getConnection()->getReference('App\\Entities\\Teams', $teamid),
+				$this->db->getConnection()->getReference('App\\Entities\\Roles', $roleid)
+				);
+				*/
+			$team_res->setTeam($this->db->getConnection()->getReference('App\\Entities\\Teams', $teamid));
+			$team_res->setUser($this->db->getConnection()->getReference('App\\Entities\\Users', $userid));
+			$team_res->setRole($this->db->getConnection()->getReference('App\\Entities\\Roles', $roleid));
 				$team_res->setCreatedBy($created_by);
 				$team_res->setCreatedOn(new \DateTime());
 				$this->db->getConnection()->persist($team_res);
@@ -283,5 +287,35 @@ class TeamRepo extends BaseRepo{
 		//return $query;
 	}
 	
+	public function getTeamsOfUser($user_id)
+	{
+		// the IF in query checks a NULL, means role of creator of project and should be assigned '2' (An Project Manager)
+		$sql = "SELECT *, if(role_id is NULL, 2, role_id) as role_id from (
+select *,      (select role_id from team_resources where user_id = $user_id and team_id = t.id) as role_id            from teams t where id in (
+select team_id from team_resources where user_id = $user_id
+union 
+select id as team_id from teams where created_by = $user_id)
+) as temp";
+							   //dd($sql);
+									
+	    $query = $this->db->executeNative($sql , 'db_conn');
+		
+		return $query->fetchAll();
+	}
 	
+	public function getRolesInHashArray()
+	{
+		$sql = "SELECT * FROM roles";
+							   //dd($sql);
+									
+	    $query = $this->db->executeNative($sql , 'db_conn');
+		
+		$roles = $query->fetchAll();
+		$array = [];
+		foreach($roles as $role)
+		{
+			$array[$role['id']] = $role;
+		}
+		return $array;
+	}
 }

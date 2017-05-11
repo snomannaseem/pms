@@ -5,6 +5,7 @@
 
 <div class="row">
 <?php 
+
 $issue_readonly = '';
 if(isset($_GET['type']) && $_GET['type']=="subtask"){
 	$data = $_GET;
@@ -27,10 +28,29 @@ if(isset($_GET['type']) && $_GET['type']=="subtask"){
 			</div>
 			  <form class="form-horizontal tasi-form" method="get" id="add_issue">
 				
+				<div class="col-sm-3">
+				
+				<div class="form-group">
+					  <label class="control-label">Title</label>
+					  <div class="">
+						  <input id="issue_title" name="issue_title" type="text" class="form-control" value="<?php if(isset($data['issue_title'])){ echo $data['issue_title'];}?>">
+					  </div>
+				  </div>
+				  
+				  <div class="form-group"> 
+				  
+					  <label class="control-label">Assigned To</label>
+					  <div class="">
+					   <select class="form-control" name="assigned_to" id="assigned_to" > 
+								
+						</select>
+						</div>
+				</div>
+				
 				<div class="form-group"> 
 				  
-					  <label class="col-sm-2 col-sm-2 control-label">Category</label>
-					  <div class="col-sm-3">
+					  <label class="control-label">Category</label>
+					  <div class="">
 					   <select class="form-control" name="category" id="category" > 
 								<?php if($cats['rows']) { foreach($cats['rows'] as $cat) {?>
 									<option value ="<?php echo $cat->getId();?>"><?php  echo ucfirst($cat->getName());?></option>
@@ -39,10 +59,16 @@ if(isset($_GET['type']) && $_GET['type']=="subtask"){
 						</div>
 				</div>
 				
+				</div>
+				
+				<div class="col-sm-1"></div>
+				
+				<div class="col-sm-3">
+				
 				<div class="form-group"> 
 				  
-					  <label class="col-sm-2 col-sm-2 control-label">Project</label>
-					  <div class="col-sm-3">
+					  <label class="control-label">Project</label>
+					  <div class="">
 					   <select class="form-control" name="project" id="project" > 
 								<?php if($projects['rows']) { foreach($projects['rows'] as $pro) {?>
 									<option value ="<?php echo $pro->getId();?>"><?php  echo $pro->getTitle();?></option>
@@ -50,31 +76,43 @@ if(isset($_GET['type']) && $_GET['type']=="subtask"){
 						</select>
 						</div>
 				</div>
+				
 				<div class="form-group"> 
 				  
-					  <label class="col-sm-2 col-sm-2 control-label">Priorities</label>
-					  <div class="col-sm-3">
+					  <label class="control-label">Status</label>
+					  <div class="">
+					   <select class="form-control" name="status" id="status" > 
+								<option value="open">Open</option>
+								<option value="on hold">On Hold</option>
+								<option value="in progress">In Progress</option>
+								<option value="resolved">Resolved</option>
+								<option value="reopened">Reopened</option>
+								<option value="closed">Closed</option>
+						</select>
+						</div>
+				</div>
+				
+				<div class="form-group"> 
+				  
+					  <label class=" control-label">Priorities</label>
+					  <div class="">
 					   <select class="form-control" name="priorities" id="priorities" > 
 								<?php if($priorities['rows']) { foreach($priorities['rows'] as $priorities) {?>
 									<option value ="<?php echo $priorities->getId();?>"><?php  echo ucfirst($priorities->getName());?></option>
 								<?php } } ?>
 						</select>
 						</div>
+				</div>	
+				
 				</div>
 				
-				<div class="form-group"> 
-				  
-					  <label class="col-sm-2 col-sm-2 control-label">Assigned To</label>
-					  <div class="col-sm-3">
-					   <select class="form-control" name="assigned_to" id="assigned_to" > 
-								
-						</select>
-						</div>
-				</div>
+				<div class="col-sm-1"></div>
+				
+				<div class="col-sm-3">
 				
 				<div class="form-group"> 
-					  <label class="col-sm-2 col-sm-2 control-label">Issue Type</label>
-					  <div class="col-sm-3">
+					  <label class="control-label">Issue Type</label>
+					  <div class="">
 					   <select  <?php echo $issue_readonly;?>   class="form-control" name="issue_type" id="issue_type" > 
 								<?php if($issue_types) { foreach($issue_types as $issue_type) {
 									
@@ -87,8 +125,8 @@ if(isset($_GET['type']) && $_GET['type']=="subtask"){
 				
 				
 				<div class="form-group"> 
-					  <label class="col-sm-2 col-sm-2 control-label">Resolution</label>
-					  <div class="col-sm-3">
+					  <label class="control-label">Resolution</label>
+					  <div class="">
 					   <select class="form-control" name="resolution" id="resolution" > 
 								<?php if($issue_rso_types) { foreach($issue_rso_types as $issue_type) {?>
 									<option value ="<?php echo $issue_type['id'];?>"><?php  echo ucfirst($issue_type['name']);?></option>
@@ -97,45 +135,30 @@ if(isset($_GET['type']) && $_GET['type']=="subtask"){
 						</div>
 				</div>
 				
-				
-			  
-				  <div class="form-group">
-					  <label class="col-sm-2 col-sm-2 control-label">Title</label>
-					  <div class="col-sm-10">
-						  <input id="issue_title" name="issue_title" type="text" class="form-control" value="<?php if(isset($data['issue_title'])){ echo $data['issue_title'];}?>">
-					  </div>
-				  </div>
-				  <div class="form-group">
-					  <label class="col-sm-2 col-sm-2 control-label">Description</label>
-					  <div class="col-sm-10">
-						<textarea class=" description form-control" id="description" name="description"><?php if(isset($data['description'])){ echo html_entity_decode($data['description']);}?></textarea>
-					  </div>
-				  </div>
-				  <div class="form-group">
-					  <label class="col-sm-2 col-sm-2 control-label">Estimate Time</label>
-					  <div class="col-sm-3">
+				<div class="form-group">
+					  <label class="control-label">Estimate Time</label>
+					  <div class="">
 						  <input id="estimate_time" name="estimate_time" type="text" class="form-control round-input" value="<?php if(isset($data['est_time'])){ echo $data['est_time'];}?>">
 					  </div>
 				  </div>
 				  
-				  <div class="form-group"> 
-				  
-					  <label class="col-sm-2 col-sm-2 control-label">Status</label>
-					  <div class="col-sm-3">
-					   <select class="form-control" name="status" id="status" > 
-								<option value="open">Open</option>
-								<option value="in progress">In Progress</option>
-								<option value="resolved">Resolved</option>
-								<option value="reopened">Reopened</option>
-								<option value="closed">Closed</option>
-						</select>
-						</div>
+				  </div>
+				
+				<div class="col-lg-12">
+				  <div class="form-group">
+					  <label class=" control-label">Description</label>
+					  <div class="">
+						<textarea class=" description form-control" id="description" name="description"><?php if(isset($data['description'])){ echo html_entity_decode($data['description']);}?></textarea>
+					  </div>
+				  </div>
 				</div>
+				  
+				  
 				  <div class="form-group">
 				  <label class="col-lg-2 col-sm-2 control-label"></label>
-				  <div class="col-lg-10">
+				  <div class="col-lg-12">
 					<input type="hidden" name="id" id="id" value="<?php if(isset($data['issue_id'])) echo $data['issue_id'];?>">
-					<input type="hidden" name="parent_issue_type" id="parent_issue_type" value="<?php if(isset($data['parent_issue_type'])) echo $data['parent_issue_type'];?>">
+					<input type="hidden" name="parent_issue_type" id="parent_issue_type" value="<?php if(isset($data['parent_issue_id'])) echo $data['parent_issue_id'];?>">
 					<input type="hidden" name="task_type" id="task_type" value="<?php if(isset($data['task_type'])) echo $data['task_type'];?>">
 					<button type="button" class="btn btn-info" id="create_issue"><?php echo isset($data['issue_id'])?"Update":"Submit";?></button>
 				 </div>
@@ -257,6 +280,7 @@ if(isset($_GET['type']) && $_GET['type']=="subtask"){
 					$('#assigned_to').html($("<option></option>").attr("value", '').text('Assginee not found'));
 				}
 		}
+		$('#assigned_to option[value="' + assigned_to + '"]').prop('selected', true);
 	}
 	function fillResponse(data){
 		console.log(data);
@@ -266,5 +290,6 @@ if(isset($_GET['type']) && $_GET['type']=="subtask"){
 		goToByScroll('msg_add_issue');
 		}
 	}
+	
 </script>
 @stop

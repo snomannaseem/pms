@@ -1,6 +1,6 @@
 <?php
-
 namespace App\Entities;
+
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -60,10 +60,14 @@ private $deletedOn;
 private $project;
 
 /**
-	 * @ORM\ManyToOne(targetEntity="Users", inversedBy="projects_resources")
-	 * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
-	 */
-protected $user;
+ * @var \Users
+ *
+ * @ORM\ManyToOne(targetEntity="Users")
+ * @ORM\JoinColumns({
+ *   @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
+ * })
+ */
+private $user;
 
 
 /**

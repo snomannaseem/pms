@@ -78,23 +78,6 @@ private $deletedBy;
 private $deletedOn;
 
 
-
-/**
- * @ORM\OneToMany(targetEntity="TeamResources", mappedBy="team")
- * @ORM\JoinColumn(name="id", referencedColumnName="team_id", nullable=false)
-	 */
-protected $team_resources;
-
-
-/**
-	 *
-	 * @return \Doctrine\Common\Collections\Collection
-	 */
-public function getTeamResources()
-{
-	return $this->team_resources;
-}
-
 /**
  * Get id
  *

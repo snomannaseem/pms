@@ -2,6 +2,13 @@
         <header class="header">
             <a href="index.html" class="logo">
                 PMS
+				<?php 
+				if(isset($selected_team) && $selected_team)
+				{
+				?><span style='font-size:10px'>[<?php echo $selected_team['name']; ?>]</span>
+				<?php
+				}
+				?>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">

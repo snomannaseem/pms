@@ -37,8 +37,9 @@ class AuthenticateUI
      */
     public function handle($request, Closure $next)
     {
-	//dd('in authenticateUi.php');
-	//print "in authenticateUi.php<br>";
+	
+	//echo('in authenticateUi.php');
+	//dd( "in authenticateUi.php");
         if ($this->auth->guest()) {
             if ($request->ajax()) {
                 //return response('Unauthorized.', 401);

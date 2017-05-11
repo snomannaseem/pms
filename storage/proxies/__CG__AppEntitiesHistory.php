@@ -257,7 +257,7 @@ class History extends \App\Entities\History implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setIssue(\Issues $issue = NULL)
+    public function setIssue(\App\Entities\Issues $issue = NULL)
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setIssue', [$issue]);

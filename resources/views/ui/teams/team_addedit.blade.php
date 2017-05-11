@@ -11,7 +11,7 @@
 			<header class="panel-heading">Add Team</header>
 			<div class="panel-body">
 				<?php if($errors != "") { ?><p class="alert alert-block alert-danger"><?php echo $errors;  ?></p><?php } ?>
-				<form role="form" action="/teams/<?php echo $id; ?>" method="post">
+				<form role="form" !action="/teams/<?php echo $id; ?>" method="post">
 				<div class="form-group"> Name: <input class="form-control" id="name" name="name" value="<?php echo $data_set['name'];?>" type="text"> </div>
 				<p> Add User By Typing and Enter: <input class="form-control" id="userid" name="userid" value="" type="text" autocomplete="off" class="ui-autocomplete-input" > </p>
 				
@@ -25,10 +25,18 @@
 									
 									foreach($team_res as $user)
 									{
-										$profile_image = $user['profileImage']!=null?"/user_images/".$user['profileImage']:"/user_images/default.jpg";
+										if($user['deletedBy'] != null) continue;
+										$profile_image = $user['profile_image']!=null?"/user_images/".$user['profile_image']:"/user_images/default.jpg";
+										
+										$roles_select_html = "&nbsp;<select name='roleids[]'>";
+										foreach($role_res as $role)
+										{
+											$roles_select_html .= "<option value='{$role['id']}' ".($role['id'] == $user['roleId'] ? "selected='selected'" : "").">{$role['role']}</option>"; 
+										}
+										$roles_select_html .= "</select>";
 										
 									?>
-									<li class="alert list-group-item"><button type="button" class="close close-sm" data-dismiss="alert"><i class="fa fa-times"></i></button><a href=""><img width="50" height="50" src="<?php echo $profile_image;?>"></a><a href=""><?php echo $user['name']; ?></a><input type="hidden" name="userids[]" value="<?php echo $user['id']; ?>" /></li>
+									<li class="alert list-group-item"><button type="button" class="close close-sm" data-dismiss="alert"><i class="fa fa-times"></i></button><a href=""><img width="50" height="50" src="<?php echo $profile_image;?>"></a><a href=""><?php echo $user['name']; ?></a><input type="hidden" name="userids[]" value="<?php echo $user['id']; ?>" /><?php echo $roles_select_html; ?></li>
 									<?php 
 									} 
 									?>
@@ -76,10 +84,19 @@
 		</section>
 	</div>
 </div>
+	<?php
+	$roles_select_html = "<select name='roleids[]'>";
+	foreach($role_res as $role)
+	{
+		$roles_select_html .= "<option value='{$role['id']}'>{$role['role']}</option>"; 
+	}
+	$roles_select_html .= "</select>";
+	?>
 @stop
 @section('client_script')
 <script type="text/javascript">
-		
+	   roles = <?php echo $role_res ? json_encode($role_res) : 0; ?>;
+	   roles_select_html = "&nbsp;<?php echo $roles_select_html; ?>";
 		
        $(document).ready(function(){
 	   $(document).on("click", "#cancel_btn", function(){
@@ -120,7 +137,7 @@
 		var profile_image = "/user_images/"+ui.item.profileImage;
 		}
 		$(this).val('');
-		$('.teammates').append('<li class="alert list-group-item"><button type="button" class="close close-sm" data-dismiss="alert"><i class="fa fa-times"></i></button><a href=""><img width="50" height="50" src="'+profile_image+'"></a><a href="">'+ui.item.name+'</a><input type="hidden" name="userids[]" value="'+ui.item.id+'" /></li>');
+		$('.teammates').append('<li class="alert list-group-item"><button type="button" class="close close-sm" data-dismiss="alert"><i class="fa fa-times"></i></button><a href=""><img width="50" height="50" src="'+profile_image+'"></a><a href="">'+ui.item.name+'</a><input type="hidden" name="userids[]" value="'+ui.item.id+'" />'+roles_select_html+'</li>');
 		console.log('selected from autocomplete');
         return false;
       }

@@ -41,12 +41,22 @@ class UIAuthController extends Controller
 		//dd('hi');
         $this->middleware('guest', ['except' => ['getLogout', 'getStaffLogout', 'getMagicLogin', 'postLogin']]);
     }
-
+	/*
+	public function getLogout()
+	{
+		Session::forget('is_super_admin');
+        Session::forget('module_actions');
+		parent::getLogout();
+	}
+	*/
     public function getStaffLogout()
     {
-        Session::forget('staff_user');
-        Session::forget('staff_name');
-        Session::forget('staff_logged_password');
+        //Session::forget('staff_user');
+        //Session::forget('staff_name');
+        //Session::forget('staff_logged_password');
+		
+        Session::forget('is_super_admin');
+        Session::forget('module_actions');
         Auth::logout();
 
         return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
@@ -115,6 +125,7 @@ class UIAuthController extends Controller
      */
     public function postLogin(Request $request)
     {
+	
         $auth = false;
         $code = 301;
         $msg = "";
@@ -288,6 +299,7 @@ class UIAuthController extends Controller
 		*/
 if($auth)
 {
+	//dd('in UI AuthController after logged in ');
 	return redirect()->intended('dashboard');
 }
 return $this->sendFailedLoginResponse($request); 
@@ -315,5 +327,12 @@ return $this->getLogin();
           'email' => $data['email'],
           'password' => $data['password'],
         ]);
+    }
+	
+	public function getLogout()
+    {
+        Auth::logout();
+        Session::flush();
+        return redirect('/');
     }
 }

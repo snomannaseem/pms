@@ -1,6 +1,6 @@
 <?php
-
 namespace App\Entities;
+
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -390,7 +390,7 @@ return $this->deletedOn;
  *
  * @return Projects
  */
-public function setTeam(\Teams $team = null)
+public function setTeam(Teams $team = null)
 {
 $this->team = $team;
 

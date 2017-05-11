@@ -3,16 +3,39 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Request as REQ;
 use App\Http\Controllers\Controller;
 use App\Repositories\ProjectRepo;
 use App\Validation\Validate;
 use Auth;
+use Session;
+
 class ProjectCont extends Controller
 {
     public function __construct()
     {
-        $this->logged_user = \Auth::user();
+		$this->logged_user = \Auth::user();
         $this->pro = new ProjectRepo();
+		// First check if it is not superadmin
+		
+		$is_super_admin = Session::get('is_super_admin', null);
+		if($is_super_admin == false)
+		{
+			$id = REQ::route('id');  // The 'id' parameter must always be Project id
+			$selected_team = Session::get('selected_team', 0);
+			if($id !== null)  // only when Id is provided in url like projects/12, then we will check if this project is allowed to him(logged_in_user) (it is his team project)
+			{
+				$project = $this->pro->getProjectById($id);
+				//dd($project, $selected_team);
+				if($project['team']['id'] != $selected_team['id'])
+				{
+					// response()->view('ui.common.no_permission');
+					return redirect('/404');
+				}
+			}
+		}
+		
+        
     }
 		
     public function index(Request $request){
@@ -102,6 +125,9 @@ class ProjectCont extends Controller
 		$project_resources = $this->pro->getProjectResources($id);
 		return view('ui.project.add',['data'=>$project_data]);
 	}
-	
+	public function view($id){
+		$project_data = $this->pro->getProjectById($id);
+		return view('ui.project.view',['data'=>$project_data]);
+	}
 	
 }

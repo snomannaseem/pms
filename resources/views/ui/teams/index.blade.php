@@ -63,6 +63,9 @@ $sort_by =  $data_set['sort_by'];
 </script>
 
 <script type="text/javascript">
+		$(document).on("click", ".btn_login", function(){
+			 window.location =  '/teamlogin/' + $(this).attr('rid');
+		});
        $(document).ready(function(){
               if(!paging_bg){
 				  

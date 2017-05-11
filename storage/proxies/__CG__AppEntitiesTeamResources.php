@@ -64,10 +64,10 @@ class TeamResources extends \App\Entities\TeamResources implements \Doctrine\ORM
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'id', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'deletedBy', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'deletedOn', 'team', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'user', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'team_id'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'id', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'deletedBy', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'deletedOn', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'role', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'team', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'user'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'id', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'deletedBy', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'deletedOn', 'team', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'user', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'team_id'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'id', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'deletedBy', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'deletedOn', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'role', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'team', '' . "\0" . 'App\\Entities\\TeamResources' . "\0" . 'user'];
     }
 
     /**
@@ -279,7 +279,29 @@ class TeamResources extends \App\Entities\TeamResources implements \Doctrine\ORM
     /**
      * {@inheritDoc}
      */
-    public function setTeam(\App\Entities\Teams $team = NULL)
+    public function setRole(\Roles $role = NULL)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setRole', [$role]);
+
+        return parent::setRole($role);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRole()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getRole', []);
+
+        return parent::getRole();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setTeam(\Teams $team = NULL)
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setTeam', [$team]);
@@ -318,28 +340,6 @@ class TeamResources extends \App\Entities\TeamResources implements \Doctrine\ORM
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUser', []);
 
         return parent::getUser();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setTeamId(\App\Entities\Teams $team = NULL)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setTeamId', [$team]);
-
-        return parent::setTeamId($team);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getTeamId()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getTeamId', []);
-
-        return parent::getTeamId();
     }
 
 }

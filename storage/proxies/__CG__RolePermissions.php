@@ -64,10 +64,10 @@ class RolePermissions extends \RolePermissions implements \Doctrine\ORM\Proxy\Pr
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'RolePermissions' . "\0" . 'id', '' . "\0" . 'RolePermissions' . "\0" . 'createdOn', '' . "\0" . 'RolePermissions' . "\0" . 'updatedOn', '' . "\0" . 'RolePermissions' . "\0" . 'deletedOn', '' . "\0" . 'RolePermissions' . "\0" . 'permission', '' . "\0" . 'RolePermissions' . "\0" . 'role'];
+            return ['__isInitialized__', '' . "\0" . 'RolePermissions' . "\0" . 'id', '' . "\0" . 'RolePermissions' . "\0" . 'isActive', '' . "\0" . 'RolePermissions' . "\0" . 'createdOn', '' . "\0" . 'RolePermissions' . "\0" . 'updatedOn', '' . "\0" . 'RolePermissions' . "\0" . 'deletedOn', '' . "\0" . 'RolePermissions' . "\0" . 'modulePermission', '' . "\0" . 'RolePermissions' . "\0" . 'role'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'RolePermissions' . "\0" . 'id', '' . "\0" . 'RolePermissions' . "\0" . 'createdOn', '' . "\0" . 'RolePermissions' . "\0" . 'updatedOn', '' . "\0" . 'RolePermissions' . "\0" . 'deletedOn', '' . "\0" . 'RolePermissions' . "\0" . 'permission', '' . "\0" . 'RolePermissions' . "\0" . 'role'];
+        return ['__isInitialized__', '' . "\0" . 'RolePermissions' . "\0" . 'id', '' . "\0" . 'RolePermissions' . "\0" . 'isActive', '' . "\0" . 'RolePermissions' . "\0" . 'createdOn', '' . "\0" . 'RolePermissions' . "\0" . 'updatedOn', '' . "\0" . 'RolePermissions' . "\0" . 'deletedOn', '' . "\0" . 'RolePermissions' . "\0" . 'modulePermission', '' . "\0" . 'RolePermissions' . "\0" . 'role'];
     }
 
     /**

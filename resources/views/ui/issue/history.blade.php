@@ -15,10 +15,10 @@
 			</a>
 				
             <div class="media-body ">
-                <a class="commenter" href="javascript:void(0)"><?php echo $row['username'];;?></a>
-
+               
 				<div class="text-muted">
-                <span id="comment_text<?php echo $row['id'];?>"><?php echo $row['comment'];?></span>
+                <span id="comment_text<?php echo $row['id'];?>">  <a class="commenter" href="javascript:void(0)"><?php echo $row['username'];;?></a>
+ <?php echo $row['comment'];?></span>
 
                 <span class="nus-timestamp">
 					<small>

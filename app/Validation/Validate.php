@@ -10,6 +10,7 @@ class Validate{
 			'estimate_time.required' 	=> "Estimated time is required.",
 			'issue_title.required'     	=> "Issue tilte is  required.",
 			'assigned_to.required'     	=> "Assignee name is required",
+            'name.required'     		=> "Name is required.",
 			
         ];
 

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * RolePermissions
  *
- * @ORM\Table(name="role_permissions", indexes={@ORM\Index(name="fk_role_permissions", columns={"permission_id"}), @ORM\Index(name="fk_role_permissions_role_id", columns={"role_id"})})
+ * @ORM\Table(name="role_permissions", indexes={@ORM\Index(name="idx_role_permissions_role_id", columns={"role_id"}), @ORM\Index(name="idx_role_permissions_module_permission_id", columns={"module_permission_id"})})
  * @ORM\Entity
  */
 class RolePermissions
@@ -20,6 +20,13 @@ class RolePermissions
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_active", type="boolean", nullable=true)
+     */
+    private $isActive;
 
     /**
      * @var \DateTime
@@ -43,14 +50,14 @@ class RolePermissions
     private $deletedOn;
 
     /**
-     * @var \Permissions
+     * @var \ModuleActions
      *
-     * @ORM\ManyToOne(targetEntity="Permissions")
+     * @ORM\ManyToOne(targetEntity="ModuleActions")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="permission_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="module_permission_id", referencedColumnName="id")
      * })
      */
-    private $permission;
+    private $modulePermission;
 
     /**
      * @var \Roles

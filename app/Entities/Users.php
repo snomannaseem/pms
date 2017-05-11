@@ -45,14 +45,14 @@ private $password;
 /**
  * @var integer
  *
- * @ORM\Column(name="desig_id", type="integer", precision=0, scale=0, nullable=true, unique=false)
+ * @ORM\Column(name="role_id", type="integer", precision=0, scale=0, nullable=true, unique=false)
  */
-private $desigId;
+private $roleId;
 
 /**
  * @var string
  *
- * @ORM\Column(name="remember_token", type="string", length=255, precision=0, scale=0, nullable=true, unique=false)
+ * @ORM\Column(name="remember_token", type="string", length=255, precision=0, scale=0, nullable=false, unique=false)
  */
 private $rememberToken;
 
@@ -111,25 +111,6 @@ private $deletedBy;
  * @ORM\Column(name="deleted_on", type="datetime", precision=0, scale=0, nullable=true, unique=false)
  */
 private $deletedOn;
-
-
-/**
-	 * @ORM\OneToMany(targetEntity="ProjectsResources", mappedBy="users")
-	 * @ORM\JoinColumn(name="id", referencedColumnName="user_id", nullable=false)
-	 */
-protected $projects_resources;
-
-/**
-	 * Get AdcenterCampaigns entity collection (one to many).
-	 *
-	 * @return \Doctrine\Common\Collections\Collection
-	 */
-public function getProjectsResources()
-{
-	return $this->projects_resources;
-}
-
-
 
 
 /**
@@ -215,27 +196,27 @@ return $this->password;
 }
 
 /**
- * Set desigId
+ * Set roleId
  *
- * @param integer $desigId
+ * @param integer $roleId
  *
  * @return Users
  */
-public function setDesigId($desigId)
+public function setRoleId($roleId)
 {
-$this->desigId = $desigId;
+$this->roleId = $roleId;
 
 return $this;
 }
 
 /**
- * Get desigId
+ * Get roleId
  *
  * @return integer
  */
-public function getDesigId()
+public function getRoleId()
 {
-return $this->desigId;
+return $this->roleId;
 }
 
 /**

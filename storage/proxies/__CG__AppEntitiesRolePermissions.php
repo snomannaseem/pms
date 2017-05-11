@@ -64,10 +64,10 @@ class RolePermissions extends \App\Entities\RolePermissions implements \Doctrine
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\RolePermissions' . "\0" . 'id', '' . "\0" . 'App\\Entities\\RolePermissions' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\RolePermissions' . "\0" . 'updatedOn', '' . "\0" . 'App\\Entities\\RolePermissions' . "\0" . 'deletedOn', '' . "\0" . 'App\\Entities\\RolePermissions' . "\0" . 'permission', '' . "\0" . 'App\\Entities\\RolePermissions' . "\0" . 'role'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\RolePermissions' . "\0" . 'id', '' . "\0" . 'App\\Entities\\RolePermissions' . "\0" . 'isActive', '' . "\0" . 'App\\Entities\\RolePermissions' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\RolePermissions' . "\0" . 'updatedOn', '' . "\0" . 'App\\Entities\\RolePermissions' . "\0" . 'deletedOn', '' . "\0" . 'App\\Entities\\RolePermissions' . "\0" . 'modulePermission', '' . "\0" . 'App\\Entities\\RolePermissions' . "\0" . 'role'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\RolePermissions' . "\0" . 'id', '' . "\0" . 'App\\Entities\\RolePermissions' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\RolePermissions' . "\0" . 'updatedOn', '' . "\0" . 'App\\Entities\\RolePermissions' . "\0" . 'deletedOn', '' . "\0" . 'App\\Entities\\RolePermissions' . "\0" . 'permission', '' . "\0" . 'App\\Entities\\RolePermissions' . "\0" . 'role'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\RolePermissions' . "\0" . 'id', '' . "\0" . 'App\\Entities\\RolePermissions' . "\0" . 'isActive', '' . "\0" . 'App\\Entities\\RolePermissions' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\RolePermissions' . "\0" . 'updatedOn', '' . "\0" . 'App\\Entities\\RolePermissions' . "\0" . 'deletedOn', '' . "\0" . 'App\\Entities\\RolePermissions' . "\0" . 'modulePermission', '' . "\0" . 'App\\Entities\\RolePermissions' . "\0" . 'role'];
     }
 
     /**
@@ -191,6 +191,28 @@ class RolePermissions extends \App\Entities\RolePermissions implements \Doctrine
     /**
      * {@inheritDoc}
      */
+    public function setIsActive($isActive)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setIsActive', [$isActive]);
+
+        return parent::setIsActive($isActive);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getIsActive()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getIsActive', []);
+
+        return parent::getIsActive();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function setCreatedOn($createdOn)
     {
 
@@ -257,23 +279,23 @@ class RolePermissions extends \App\Entities\RolePermissions implements \Doctrine
     /**
      * {@inheritDoc}
      */
-    public function setPermission(\Permissions $permission = NULL)
+    public function setModulePermission(\ModuleActions $modulePermission = NULL)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPermission', [$permission]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setModulePermission', [$modulePermission]);
 
-        return parent::setPermission($permission);
+        return parent::setModulePermission($modulePermission);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getPermission()
+    public function getModulePermission()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPermission', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getModulePermission', []);
 
-        return parent::getPermission();
+        return parent::getModulePermission();
     }
 
     /**

@@ -1,6 +1,8 @@
 <aside class="left-side sidebar-offcanvas">
 <?php 
+$selected_team = Session::get('selected_team', 0);
 
+$team_name = $selected_team ? $selected_team['name'] : "";
 //dd(@strstr($_SERVER['SERVER_NAME'],'projects')); 
 ?>
 	<section class="sidebar">
@@ -12,6 +14,9 @@
 			<div class="pull-left info">
 				<p>Hello, {{ $logged_in_username }}</p>
 				<a href="#"><i class="fa fa-circle text-success"></i>Online</a>
+			</div>
+			<div class="pull-left info">
+				<p><?php echo $team_name; ?></p>				
 			</div>
 		</div>
 		<!-- search form -->
@@ -55,30 +60,22 @@
 				
 			</li>
 				<?php $class_issu = ''; if(Request::segment(1)=="issues"){ $class_issu = 'active'; } ?>
-				<li class="<?php echo $class_issu;?>"><a href="/issues"> <i class="fa fa-dashboard"></i> <span>Issues</span></a></li>
-			<li>
-				<a href="index.html">
-					<i class="fa fa-dashboard"></i> <span>History</span>
-				</a>
+				<li class="<?php echo $class_issu;?>"><a href="/issues"> <i class="fa fa-dashboard"></i> <span>Issues</span></a>
 			</li>
+            <li>
+				<a>
+					<i class="fa fa-dashboard"></i>
+                    <span>User Management</span>
+				</a>
+                <ul>
+                    <li><a href="/module">Module</a></li>
+                    <li><a href="/actions">Actions</a></li>
+                    <li><a href="/module_actions">Module Actions</a></li>
+                </ul>
+			</li>
+			
 
-			<li>
-				<a href="general.html">
-					<i class="fa fa-gavel"></i> <span>General</span>
-				</a>
-			</li>
-
-			<li>
-				<a href="basic_form.html">
-					<i class="fa fa-globe"></i> <span>Basic Elements</span>
-				</a>
-			</li>
-
-			<li>
-				<a href="simple.html">
-					<i class="fa fa-glass"></i> <span>Simple tables</span>
-				</a>
-			</li>
+			
 
 		</ul>
 	</section>

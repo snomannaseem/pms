@@ -18,6 +18,10 @@ class TeamCont extends Controller
      */
     public function __invoke($id){
         //return view('pages.users', ['name' => 'users']);
+		if(Session::get('is_super_admin', null) === null)
+		{
+			return response()->view('ui.common.no_permission');
+		}
     }
 	
 	
@@ -67,7 +71,7 @@ class TeamCont extends Controller
 		//return view('pages.teams', ['name' => 'teams', 'title' => 'User List']);
 		return view('ui.teams.index', ['name' => 'teams', 'title' => 'Team List', 'data_set' => $data_set]);
     }
-	
+	/*
 	public function add($id, Request $request)
 	{
 		//Request $request
@@ -136,6 +140,7 @@ class TeamCont extends Controller
 		
 		return view('ui.teams.team_addedit', ['errors' => $errors, 'name' => 'teams', 'title' => 'Add User', 'id' => $id, 'data_set' => $data_set]);
 	}
+	*/
 	
 	public function addedit($id, Request $request)
 	{
@@ -144,11 +149,13 @@ class TeamCont extends Controller
 		
 		$logged_in_userid = $user->__get('id');
 		$this->team = new TeamRepo();
+		$this->role = new \App\Repositories\RoleRepo();
 		$errors = "";
 		$id = (int) $id;
 		$data_set = $request_data = ['id' => $id, 'name' => $request->get('name',''), 
 		'email' => $request->get('email',''), 'password' => $request->get('password','') ]; // default empty data set just to make	
 		$team_res = [];
+		$role_res = $this->role->getRoles();
 		
 		if($id != 0) // edit request, fetch the data to fill the form
 		{
@@ -166,6 +173,7 @@ class TeamCont extends Controller
 				//dd($request->all());
 				$name = $request->get('name');
 				$userids = $request->get('userids');
+				$roleids = $request->get('roleids');
 				//$password = $request->get('password');
 				//dd($id);
 				if($id == 0)
@@ -179,7 +187,7 @@ class TeamCont extends Controller
 					$team->setCreatedOn(new \DateTime());
 					try{
 						$this->team->save($team);
-						$this->team->saveTeamResources($team->getId(), $userids, $logged_in_userid);
+						$this->team->saveTeamResources($team->getId(), $userids, $roleids, $logged_in_userid);
 						return Redirect::to('/teams')->with('message', 'Successfully added.');
 					}
 					catch(\Exception $e)
@@ -191,7 +199,7 @@ class TeamCont extends Controller
 				{
 					try {
 						$res = $this->team->update(['id' => $id, 'name' => $name]);
-						$res = $this->team->updateTeamResources($id, $userids, $logged_in_userid);
+						$res = $this->team->updateTeamResources($id, $userids, $roleids, $logged_in_userid);
 						
 						return Redirect::to('/teams')->with('message', 'Successfully edited.');
 					}
@@ -209,7 +217,7 @@ class TeamCont extends Controller
 		}
 		
 		
-		return view('ui.teams.team_addedit', ['errors' => $errors, 'name' => 'teams', 'title' => 'Add User', 'id' => $id, 'data_set' => $data_set, 'team_res' => $team_res]);
+		return view('ui.teams.team_addedit', ['errors' => $errors, 'name' => 'teams', 'title' => 'Add User', 'id' => $id, 'data_set' => $data_set, 'team_res' => $team_res, 'role_res' => $role_res]);
 	}
 	
 	public function delete($id)
@@ -242,6 +250,14 @@ class TeamCont extends Controller
 		
 	}
 	
+	public function add(Request $request)
+	{
+		return $this->addedit(0, $request);
+	}
 	
+	public function edit($id, Request $request)
+	{
+		return $this->addedit($id, $request);
+	}
 
 }

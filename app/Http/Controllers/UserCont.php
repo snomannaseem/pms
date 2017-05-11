@@ -5,11 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\UserRepo;
+use App\Repositories\RoleRepo;
 use Redirect;
+use Route;
 
 
 class UserCont extends Controller
 {
+	
+	public function __construct()
+    {
+        $this->logged_user = \Auth::user();
+        
+    }
+	
     /**
      * Show the profile for the given user.
      *
@@ -24,8 +33,9 @@ class UserCont extends Controller
 
     public function index(Request $request){
 		
-		
+		//$logged_in_userid = $this->logged_user->__get('id');
 		$this->user = new UserRepo();
+		$roles = new RoleRepo();
 		//dd($this->user->getUsersList());
 		
         $paging['page_num'] = $request->input('page_num', 1);
@@ -36,6 +46,8 @@ class UserCont extends Controller
 		$temp = $request->input('srch', "");
         parse_str($temp, $srch);
 		$filters['name'] = isset($srch['table_search']) ? $srch['table_search'] : "";
+		//if($this->logged_user->__get('role_id') !== 1)
+		//	$filters['logged_in_userid'] = $logged_in_userid;
 		
 		$data_set 	= $this->user->getUsersList($filters,$order_by, $paging);
 		
@@ -71,17 +83,22 @@ class UserCont extends Controller
 	
 	public function addedit($id, Request $request)
 	{
+		//dd(Route::current()->getUri());
+		$logged_in_userid = $this->logged_user->__get('id');
 		//Request $request
+		$roles = new RoleRepo();
+		$all_roles 	= $roles->getRoles();
 		$this->user = new UserRepo();
 		$errors = "";
 		$id = (int) $id;
 		$data_set = $request_data = ['id' => $id, 'name' => $request->get('name',''), 
-		'email' => $request->get('email',''), 'password' => $request->get('password','') ]; // default empty data set just to make		
+		'email' => $request->get('email',''), 'password' => $request->get('password',''), 'roleId' => $request->get('role_id','') ]; // default empty data set just to make		
 		
 		if($id != 0) // edit request, fetch the data to fill the form
 		{
 			$data_set 	= $this->user->getUserById($id);
 		}
+		$data_set['all_roles'] = $all_roles;
 		if($request->isMethod('post'))
 		{
 			$validator = $this->user->getUserFormValidator($request_data);
@@ -91,6 +108,7 @@ class UserCont extends Controller
 			{
 				$name = $request->get('name');
 				$email = $request->get('email');
+				$role_id = $request->get('role_id');
 				$password = $request->get('password');
 				if($id == 0)
 				{
@@ -99,6 +117,10 @@ class UserCont extends Controller
 					$user->setName($name);
 					$user->setEmail($email);
 					$user->setPassword($password);
+					$user->setRememberToken("");
+					$user->setCreatedBy($logged_in_userid);
+					$user->setCreatedOn(new \DateTime());
+					$user->setRoleId($role_id);
 					$user->setStatus(1);
 					$this->user->save($user);
 					
@@ -143,6 +165,16 @@ class UserCont extends Controller
 		$user = new UserRepo();
 		return $user->search(['term' => $request['term'], 'status' => 1]);
 		
+	}
+	
+	public function add(Request $request)
+	{
+		return $this->addedit(0, $request);
+	}
+	
+	public function edit($id, Request $request)
+	{
+		return $this->addedit($id, $request);
 	}
 
 }

@@ -17,9 +17,9 @@ Route::get('/', function () {
 });
 */
 //Route::get('/users', 'UserCont@index');
-Route::match(['get', 'post'], '/users', ['uses' => 'UserCont@index']);
-Route::match(['get', 'post'], '/user/{id}', ['uses' => 'UserCont@addedit']);
-Route::match(['get', 'post'], '/user/delete/{id}', ['uses' => 'UserCont@delete']);
+//Route::match(['get', 'post'], '/users', ['uses' => 'UserCont@index']);
+//Route::match(['get', 'post'], '/user/{id}', ['uses' => 'UserCont@addedit']);
+//Route::match(['get', 'post'], '/user/delete/{id}', ['uses' => 'UserCont@delete']);
 
 
 Route::get('/index.html', function () {
@@ -42,12 +42,12 @@ Route::get('/simple.html', function () {
 /**
  * Add New Task
  */
-Route::post('/task', function (Request $request) {
-});
+//Route::post('/task', function (Request $request) {
+//});
 
 /**
  * Delete Task
  */
-Route::delete('/task/{task}', function (Task $task) {
+//Route::delete('/task/{task}', function (Task $task) {
     
-});
+//});

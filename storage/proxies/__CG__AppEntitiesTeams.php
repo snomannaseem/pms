@@ -64,10 +64,10 @@ class Teams extends \App\Entities\Teams implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'name', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'status', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'updatedBy', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'updatedOn', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'deletedBy', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'deletedOn', 'team_resources'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'name', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'status', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'updatedBy', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'updatedOn', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'deletedBy', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'deletedOn'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'name', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'status', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'updatedBy', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'updatedOn', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'deletedBy', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'deletedOn', 'team_resources'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'name', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'status', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'updatedBy', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'updatedOn', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'deletedBy', '' . "\0" . 'App\\Entities\\Teams' . "\0" . 'deletedOn'];
     }
 
     /**
@@ -173,17 +173,6 @@ class Teams extends \App\Entities\Teams implements \Doctrine\ORM\Proxy\Proxy
     }
 
     
-    /**
-     * {@inheritDoc}
-     */
-    public function getTeamResources()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getTeamResources', []);
-
-        return parent::getTeamResources();
-    }
-
     /**
      * {@inheritDoc}
      */

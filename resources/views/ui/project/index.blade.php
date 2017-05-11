@@ -121,6 +121,9 @@ $sort_by =  $result_set['sort_by'];
 			$(document).on("click", ".btn_edit_res", function(){
 				 window.location = '/projects/resources/' + $(this).attr('rid');
 			});
+			$(document).on("click", ".btn_view", function(){
+				 window.location = '/project/view/' + $(this).attr('rid');
+			});
 	
         });
  

@@ -64,10 +64,10 @@ class TeamResources extends \TeamResources implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'TeamResources' . "\0" . 'id', '' . "\0" . 'TeamResources' . "\0" . 'createdBy', '' . "\0" . 'TeamResources' . "\0" . 'createdOn', '' . "\0" . 'TeamResources' . "\0" . 'deletedBy', '' . "\0" . 'TeamResources' . "\0" . 'deletedOn', '' . "\0" . 'TeamResources' . "\0" . 'team', '' . "\0" . 'TeamResources' . "\0" . 'user'];
+            return ['__isInitialized__', '' . "\0" . 'TeamResources' . "\0" . 'id', '' . "\0" . 'TeamResources' . "\0" . 'createdBy', '' . "\0" . 'TeamResources' . "\0" . 'createdOn', '' . "\0" . 'TeamResources' . "\0" . 'deletedBy', '' . "\0" . 'TeamResources' . "\0" . 'deletedOn', '' . "\0" . 'TeamResources' . "\0" . 'role', '' . "\0" . 'TeamResources' . "\0" . 'team', '' . "\0" . 'TeamResources' . "\0" . 'user'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'TeamResources' . "\0" . 'id', '' . "\0" . 'TeamResources' . "\0" . 'createdBy', '' . "\0" . 'TeamResources' . "\0" . 'createdOn', '' . "\0" . 'TeamResources' . "\0" . 'deletedBy', '' . "\0" . 'TeamResources' . "\0" . 'deletedOn', '' . "\0" . 'TeamResources' . "\0" . 'team', '' . "\0" . 'TeamResources' . "\0" . 'user'];
+        return ['__isInitialized__', '' . "\0" . 'TeamResources' . "\0" . 'id', '' . "\0" . 'TeamResources' . "\0" . 'createdBy', '' . "\0" . 'TeamResources' . "\0" . 'createdOn', '' . "\0" . 'TeamResources' . "\0" . 'deletedBy', '' . "\0" . 'TeamResources' . "\0" . 'deletedOn', '' . "\0" . 'TeamResources' . "\0" . 'role', '' . "\0" . 'TeamResources' . "\0" . 'team', '' . "\0" . 'TeamResources' . "\0" . 'user'];
     }
 
     /**

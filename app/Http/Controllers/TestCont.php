@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\UserRepo;
 use Redirect;
+use Cookie;
+use Session;
 
 
 class TestCont extends Controller
@@ -20,7 +22,52 @@ class TestCont extends Controller
         //return view('pages.users', ['name' => 'users']);
     }
 	
-	
+	public function teamLogin($id = 0){  //if id of the team is supplied login for that team
+		//dd('teamLogin');
+		$request = new \Illuminate\Http\Request();
+		$error = "";
+		$teams = new \App\Repositories\TeamRepo();
+		$user = \Auth::user();
+		$logged_in_user_id = $user ? $user->__get('id') : 0;
+		$id = (int) $id;
+		//dd($logged_in_user_id);
+		//dd($user);
+		
+		if($id != 0)
+		{
+			// Make sure that the logged in user is in the team provided in the url. before logging in to that team
+			
+			$myteams = $teams->getTeamsOfUser($logged_in_user_id);
+			
+			$myteam = [];
+			$flag = false;
+			foreach($myteams as $myteam)
+			{
+				if($myteam['id'] == $id)
+				{
+					$flag = true;
+					break;
+				}
+			}
+			if($flag == false)
+			{
+				$error = "You are not included in this team.";
+			}
+			else
+			{
+				
+				//Cookie::queue(Cookie::make('selected_team', $myteam));
+				Session::put('selected_team', $myteam);
+				Session::forget('module_actions');
+				//return $next($request);
+				//dd($myteam);
+				return Redirect::to('/projects');
+				
+			}
+		}
+		$myteams = $teams->getTeamsOfUser($logged_in_user_id);
+		return view('ui.dashboard.index', ['name' => 'Atif', 'title' => 'Dashboard', 'myteams' => $myteams, 'error' => $error]);
+    }
 
     public function index(Request $request){
 		
@@ -66,7 +113,7 @@ class TestCont extends Controller
         }
 		
 		//return view('pages.users', ['name' => 'users', 'title' => 'User List']);
-		return view('ui.users.index', ['name' => 'users', 'title' => 'User List', 'data_set' => $data_set]);
+		return view('ui.users.index', ['name' => 'users', 'title' => 'Fake Team', 'data_set' => $data_set]);
     }
 	
 	public function addedit($id, Request $request)

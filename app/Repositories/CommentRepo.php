@@ -35,9 +35,9 @@ class CommentRepo extends BaseRepo{
 		EntityManager::flush();
 		
 		/*History call*/
-		$data['comment'] ="Comment has been added";
+		$data['comment'] = config(('messages.HISTORY'))['COMMENT']['ADD'];
 		if(isset($data['commentid']) and $data['commentid']!=''){
-			$data['comment'] ="Comment has been updated";
+			$data['comment'] = config(('messages.HISTORY'))['COMMENT']['EDIT'];
 		}
 		$this->history 	= new HistoryRepo();
 		$this->history->addHistory($data);
@@ -78,7 +78,7 @@ class CommentRepo extends BaseRepo{
 		EntityManager::persist($comment);
 		EntityManager::flush();
 		
-		$data['comment'] ="Comment has been deleted";
+		$data['comment'] = config(('messages.HISTORY'))['COMMENT']['DELETE'];
 		$this->history 	= new HistoryRepo();
 		$this->history->addHistory($data);
 	}

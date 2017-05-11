@@ -6,11 +6,11 @@
 	$(document).ready(function (){
 		console.log('url is ', grid_list_page_name);
 		$('#btn_add').click(function(){
-			 window.location = grid_edit_page_name + '/0';
+			 window.location = grid_edit_page_name + '/add';
 		});
 		
 		$(document).on("click", ".btn_edit", function(){
-			 window.location = grid_edit_page_name + '/' + $(this).attr('rid');
+			 window.location = grid_edit_page_name + '/edit/' + $(this).attr('rid');
 		});
 
 		

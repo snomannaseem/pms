@@ -16,6 +16,7 @@ class Kernel extends HttpKernel
     protected $middleware = [
 		
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+		//\Illuminate\Session\Middleware\StartSession::class,
     ];
 
     /**
@@ -30,6 +31,9 @@ class Kernel extends HttpKernel
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
+			//\App\Http\Middleware\AuthenticateUI::class,
+			//\App\Http\Middleware\CheckTeamSelection::class,
+			
         ],
 
         'api' => [
@@ -46,8 +50,8 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
-		'auth.team' => \App\Http\Middleware\CheckTeamSelection::class,
         'auth.ui' => \App\Http\Middleware\AuthenticateUI::class,
+		'auth.team' => \App\Http\Middleware\CheckTeamSelection::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'can' => \Illuminate\Foundation\Http\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,

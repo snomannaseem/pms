@@ -13,89 +13,91 @@
 		<section class="panel">
 		
 		  <header class="panel-heading"> Issue Detail </header>
-		  <div class="panel-body">
+		  <div class="panel-body issue_details">
 		  
 			<form class="form-horizontal tasi-form" method="get" id="add_issue">
 			
-			<div class="col-lg-5">
+			<div class="col-sm-4">
 				
-				<div class="form-group border-bottom">
-					  <label class="col-sm-3 control-label">Title</label> 
-					  <div class="col-lg-9">
+				<div class="form-group">
+					  <label class=" control-label">Title</label> 
+					  <div class="">
 						<p class="form-control-static" ><?php if(isset($data['issue_title'])){ echo $data['issue_title'];}?></p>
 					  </div>
 				</div>
 				
-				<div class="form-group border-bottom">
-					  <label class="col-sm-3 control-label">Reporter</label> 
-					  <div class="col-lg-9">
+				<div class="form-group">
+					  <label class=" control-label">Reporter</label> 
+					  <div class="">
 						<p class="form-control-static"><?php echo ucfirst($data['create_by']);?></p>
 					  </div>
 				</div>				
 				  
-				<div class="form-group border-bottom"> 
-					  <label class="col-sm-3 control-label">Category</label>
-					  <div class="col-lg-9">
+				<div class="form-group"> 
+					  <label class="control-label">Category</label>
+					  <div class="">
 					    <p class="form-control-static"><?php echo ucfirst($data['cat_name']);?></p>
 					  </div>
 				</div>
 				
-				<div class="form-group border-bottom"> 
+				</div>	
+
+				<div class="col-sm-4">
+				
+				<div class="form-group"> 
 				  
-					  <label class="col-sm-3 control-label">Project</label>
-					  <div class="col-lg-9">
+					  <label class="control-label">Project</label>
+					  <div class="">
 						<p class="form-control-static"><?php echo ucfirst($data['project_tilte']);?></p>
 					  </div>
 				</div>
 				
-				<div class="form-group border-bottom"> 
+				<div class="form-group"> 
 				  
-					  <label class="col-sm-3 control-label">Priorities</label>
-					  <div class="col-lg-9">
+					  <label class=" control-label">Priorities</label>
+					  <div class="">
 						<p class="form-control-static"><?php echo ucfirst($data['pirority_name']);?></p>
 					  </div>
 				</div>
 				
-				</div>
-				
-				<div class="col-lg-1"></div>
-				
-				<div class="col-lg-6">
-				
-				<div class="form-group border-bottom"> 
-					  <label class="col-sm-3 control-label">Issue Type</label>
-					  <div class="col-lg-9">
+				<div class="form-group"> 
+					  <label class=" control-label">Issue Type</label>
+					  <div class="">
 						<p class="form-control-static"><?php echo ucfirst($data['issue_type_name']);?></p>
 					  </div>
 				</div>
+					
+				</div>
 				
-				<div class="form-group border-bottom"> 
-					  <label class="col-sm-3 control-label">Resolution</label>
-					  <div class="col-lg-9">
+				
+				<div class="col-sm-4">
+				
+				<div class="form-group"> 
+					  <label class=" control-label">Resolution</label>
+					  <div class="">
 					  	  <p class="form-control-static"><?php echo ucfirst($data['resolution_name']);?></p>
 						</div>
 				</div>
-				
-				  
-				  <div class="form-group border-bottom">
-					  <label class="col-sm-3 control-label">Description</label>
-					  <div class="col-lg-9">
-						<p class="form-control-static"> <?php if(isset($data['description'])){ echo html_entity_decode($data['description']);}?></p>
-					  </div>
-				  </div>
-				  <div class="form-group border-bottom">
-					  <label class="col-sm-3 control-label">Estimate Time</label>
-					  <div class="col-lg-9">					  
+		
+				  <div class="form-group">
+					  <label class=" control-label">Estimate Time</label>
+					  <div class="">					  
 						<p class="form-control-static"><?php if(isset($data['est_time'])){ echo $data['est_time'];}?></p>
 					  </div>
 				  </div>
-				  
-				  <div class="form-group">
-				  <label class="col-lg-2 control-label"></label>
-				  <div class="col-lg-10"></div>	
-				</div>
 								
 				</div>
+				
+				<div class="col-lg-12">
+					<div class="form-group">
+					  <label class=" control-label">Description</label>
+					  <div class="">
+						<p class="form-control-static"> <?php if(isset($data['description'])){ echo html_entity_decode($data['description']);}?></p>
+					  </div>
+					</div>
+				</div>
+				
+				
 				
 			  </form>
 		  </div>  
@@ -135,7 +137,14 @@
                                         @include('ui.issue.comments',['comments_data' => $comments_data,'issue'=>$data,'userdata'=>$userdata])
                                     </div>
                                     <div id="history" class="tab-pane "> <div id="history_div" class="tab-pane active"></div></div>
-                                    <div id="attachments" class="tab-pane">Attachments</div>
+                                    <div id="attachments" class="tab-pane">
+									<?php 
+										$data['id'] = $data['issue_id'];
+										$data['type'] = "issue";
+									?>
+										@include('ui.file_uploader.file_upload',['data'=>$data])
+									
+									</div>
 									<div id="subtask" class="tab-pane"><div id="subtask_div" class="tab-pane active"></div></div>
                                 </div>
                             </div>
@@ -152,18 +161,83 @@
 @section('client_script')
 
 
+<script src="/js/dropzone.js"></script>
+<link rel="stylesheet" href="/css/dropzone.css">
 <script type="text/javascript">
 <?php $loged_user_image='/user_images/'.$userdata["userimage"];;
 
 ?>
+
 var username	='<?php echo $userdata["username"];?>';
 var userid		='<?php echo $userdata["userid"];?>';
 var userimage	='<?php echo $userdata["userimage"];?>';
-
+var type_id = '<?php echo $data['id'];?>';
 $(document).ready(function(){
 
 var href = location.href;
 var issue_id = href.match(/([^\/]*)\/*$/)[1];
+
+
+/*Multiple uploading*/
+	
+	request_data = {'type_id':type_id,type:'issue'};
+	pageURI = '/get_files';
+	mainAjax('', request_data, 'POST',fillResponse);
+
+	var md = new Dropzone(".dropzone", {});
+	   md.on("complete", function (file) {
+        if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
+             location.reload();
+        }
+
+       // md.removeFile(file); # remove file from the zone.
+    });
+	function fillResponse(data){
+	//console.log(md);
+		console.log(data['rows']);
+		 var html = "";
+		 $.each(data['rows'], function(key,value) {
+		 var name=value.filename.split('.').pop();
+		 var image = "/img/"+name+".png";
+		 var fileid= value.fileid.$oid;
+		 console.log(fileid);
+		 html+='<div fileid="'+fileid+'" class=" dz-preview dz-file-preview dz-processing dz-success dz-complete"> <div class="dz-image"><img  style="width:100px;height:100px;"data-dz-thumbnail="" alt="" src="'+image+'" class="'+name+'"></div><div class="dz-detailss">  <div class="dz-filename"><span data-dz-name="">'+value.filename+'</span></div>  </div>  <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div> <div class="dz-error-message"><span data-dz-errormessage=""></span></div> <div class="dz-success-mark"></div></div>';
+	
+			//console.log(key,value.filename);
+			
+			//console.log(name);
+			//$(".dz-preview").find('.dz-image').addClass('ft_'+name);
+			//md.element.classList.add('ft_'+name);
+			
+			var mockFile = { name: value.filename};
+			//md.options.addedfile.call(md, mockFile);
+			//md.options.thumbnail.call(md, mockFile, "uploads/"+value.name);
+		 });
+		 $('.dropzone').append(html);
+		// md.previewTemplate = html;
+	}
+	
+	$(document).on("click", ".dz-preview", function(){
+		var fileid = $(this).attr('fileid');
+		$('#fileid_hidden').val(fileid);
+		 $('#myModal-2').modal('show');
+		  
+	});
+	
+	$(document).on("click", "#download_this_attachment", function(){
+		$('#myModal-2').modal('hide');
+		window.location = "/download_files/" +$('#fileid_hidden').val()
+	});
+	
+	$(document).on("click", "#delete_this_attachment", function(){
+		$('#myModal-2').modal('hide');
+		window.location = "/delete_files/" +$('#fileid_hidden').val()
+	});
+	
+/*End of Multiple file*/
+		
+	
+	
 
 $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
     var target = $(e.target).attr("href");
@@ -221,6 +295,10 @@ function getComments(issue_id){
 	$(document).on("click", ".btn_view", function(){
 		window.location = '/issue/view/' + $(this).attr('rid');
 	});
+	
+	
+	
+	
 });
 function add_comment(issue_id){
 	var comment=$.trim($('#new_comment_add'+issue_id).val());

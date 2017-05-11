@@ -15,6 +15,9 @@
 		$resolution_name 		= ucfirst($result_object['resolution_name']);
 		$issue_type_name 		= ucfirst($result_object['issue_type_name']);
 		$pirority_name 			= ucfirst($result_object['pirority_name']);
+		$status 				= $result_object['status'];
+		
+		
 		$row_status= 0;
 		$hide_st = "false";
 		$status_label = $status_class = "";
@@ -35,6 +38,15 @@
 			$status_class = " label-success";
 			
 		}
+		
+		$status_time_icon = "fa-play";
+		if($status=="in progress"){
+			$status_time_icon = "fa-pause";
+		}
+		if($status=="closed"){
+			$status_time_icon = "fa-stop";
+		}
+		
 		$rows .= "<tr>
 					 <td id ='logid'>${row_issue_id}</td>
 					 <td>${issue_title}</td>
@@ -47,6 +59,9 @@
 						  <button id=\"btn_edit\" rid=\"${row_issue_id}\" class=\"btn btn-default btn-xs btn_edit\"><i class=\"fa fa-pencil\"></i></button>
 						  <button id=\"btn_del\"  rstatus =\"${hide_st}\" rid=\"${row_issue_id}\" class=\"btn btn-default btn-xs btn_view\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>
 					 </td>
+					 <td>
+						  <button id=\"btn_spent\" rid=\"${row_issue_id}\" class=\"btn btn-default btn-xs btn_timespent\"><i  rid=\"${row_issue_id}\" class=\"fa ${status_time_icon}\"></i></button>
+					</td>
 				  </tr>";
 	}
 ?>

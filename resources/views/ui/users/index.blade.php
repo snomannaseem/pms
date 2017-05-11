@@ -18,6 +18,7 @@
                                 <header class="panel-heading">
 								{{$title}}
                                 </header>
+								
 								<div class="panel-body table-responsive">
 								<form id="camp_search">
                                     <div class="box-tools m-b-15">
@@ -30,6 +31,7 @@
                                         </div>
                                     </div>
 									</form>
+									<!-- p>You will only see users created by 'you'.</p -->
 									<div class="grid_box" id="this_grid">
 									<?php 
 										#dd($data_set);

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Entities;
 
+namespace App\Entities;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * TeamResources
  *
- * @ORM\Table(name="team_resources", indexes={@ORM\Index(name="fk_team_resources_team_id", columns={"team_id"}), @ORM\Index(name="fk_team_resources_user_id", columns={"user_id"})})
+ * @ORM\Table(name="team_resources", indexes={@ORM\Index(name="fk_team_resources_team_id", columns={"team_id"}), @ORM\Index(name="fk_team_resources_user_id", columns={"user_id"}), @ORM\Index(name="fk_team_resources_role_id", columns={"role_id"})})
  * @ORM\Entity
  */
 class TeamResources
@@ -49,22 +49,15 @@ private $deletedBy;
  */
 private $deletedOn;
 
-
 /**
-	 * @ORM\ManyToOne(targetEntity="Teams", inversedBy="team_resources")
-	 * @ORM\JoinColumn(name="team_id", referencedColumnName="id", nullable=false)
-	 */
-protected $team;
-/**
- * @var \Users
+ * @var \Roles
  *
- * @ORM\ManyToOne(targetEntity="Users")
+ * @ORM\ManyToOne(targetEntity="Roles")
  * @ORM\JoinColumns({
- *   @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
+ *   @ORM\JoinColumn(name="role_id", referencedColumnName="id", nullable=true)
  * })
  */
-private $user;
-
+private $role;
 
 /**
  * @var \Teams
@@ -74,8 +67,17 @@ private $user;
  *   @ORM\JoinColumn(name="team_id", referencedColumnName="id", nullable=true)
  * })
  */
-private $team_id;
+private $team;
 
+/**
+ * @var \Users
+ *
+ * @ORM\ManyToOne(targetEntity="Users")
+ * @ORM\JoinColumns({
+ *   @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
+ * })
+ */
+private $user;
 
 
 /**
@@ -185,13 +187,37 @@ return $this->deletedOn;
 }
 
 /**
+ * Set role
+ *
+ * @param \Roles $role
+ *
+ * @return TeamResources
+ */
+public function setRole(\Roles $role = null)
+{
+$this->role = $role;
+
+return $this;
+}
+
+/**
+ * Get role
+ *
+ * @return \Roles
+ */
+public function getRole()
+{
+return $this->role;
+}
+
+/**
  * Set team
  *
  * @param \Teams $team
  *
  * @return TeamResources
  */
-public function setTeam(Teams $team = null)
+public function setTeam(\Teams $team = null)
 {
 $this->team = $team;
 
@@ -231,30 +257,5 @@ public function getUser()
 {
 return $this->user;
 }
-
-/**
- * Set team_id
- *
- * @param \Teams $team
- *
- * @return TeamResources
- */
-public function setTeamId(Teams $team = null)
-{
-$this->team = $team;
-
-return $this;
-}
-
-/**
- * Get team
- *
- * @return Team
- */
-public function getTeamId()
-{
-return $this->team_id;
-}
-
 }
 

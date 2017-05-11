@@ -64,10 +64,10 @@ class Users extends \App\Entities\Users implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'name', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'email', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'password', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'desigId', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'rememberToken', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'status', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'profileImage', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'updatedBy', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'updatedOn', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'deletedBy', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'deletedOn', 'projects_resources'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'name', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'email', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'password', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'roleId', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'rememberToken', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'status', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'profileImage', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'updatedBy', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'updatedOn', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'deletedBy', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'deletedOn'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'name', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'email', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'password', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'desigId', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'rememberToken', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'status', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'profileImage', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'updatedBy', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'updatedOn', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'deletedBy', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'deletedOn', 'projects_resources'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'id', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'name', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'email', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'password', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'roleId', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'rememberToken', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'status', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'profileImage', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'updatedBy', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'updatedOn', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'deletedBy', '' . "\0" . 'App\\Entities\\Users' . "\0" . 'deletedOn'];
     }
 
     /**
@@ -176,17 +176,6 @@ class Users extends \App\Entities\Users implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getProjectsResources()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getProjectsResources', []);
-
-        return parent::getProjectsResources();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function getId()
     {
         if ($this->__isInitialized__ === false) {
@@ -268,23 +257,23 @@ class Users extends \App\Entities\Users implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setDesigId($desigId)
+    public function setRoleId($roleId)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDesigId', [$desigId]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setRoleId', [$roleId]);
 
-        return parent::setDesigId($desigId);
+        return parent::setRoleId($roleId);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getDesigId()
+    public function getRoleId()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDesigId', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getRoleId', []);
 
-        return parent::getDesigId();
+        return parent::getRoleId();
     }
 
     /**

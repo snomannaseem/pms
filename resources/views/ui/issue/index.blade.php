@@ -104,6 +104,28 @@
 			$(document).on("click", ".btn_view", function(){
 				window.location = 'issue' + '/view/' + $(this).attr('rid');
 			});
+			
+			/*Time spent play pause*/
+			$(document).on("click", ".fa-play", function(){
+				var issue_id = $(this).attr('rid');
+				pageURI = '/issues/timespent';
+				request_data = {issue_id:issue_id,type:'start'}
+				mainAjax('', request_data, 'POST',timeSpent);	
+			});
+			
+			$(document).on("click", ".fa-pause", function(){
+				var issue_id = $(this).attr('rid');
+				pageURI = '/issues/timespent';
+				request_data = {issue_id:issue_id,type:'stop'}
+				mainAjax('', request_data, 'POST',timeSpent);	
+			});
+			function timeSpent(data){
+				if(data.code==200){
+					$('.fa-search').trigger('click');
+				}
+			}
+			
         });
+	
 </script>
 @stop

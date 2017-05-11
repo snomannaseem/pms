@@ -433,7 +433,7 @@ class Projects extends \App\Entities\Projects implements \Doctrine\ORM\Proxy\Pro
     /**
      * {@inheritDoc}
      */
-    public function setTeam(\Teams $team = NULL)
+    public function setTeam(\App\Entities\Teams $team = NULL)
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setTeam', [$team]);

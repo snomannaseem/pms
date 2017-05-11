@@ -3,6 +3,7 @@
 
 @section('content')
 
+<section class="content">
 <div class="row">
 <?php 
 //dd($data);
@@ -19,35 +20,20 @@
 				
 			</div>
 			  <form class="form-horizontal tasi-form" method="get" id="add_project">
+				
+				<div class="col-sm-3">
+				
 				  <div class="form-group">
-					  <label class="col-sm-2 col-sm-2 control-label">Title</label>
-					  <div class="col-sm-10">
+					  <label class="control-label">Title</label>
+					  <div class="">
 						  <input id="title" name="title" type="text" class="form-control" value="<?php if(isset($data['title'])){ echo $data['title'];}?>">
-					  </div>
-				  </div>
-				  <div class="form-group">
-					  <label class="col-sm-2 col-sm-2 control-label">Description</label>
-					  <div class="col-sm-10">
-						<textarea class=" description form-control" id="description" name="description"><?php if(isset($data['description'])){ echo html_entity_decode($data['description']);}?></textarea>
-					  </div>
-				  </div>
-				  <div class="form-group">
-					  <label class="col-sm-2 col-sm-2 control-label">Estimate Time</label>
-					  <div class="col-sm-3">
-						  <input id="estimate_time" name="estimate_time" type="text" class="form-control round-input" value="<?php if(isset($data['estTime'])){ echo $data['estTime'];}?>"><small>Estimate time is in hours</small>
-					  </div>
-				  </div>
-				  <div class="form-group">
-					  <label class="col-sm-2 col-sm-2 control-label">Deadline</label>
-					  <div class="col-sm-3">
-						  <input id="estimate_deadline" name="estimate_deadline"class="form-control" id="focusedInput" type="text" value="<?php if(isset($data['estDeadline'])){ echo $data['estDeadline']->format('Y-m-d');}?>">
 					  </div>
 				  </div>
 				  
 				  <div class="form-group"> 
 				  
-					  <label class="col-sm-2 col-sm-2 control-label">Status</label>
-					  <div class="col-sm-3">
+					  <label class="control-label">Status</label>
+					  <div class="">
 					   <select class="form-control" name="status" id="status" > 
 								<option value="1">In Progress</option>
 								<option value="2">Completed</option>
@@ -55,18 +41,63 @@
 						</select>
 						</div>
 				</div>
-				  <div class="form-group">
-				  <label class="col-lg-2 col-sm-2 control-label"></label>
-				  <div class="col-lg-10">
-					<input type="hidden" name="id" id="id" value="<?php if(isset($data['id'])) echo $data['id'];?>">
-					<button type="button" class="btn btn-info" id="create_project"><?php echo isset($data['id'])?"Update":"Submit";?></button>
-				 </div>
+				  
 				</div>
+				
+				<div class="col-sm-1"></div>
+				
+				<div class="col-sm-3">
+				  
+				  <div class="form-group">
+					  <label class=" control-label">Estimate Time</label>
+					  <div class="">
+						  <input id="estimate_time" name="estimate_time" type="text" class="form-control round-input" value="<?php if(isset($data['estTime'])){ echo $data['estTime'];}?>"><small>Estimate time is in hours</small>
+					  </div>
+				  </div>
+				  
+				  </div>
+				  
+				  <div class="col-sm-1"></div>
+				  
+				  <div class="col-sm-3">
+				  
+				  <div class="form-group">
+					  <label class="control-label">Deadline</label>
+					  <div class="">
+						  <input id="estimate_deadline" name="estimate_deadline"class="form-control" id="focusedInput" type="text" value="<?php if(isset($data['estDeadline'])){ echo $data['estDeadline']->format('Y-m-d');}?>">
+					  </div>
+				  </div>
+				  
+				  </div>
+				  
+				  <div class="col-sm-12">
+				  
+					  <div class="form-group">
+						  <label class="control-label">Description</label>
+						  <div class="">
+							<textarea class=" description form-control" id="description" name="description"><?php if(isset($data['description'])){ echo html_entity_decode($data['description']);}?></textarea>
+						  </div>
+					  </div>
+				  
+				  </div>
+				  
+				  <div class="col-sm-12">
+				  
+					  <div class="form-group">				  
+					  <div class="">
+						<input type="hidden" name="id" id="id" value="<?php if(isset($data['id'])) echo $data['id'];?>">
+						<button type="button" class="btn btn-info" id="create_project"><?php echo isset($data['id'])?"Update":"Submit";?></button>
+					 </div>
+					</div>
+				
+				</div>
+					
 			  </form>
 		  </div>
 		</section>
 	   </div>
 </div>
+</section>
 
 <script src="/ckeditor/ckeditor.js" type="text/javascript"></script>
 

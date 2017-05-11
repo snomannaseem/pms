@@ -39,9 +39,10 @@
 					<td>${row_est_date}</td>
 					<td>${row_created_date}</td>
 					 <td>
-						<button id=\"btn_edit_res\" rid=\"${row_proid}\" class=\"btn btn-default btn-xs btn_edit_res\"><i class=\"fa fa-pencil\"></i></button>	
+						<button id=\"btn_edit_res\" rid=\"${row_proid}\" class=\"btn btn-default btn-xs btn_edit_res\"><i class=\"fa fa-users\"></i></button>	
 						  <button id=\"btn_edit\" rid=\"${row_proid}\" class=\"btn btn-default btn-xs btn_edit\"><i class=\"fa fa-pencil\"></i></button>
 						  <button id=\"btn_del\"  rstatus =\"${hide_st}\" rid=\"${row_proid}\" class=\"btn btn-default btn-xs btn_del\"><i class=\"fa fa-times\"></i></button>
+						<button id=\"btn_del\"  rstatus =\"${hide_st}\" rid=\"${row_proid}\" class=\"btn btn-default btn-xs btn_view\"><i class=\"glyphicon glyphicon-eye-open\"></i></button>
 					 </td>
 				  </tr>";
 	}

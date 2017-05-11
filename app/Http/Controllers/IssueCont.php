@@ -45,7 +45,8 @@ class IssueCont extends Controller
             "resolution_name"			=> "Resolution",
 			"issue_type_name" 			=> "Issue Type",
 			"priority_name" 			=> "Pirority",
-			"action"					=>	"Action"
+			"action"					=>	"Action",
+			"action2"					=>	"Start/Stop"
         ];
 		
 		 if ($request->ajax()) {
@@ -98,12 +99,10 @@ class IssueCont extends Controller
 	}
 	
 	public function create(Request $request){
-		
 		$post_data = $request->all();
 		$post_data['userid'] =   $this->logged_user->__get('id');
 		$validate_array = array( 'issue_title' => 'required','estimate_time'=>'required|numeric','assigned_to'=>'required');
 		$validation_res = Validate::validateMe($post_data, $validate_array);
-
         if ($validation_res['code'] == 401) { return $validation_res; }
 		return $this->issue->createIssue($post_data);
 	}
@@ -120,7 +119,6 @@ class IssueCont extends Controller
 	}
 	public function view($id){
 		$userid =  $this->logged_user->__get('id');
-		
 		$issue_data = $this->issue->getIssueById($id);
 		$this->com 	= new CommentRepo();
 		$commens_data = $this->com->getCommentById($id);
@@ -133,11 +131,14 @@ class IssueCont extends Controller
 		$substask_data =  $this->issue->getSubTaskListByTaskId($post_data);
 	//	print_r($substask_data);
 		$view = view('ui.issue.subtask')->with(['substask_data'=> $substask_data,'parent_issue_id'=>$post_data['issue_id']]);
-		$response = array(
-                'code' 			=> 200,
-                'status' 		=> 'ok',
-                'rows' 			=> $view->render()
-            );
+		$response = array('code' 			=> 200,'status' 		=> 'ok','rows' 			=> $view->render());
 		return response(json_encode($response))->header('Content-Type', 'json');
+	}
+	
+	/**********TIME SPENT***********************/
+	public function timeSpents(Request $request){
+		$post_data = $request->all();
+		$post_data['userid'] = $this->logged_user->__get('id');
+		return $this->issue->timeSpents($post_data);
 	}
 }

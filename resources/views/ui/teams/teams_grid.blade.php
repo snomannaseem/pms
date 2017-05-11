@@ -43,6 +43,7 @@
 					 <td>
 						  <button id=\"btn_edit\" rid=\"${row_userid}\" class=\"btn btn-default btn-xs btn_edit\"><i class=\"fa fa-pencil\"></i></button>
 						  <button id=\"btn_del\"  rid=\"${row_userid}\" class=\"btn btn-default btn-xs btn_del\"><i class=\"fa fa-times\"></i></button>
+						  <button id=\"btn_login\"  rid=\"${row_userid}\" class=\"btn btn-default btn-xs btn_login\"><i class=\"fa fa-sign-in\"></i></button>
 					 </td>
 				  </tr>";
 	}

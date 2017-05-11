@@ -12,8 +12,10 @@ use App\Entities\Priorities;
 use App\Entities\Users;
 use App\Entities\IssueResolutionTypes;
 use App\Entities\IssueTypes;
-
 use App\Repositories\HistoryRepo;
+use App\Entities\IssueActivity;
+
+
 class IssueRepo extends BaseRepo{
 
     
@@ -58,16 +60,18 @@ class IssueRepo extends BaseRepo{
 			
 			
 			/*History call*/
-			$data['comment'] ="Issue has been created";
+			$data['comment'] = config(('messages.HISTORY'))['ISSUE']['ADD'];
+			//dd();
 			$data['issue_id'] = $issue->getId();
 			if($data['issue_type']==2){
-					$data['comment'] ="Sub task has been created";
+					$data['comment'] =  config(('messages.HISTORY'))['SUB-ISSUE']['ADD'];
 			}
 			if(isset($data['id']) and $data['id']!=''){
-				$data['comment'] ="Issue has been updated";
+				$data['comment'] = config(('messages.HISTORY'))['ISSUE']['EDIT'];
 				$data['issue_id'] = $data['id'];
 				if($data['issue_type']==2){
-					$data['comment'] ="Sub task has been updated";
+					$data['comment'] = config(('messages.HISTORY'))['SUB-ISSUE']['ADD'];
+					
 				}
 			}
 			$this->history 	= new HistoryRepo();
@@ -95,14 +99,15 @@ class IssueRepo extends BaseRepo{
 		}
 		$userid = $filters['userid'];
 		
-		$sql = "SELECT iss.id as issue_id,iss.title as issue_title,p.title as project_tilte , ct.name as cat_name  ,irt.name as resolution_name ,it.name as issue_type_name, prt.name as pirority_name
+		$sql = "SELECT iss.status as status,iss.id as issue_id,iss.title as issue_title,p.title as project_tilte , ct.name as cat_name  ,irt.name as resolution_name ,it.name as issue_type_name, prt.name as pirority_name
 				FROM issues iss, projects p , categories ct, issue_resolution_types irt,issue_types it ,priorities prt
 				WHERE p.id=iss.project_id
 				AND ct.id = iss.category_id
 				AND irt.id=iss.resolution_id
 				AND it.id=iss.issue_type_id
-				AND prt.id=iss.priority_id AND iss.issue_type_id!=2
-				AND (iss.created_by=$userid OR iss.assigned_to=$userid) $where ";
+				AND prt.id=iss.priority_id
+				AND iss.assigned_to=$userid $where  order by iss.status desc ";
+				
 				
 		 $result_set = $this->paginateNative($sql, $paging['page_size'], $paging['page_num']);
 		 $result_set['code']  = 200;
@@ -168,5 +173,67 @@ class IssueRepo extends BaseRepo{
 				return $res;
 		}catch(\Exception $e){ return ['code'=>1000,'status'=>'error','msg'=> $e->getMessage(),];}	
 	}
+	public function timeSpents($data){
+		
+		$this->timeSpentMisc($data);
+		$issue_id = $data['issue_id'];
+		
+		
+		if($data['type'] == "start"){
+			$issue_activity = new IssueActivity();
+			$issue_activity->setSecondsElapsed(0);
+			$issue_activity->setStartTime(new \DateTime());
+			$issue_activity->setIssueId($data['issue_id']);
+			$issue_activity->setUserId($data['userid']);
+			EntityManager::persist($issue_activity);
+			EntityManager::flush();
+			return array('code'=>200,'status'=>'ok','msg'=>'successfully updated');
+		}
+		if($data['type'] == "stop"){
+			
+			/*Last most time*/
+			$sql = "SELECT * FROM issue_activity WHERE issue_id = $issue_id order by start_time DESC limit 1";
+			$query = $this->db->executeNative($sql);
+			$response = $query->fetchAll();
+			$activity_id = $response[0]['id'];
+			$sql_obj = "UPDATE	issue_activity SET seconds_elapsed = TIME_TO_SEC(TIMEDIFF(CURRENT_TIMESTAMP, start_time)) , stop_time = CURRENT_TIMESTAMP WHERE id = $activity_id";
+			$query_resp = $this->db->executeNative($sql_obj);
+			return array('code'=>200,'status'=>'ok','msg'=>'successfully updated');
+		}
+	}
+	public function timeSpentMisc($data){
+		
+		/*Step-1 Set all issues to OPEN from IN PROGRESS*/
+		$issue_id = $data['issue_id'];
+		$issue  = EntityManager::getRepository('App\Entities\Issues')->findOneBy(array('id'=>$issue_id));
 
+		$userid= $data['userid'];
+		if($data['type']=="start"){
+			
+			/*Select previous running in progress if any issue*/
+			$sql_inprogress = "SELECT * FROM issues WHERE status = 'in progress' and  assigned_to = $userid";
+			$query = $this->db->executeNative($sql_inprogress);
+			$response_inprogress = $query->fetchAll();
+			if($response_inprogress ){
+				$in_progress_issue_id = $response_inprogress[0]['id'];
+				/* Check if any on hold activity than update their time*/
+				$sql_obj = "UPDATE	issue_activity SET seconds_elapsed = TIME_TO_SEC(TIMEDIFF(CURRENT_TIMESTAMP, start_time)) , stop_time = CURRENT_TIMESTAMP WHERE issue_id = $in_progress_issue_id ";
+				$query_all_rows = $this->db->executeNative($sql_obj);
+			}
+			
+			$sql_obj = "UPDATE issues p set p.status = 'on hold' WHERE p.status ='in progress' and p.assigned_to = $userid";
+			$query = $this->db->executeNative($sql_obj);
+			
+			/*Step-2 Update the current ISSUE into IN PROGRESS*/
+			$issue->setStatus("in progress");
+		}
+		if($data['type'] == 'stop'){
+			$issue->setStatus("on hold");
+		}
+		EntityManager::persist($issue);
+		EntityManager::flush();
+		return array("status"=>'ok','code'=>200,'msg'=>"Successfully Updated");
+		
+		
+	}
 }

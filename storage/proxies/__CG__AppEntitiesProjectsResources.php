@@ -64,10 +64,10 @@ class ProjectsResources extends \App\Entities\ProjectsResources implements \Doct
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\ProjectsResources' . "\0" . 'id', '' . "\0" . 'App\\Entities\\ProjectsResources' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\ProjectsResources' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\ProjectsResources' . "\0" . 'deletedBy', '' . "\0" . 'App\\Entities\\ProjectsResources' . "\0" . 'deletedOn', '' . "\0" . 'App\\Entities\\ProjectsResources' . "\0" . 'project', 'user'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entities\\ProjectsResources' . "\0" . 'id', '' . "\0" . 'App\\Entities\\ProjectsResources' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\ProjectsResources' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\ProjectsResources' . "\0" . 'deletedBy', '' . "\0" . 'App\\Entities\\ProjectsResources' . "\0" . 'deletedOn', '' . "\0" . 'App\\Entities\\ProjectsResources' . "\0" . 'project', '' . "\0" . 'App\\Entities\\ProjectsResources' . "\0" . 'user'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\ProjectsResources' . "\0" . 'id', '' . "\0" . 'App\\Entities\\ProjectsResources' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\ProjectsResources' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\ProjectsResources' . "\0" . 'deletedBy', '' . "\0" . 'App\\Entities\\ProjectsResources' . "\0" . 'deletedOn', '' . "\0" . 'App\\Entities\\ProjectsResources' . "\0" . 'project', 'user'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entities\\ProjectsResources' . "\0" . 'id', '' . "\0" . 'App\\Entities\\ProjectsResources' . "\0" . 'createdBy', '' . "\0" . 'App\\Entities\\ProjectsResources' . "\0" . 'createdOn', '' . "\0" . 'App\\Entities\\ProjectsResources' . "\0" . 'deletedBy', '' . "\0" . 'App\\Entities\\ProjectsResources' . "\0" . 'deletedOn', '' . "\0" . 'App\\Entities\\ProjectsResources' . "\0" . 'project', '' . "\0" . 'App\\Entities\\ProjectsResources' . "\0" . 'user'];
     }
 
     /**

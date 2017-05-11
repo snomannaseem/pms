@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * TeamResources
  *
- * @ORM\Table(name="team_resources", indexes={@ORM\Index(name="fk_team_resources_team_id", columns={"team_id"}), @ORM\Index(name="fk_team_resources_user_id", columns={"user_id"})})
+ * @ORM\Table(name="team_resources", indexes={@ORM\Index(name="fk_team_resources_team_id", columns={"team_id"}), @ORM\Index(name="fk_team_resources_user_id", columns={"user_id"}), @ORM\Index(name="fk_team_resources_role_id", columns={"role_id"})})
  * @ORM\Entity
  */
 class TeamResources
@@ -48,6 +48,16 @@ class TeamResources
      * @ORM\Column(name="deleted_on", type="datetime", nullable=true)
      */
     private $deletedOn;
+
+    /**
+     * @var \Roles
+     *
+     * @ORM\ManyToOne(targetEntity="Roles")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="role_id", referencedColumnName="id")
+     * })
+     */
+    private $role;
 
     /**
      * @var \Teams

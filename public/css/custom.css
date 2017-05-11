@@ -1,7 +1,30 @@
 .label_color {
 	background-color: #f0f3f4;
 }
-.border-bottom {
-    border-bottom: 1px solid #eee;
-    padding-bottom: 20px;
+.dz-image img {
+    height: 100%;
+    width: 90%;
+}
+.dz-image {
+	margin: 0 auto;
+}
+.dropzone .dz-filename > span {
+    font-size: 12px;
+}
+.dropdown .dz-default.dz-message {
+	content: "";
+}
+.dropzone .dz-default.dz-message {
+	background: #fff url(/img/file_icon.jpg) no-repeat center center;
+	height: 70px;
+    margin: 0 0 50px;
+    padding: 0;
+    width: 100%;
+	display: inline-block;
+}
+.dropzone .dz-default.dz-message > span {
+    display: block;
+    margin: 70px 0 0;
+	font-size: 20px;
+    font-weight: 600;
 }

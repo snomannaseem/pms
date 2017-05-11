@@ -1,13 +1,13 @@
 <?php
 
-
 namespace App\Entities;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * RolePermissions
  *
- * @ORM\Table(name="role_permissions", indexes={@ORM\Index(name="fk_role_permissions", columns={"permission_id"}), @ORM\Index(name="fk_role_permissions_role_id", columns={"role_id"})})
+ * @ORM\Table(name="role_permissions", indexes={@ORM\Index(name="idx_role_permissions_role_id", columns={"role_id"}), @ORM\Index(name="idx_role_permissions_module_permission_id", columns={"module_permission_id"})})
  * @ORM\Entity
  */
 class RolePermissions
@@ -20,6 +20,13 @@ class RolePermissions
  * @ORM\GeneratedValue(strategy="IDENTITY")
  */
 private $id;
+
+/**
+ * @var boolean
+ *
+ * @ORM\Column(name="is_active", type="boolean", precision=0, scale=0, nullable=true, unique=false)
+ */
+private $isActive;
 
 /**
  * @var \DateTime
@@ -43,14 +50,14 @@ private $updatedOn;
 private $deletedOn;
 
 /**
- * @var \Permissions
+ * @var \ModuleActions
  *
- * @ORM\ManyToOne(targetEntity="Permissions")
+ * @ORM\ManyToOne(targetEntity="ModuleActions")
  * @ORM\JoinColumns({
- *   @ORM\JoinColumn(name="permission_id", referencedColumnName="id", nullable=true)
+ *   @ORM\JoinColumn(name="module_permission_id", referencedColumnName="id", nullable=true)
  * })
  */
-private $permission;
+private $modulePermission;
 
 /**
  * @var \Roles
@@ -71,6 +78,30 @@ private $role;
 public function getId()
 {
 return $this->id;
+}
+
+/**
+ * Set isActive
+ *
+ * @param boolean $isActive
+ *
+ * @return RolePermissions
+ */
+public function setIsActive($isActive)
+{
+$this->isActive = $isActive;
+
+return $this;
+}
+
+/**
+ * Get isActive
+ *
+ * @return boolean
+ */
+public function getIsActive()
+{
+return $this->isActive;
 }
 
 /**
@@ -146,27 +177,27 @@ return $this->deletedOn;
 }
 
 /**
- * Set permission
+ * Set modulePermission
  *
- * @param \Permissions $permission
+ * @param \ModuleActions $modulePermission
  *
  * @return RolePermissions
  */
-public function setPermission(\Permissions $permission = null)
+public function setModulePermission(\ModuleActions $modulePermission = null)
 {
-$this->permission = $permission;
+$this->modulePermission = $modulePermission;
 
 return $this;
 }
 
 /**
- * Get permission
+ * Get modulePermission
  *
- * @return \Permissions
+ * @return \ModuleActions
  */
-public function getPermission()
+public function getModulePermission()
 {
-return $this->permission;
+return $this->modulePermission;
 }
 
 /**

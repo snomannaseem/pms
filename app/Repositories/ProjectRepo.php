@@ -9,6 +9,7 @@ use App\Entities\Projects;
 use App\Entities\Categories;
 use App\Entities\Priorities;
 use App\Entities\Teams;
+use Session;
 
 class ProjectRepo extends BaseRepo{
 
@@ -40,6 +41,8 @@ class ProjectRepo extends BaseRepo{
 			$projects->setStatus($data['status']);
 			EntityManager::persist($projects);
 			EntityManager::flush();
+			
+			
 			  return array(
 				  'code' => '200',
 				  'status' => 'ok',
@@ -55,17 +58,22 @@ class ProjectRepo extends BaseRepo{
 	
 	
     public static function buildQuery($filters, $order_by) {
-
-		$dsql = 'SELECT PARTIAL proj.{id, title,status,estDeadline,createdOn} FROM App\\Entities\\Projects proj';
+		$selected_team = Session::get('selected_team', 0);
+		$dsql = 'SELECT PARTIAL proj.{id, title,status,estDeadline,createdOn},
+				PARTIAL t.{id} FROM App\\Entities\\Projects proj LEFT JOIN proj.team t';
 
         $where_field_map = [
-		  //"default" => [true, " cat.status = 1 "],
-          "userid" => [true, " proj.createdBy = :userid "],
+		  //"default" => [true, " t.id = {$selected_team['id']} "],
+          //"userid" => [true, " proj.createdBy = :userid "],
 		   "name" => [true, " proj.title like CONCAT('%',:name,'%') OR  proj.description like CONCAT('%',:name,'%') "],
 		 
           //"username" => [true, " cat.username like CONCAT('%',:username,'%') "]
         ];
-		
+		$is_super_admin = Session::get('is_super_admin', null);
+		if($is_super_admin == false) 
+		{
+			$where_field_map["default"] = [true, " t.id = {$selected_team['id']} "];
+		}
         $order_by_field_map = [
           "id" => " proj.id __order__ ",
           "est_deadline" => " proj.estDeadline __order__ ",
@@ -101,8 +109,10 @@ class ProjectRepo extends BaseRepo{
 	public function getProjectById($id)
     {
 
-        $query = $this->db->getConnection('db_conn')->createQuery("SELECT PARTIAL pro.{id, title,status,description,estDeadline,estTime}
+        $query = $this->db->getConnection('db_conn')->createQuery("SELECT PARTIAL pro.{id, title,status,description,estDeadline,estTime},
+		PARTIAL team.{id, name, status}
                                                     FROM App\\Entities\\Projects pro
+													LEFT JOIN pro.team team
         WHERE pro.id =:id ")->setParameter('id', $id);
 
         try {
